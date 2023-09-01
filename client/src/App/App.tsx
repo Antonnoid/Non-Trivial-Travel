@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import './App.scss';
+// import Map from '../features/map/Map';
 import Navbar from '../features/navbar/Navbar';
 import MainPage from '../features/main/MainPage';
 
