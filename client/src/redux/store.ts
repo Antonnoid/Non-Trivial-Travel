@@ -1,9 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import {configureStore} from '@reduxjs/toolkit';
 import {useDispatch} from 'react-redux';
+import placesSlice from '../features/place/placesSlice';
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    places: placesSlice,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;
