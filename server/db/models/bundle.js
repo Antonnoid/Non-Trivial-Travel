@@ -2,9 +2,12 @@
 const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Bundle extends Model {
-    static associate({User, Bundle_place}) {
+    static associate({City, User, Bundle_place, Favorite_bundle, Bundle_comment}) {
+      this.belongsTo(City, {foreignKey: 'cityId'});
       this.belongsTo(User, {foreignKey: 'userId'});
       this.hasMany(Bundle_place, {foreignKey: 'placeId'});
+      this.hasMany(Favorite_bundle, {foreignKey: 'bundleId'});
+      this.hasMany(Bundle_comment, {foreignKey: 'bundleId'});
     }
   }
   Bundle.init(
@@ -25,9 +28,13 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id',
         },
       },
-      city: {
+      cityId: {
         allowNull: false,
-        type: DataTypes.TEXT,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Cities',
+          key: 'id',
+        },
       },
     },
     {
