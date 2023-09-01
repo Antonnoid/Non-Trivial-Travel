@@ -2,7 +2,17 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Favorites', {
+    await queryInterface.createTable('Bundle_comments', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      text: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+      },
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
@@ -11,11 +21,11 @@ module.exports = {
           key: 'id',
         },
       },
-      placeId: {
+      bundleId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Places',
+          model: 'Bundles',
           key: 'id',
         },
       },
@@ -30,6 +40,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Favorites');
+    await queryInterface.dropTable('Bundle_comments');
   },
 };

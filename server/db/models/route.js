@@ -2,9 +2,12 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Route extends Model {
-    static associate({User, Route_place}) {
+    static associate({City, User, Route_place, Favorite_route, Route_comment}) {
+      this.belongsTo(City, {foreignKey: 'cityId'});
       this.belongsTo(User, { foreignKey: 'userId' });
       this.hasMany(Route_place, { foreignKey: 'placeId' });
+      this.hasMany(Favorite_route, {foreignKey: 'routeId'});
+      this.hasMany(Route_comment, {foreignKey: 'routeId'});
     }
   }
   Route.init(
@@ -37,9 +40,13 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id',
         },
       },
-      city: {
+      cityId: {
         allowNull: false,
-        type: DataTypes.TEXT,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Cities',
+          key: 'id',
+        },
       },
     },
     {

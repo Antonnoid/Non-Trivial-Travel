@@ -2,18 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Bundles', {
+    await queryInterface.createTable('Route_comments', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      title: {
-        allowNull: false,
-        type: Sequelize.TEXT,
-      },
-      description: {
+      text: {
         allowNull: false,
         type: Sequelize.TEXT,
       },
@@ -25,11 +21,11 @@ module.exports = {
           key: 'id',
         },
       },
-      cityId: {
+      routeId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Cities',
+          model: 'Routes',
           key: 'id',
         },
       },
@@ -44,6 +40,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Bundles');
+    await queryInterface.dropTable('Route_comments');
   },
 };

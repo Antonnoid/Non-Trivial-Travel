@@ -2,18 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Bundles', {
+    await queryInterface.createTable('Place_comments', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      title: {
-        allowNull: false,
-        type: Sequelize.TEXT,
-      },
-      description: {
+      text: {
         allowNull: false,
         type: Sequelize.TEXT,
       },
@@ -25,11 +21,11 @@ module.exports = {
           key: 'id',
         },
       },
-      cityId: {
+      placeId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Cities',
+          model: 'Places',
           key: 'id',
         },
       },
@@ -44,6 +40,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Bundles');
+    await queryInterface.dropTable('Place_comments');
   },
 };
