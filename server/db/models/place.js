@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       cityId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         references: {
           model: 'Cities',
           key: 'id',

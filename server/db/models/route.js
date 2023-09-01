@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       time: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
       },
       rating: {
         type: DataTypes.DOUBLE,
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       cityId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         references: {
           model: 'Cities',
           key: 'id',

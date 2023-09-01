@@ -19,7 +19,7 @@ module.exports = {
       },
       time: {
         allowNull: false,
-        type: Sequelize.TIME,
+        type: Sequelize.TEXT,
       },
       rating: {
         type: Sequelize.DOUBLE,
