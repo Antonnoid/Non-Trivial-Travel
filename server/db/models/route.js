@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       time: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
       },
       rating: {
         type: DataTypes.DOUBLE,

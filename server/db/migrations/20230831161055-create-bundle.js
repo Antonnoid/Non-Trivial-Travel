@@ -17,6 +17,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
+      rating: {
+        allowNull: false,
+        type: Sequelize.DOUBLE,
+      },
+      isPublic: {
+        allowNull: false,
+        defaultValue: false,
+        type: Sequelize.BOOLEAN,
+      },
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
