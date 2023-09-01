@@ -1,22 +1,15 @@
 'use strict';
 const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Bundle extends Model {
-    static associate({City, User, Bundle_place, Favorite_bundle, Bundle_comment}) {
-      this.belongsTo(City, {foreignKey: 'cityId'});
+  class Place_comment extends Model {
+    static associate({User, Place}) {
       this.belongsTo(User, {foreignKey: 'userId'});
-      this.hasMany(Bundle_place, {foreignKey: 'placeId'});
-      this.hasMany(Favorite_bundle, {foreignKey: 'bundleId'});
-      this.hasMany(Bundle_comment, {foreignKey: 'bundleId'});
+      this.belongsTo(Place, {foreignKey: 'placeId'});
     }
   }
-  Bundle.init(
+  Place_comment.init(
     {
-      title: {
-        allowNull: false,
-        type: DataTypes.TEXT,
-      },
-      description: {
+      text: {
         allowNull: false,
         type: DataTypes.TEXT,
       },
@@ -28,19 +21,19 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id',
         },
       },
-      cityId: {
+      placeId: {
         allowNull: false,
         type: DataTypes.INTEGER,
         references: {
-          model: 'Cities',
+          model: 'Places',
           key: 'id',
         },
       },
     },
     {
       sequelize,
-      modelName: 'Bundle',
+      modelName: 'Place_comment',
     }
   );
-  return Bundle;
+  return Place_comment;
 };

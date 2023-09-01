@@ -22,9 +22,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      city: {
+      cityId: {
         allowNull: false,
-        type: Sequelize.TEXT,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Cities',
+          key: 'id',
+        },
       },
       isAdmin: {
         allowNull: false,

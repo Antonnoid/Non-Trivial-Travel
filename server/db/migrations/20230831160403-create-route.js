@@ -37,9 +37,13 @@ module.exports = {
           key: 'id',
         },
       },
-      city: {
+      cityId: {
         allowNull: false,
-        type: Sequelize.TEXT,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Cities',
+          key: 'id',
+        },
       },
       createdAt: {
         allowNull: false,

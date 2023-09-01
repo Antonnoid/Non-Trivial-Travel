@@ -1,12 +1,14 @@
 'use strict';
 const {Model} = require('sequelize');
-const route_place = require('./route_place');
 module.exports = (sequelize, DataTypes) => {
   class Place extends Model {
-    static associate({User, Image, Route_place}) {
+    static associate({City, User, Image, Route_place, Favorite_place, Place_comment}) {
+      this.belongsTo(City, {foreignKey: 'cityId'});
       this.belongsTo(User, {foreignKey: 'userId'});
       this.hasMany(Image, {foreignKey: 'placeId'});
       this.hasMany(Route_place, {foreignKey: 'placeId'});
+      this.hasMany(Favorite_place, {foreignKey: 'placeId'});
+      this.hasMany(Place_comment, {foreignKey: 'placeId'});
     }
   }
   Place.init(
@@ -35,9 +37,13 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id',
         },
       },
-      city: {
+      cityId: {
         allowNull: false,
-        type: DataTypes.TEXT,
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'Cities',
+          key: 'id',
+        },
       },
       latitude: {
         allowNull: false,
