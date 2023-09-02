@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {NavLink, Outlet, useParams} from 'react-router-dom';
+import {Link, NavLink, Outlet, useParams} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {loadCitiesByLetter, loadCitiesPopular} from './citiesSlice';
@@ -10,7 +10,7 @@ import {City} from './types/types';
 export default function Navbar(): JSX.Element {
   const {cityId} = useParams();
 
-  const [placeholder, setPlaceholder] = useState('Выбрать город');
+  const [placeholder, setPlaceholder] = useState('Все города');
   const [input, setInput] = useState('');
   const [dropList, showDropList] = useState(false);
 
@@ -78,6 +78,11 @@ export default function Navbar(): JSX.Element {
                   {cities.length === 0 && (
                     <li className="drop-down__item">Такого города нет</li>
                   )}
+                  <li className="drop-down__item">
+                    <Link onClick={() => setPlaceholder('Все города')} to="/">
+                      Все города
+                    </Link>
+                  </li>
                   {cities.map((city) => (
                     <CityItem key={city.id} city={city} />
                   ))}
