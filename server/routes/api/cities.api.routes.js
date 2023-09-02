@@ -70,6 +70,11 @@ router.post('/search/name', async (req, res) => {
         'LIKE',
         `${name}%`
       ),
+      include: [
+        {
+          model: Place,
+        },
+      ],
     });
     if (city) {
       res.json(city);
