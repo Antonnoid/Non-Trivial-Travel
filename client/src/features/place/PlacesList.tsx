@@ -17,7 +17,7 @@ function PlacesList(): JSX.Element {
     } else {
       dispatch(cityPlacesInit(+cityId));
     }
-  }, []);
+  }, [cityId]);
 
   return (
     <div className="container">

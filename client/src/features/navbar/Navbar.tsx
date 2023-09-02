@@ -39,7 +39,7 @@ export default function Navbar(): JSX.Element {
   useEffect(() => {
     initCities();
     getCity();
-  }, [input, placeholder]);
+  }, [input, placeholder, cityId]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent): void => {
