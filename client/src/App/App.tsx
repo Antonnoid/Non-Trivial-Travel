@@ -6,6 +6,7 @@ import './App.scss';
 import Navbar from '../features/navbar/Navbar';
 import MainPage from '../features/main/MainPage';
 import Map from '../features/map/Map';
+import PlacesList from '../features/place/PlacesList';
 
 function App(): JSX.Element {
   return (
@@ -14,6 +15,7 @@ function App(): JSX.Element {
         <Route path="/" element={<Navbar />}>
           <Route path="/" element={<MainPage />} />
           <Route path="/map" element={<Map />} />
+          <Route path="/cities/:cityId" element={<PlacesList />} />
         </Route>
       </Routes>
     </BrowserRouter>

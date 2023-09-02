@@ -5,12 +5,13 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
   return (
     <>
       <h1>{place.title}</h1>
-      <img
+
+      {/* <img
         src={
           place.images[Math.floor(Math.random() * place.images.length + 1)].url
         }
         alt="..."
-      />
+      /> */}
     </>
   );
 }
