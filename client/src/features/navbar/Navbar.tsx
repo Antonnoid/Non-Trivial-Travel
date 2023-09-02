@@ -88,10 +88,6 @@ export default function Navbar(): JSX.Element {
                   ))}
                 </ul>
               )}
-
-              <button type="submit" className="btn form__submit">
-                Поиск
-              </button>
             </div>
           </form>
           <NavLink className="navbar__link" to="/">
