@@ -33,6 +33,7 @@ const citiesSlice = createSlice({
       .addCase(loadCitiesByLetter.fulfilled, (state, action) => {
         state.cities = action.payload;
       })
+
       .addCase(loadCities.rejected, (state, action) => {
         state.error = action.error.message;
       })

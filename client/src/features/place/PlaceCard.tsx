@@ -4,7 +4,12 @@ import {Place} from './type';
 function PlaceCard({place}: {place: Place}): JSX.Element {
   return (
     <>
-      <h1>{place.title}</h1>
+      <div className="place">
+        <div className="place__body">
+          <h1 className="place__title">{place.title}</h1>
+          <p className="place__description">{place.description}</p>
+        </div>
+      </div>
 
       {/* <img
         src={

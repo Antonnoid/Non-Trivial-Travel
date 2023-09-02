@@ -16,3 +16,7 @@ export const fetchCityByLetter = async (name: string): Promise<City[]> => {
   });
   return res.json();
 };
+export const fetchCityById = async (id: City['id']): Promise<City> => {
+  const res = await fetch(`/api/cities/search/id/${id}`);
+  return res.json();
+};

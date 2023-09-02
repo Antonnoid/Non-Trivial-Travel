@@ -11,7 +11,6 @@ function PlacesList(): JSX.Element {
   const {cityId} = useParams();
 
   const places = useSelector((store: RootState) => store.places.places);
-
   useEffect(() => {
     if (!cityId) {
       dispatch(placesInit());
@@ -21,10 +20,12 @@ function PlacesList(): JSX.Element {
   }, []);
 
   return (
-    <div>
-      {places.map((place: Place) => (
-        <PlaceCard place={place} key={place.id} />
-      ))}
+    <div className="container">
+      <div className="places">
+        {places.map((place: Place) => (
+          <PlaceCard place={place} key={place.id} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,16 +1,30 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {NavLink, Outlet} from 'react-router-dom';
+import {NavLink, Outlet, useParams} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {loadCitiesByLetter, loadCitiesPopular} from './citiesSlice';
-
+import * as api from './api';
 import CityItem from './CityItem';
+import {City} from './types/types';
 
 export default function Navbar(): JSX.Element {
-  const [dropList, showDropList] = useState(false);
+  const {cityId} = useParams();
+
+  const [placeholder, setPlaceholder] = useState('Выбрать город');
   const [input, setInput] = useState('');
+  const [dropList, showDropList] = useState(false);
+
   const dispatch = useAppDispatch();
   const cities = useSelector((store: RootState) => store.cities.cities);
+
+  const getCity = async (): Promise<City | undefined> => {
+    if (cityId) {
+      const data = await api.fetchCityById(+cityId);
+      setPlaceholder(data.name);
+      return data;
+    }
+  };
+
   const dropDownRef = useRef<HTMLUListElement | null>(null);
   const initCities = async (): Promise<void> => {
     if (input) {
@@ -24,7 +38,9 @@ export default function Navbar(): JSX.Element {
 
   useEffect(() => {
     initCities();
-  }, [input]);
+    getCity();
+  }, [input, placeholder]);
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent): void => {
       if (
@@ -55,7 +71,7 @@ export default function Navbar(): JSX.Element {
                 value={input}
                 className="form__input"
                 type="text"
-                placeholder="Город"
+                placeholder={placeholder}
               />
               {dropList && (
                 <ul className="drop-down" ref={dropDownRef}>
