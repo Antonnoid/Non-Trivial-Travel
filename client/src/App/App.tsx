@@ -15,7 +15,7 @@ function App(): JSX.Element {
         <Route path="/" element={<Navbar />}>
           <Route path="/" element={<MainPage />} />
           <Route path="/map" element={<Map />} />
-          <Route path="/city/:cityId" element={<PlacesList />} />
+          <Route path="/cities/:cityId" element={<PlacesList />} />
         </Route>
       </Routes>
     </BrowserRouter>
