@@ -3,6 +3,7 @@ const path = require('path');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const sessionConfig = {
   store: new FileStore(),
@@ -19,8 +20,9 @@ const sessionConfig = {
 function serverConfig(app) {
   app.use(cookieParser());
   app.use(session(sessionConfig));
-  app.use(express.urlencoded({ extended: true }));
+  app.use(express.urlencoded({extended: true}));
   app.use(express.json());
+  app.use(cors());
 }
 
 module.exports = serverConfig;
