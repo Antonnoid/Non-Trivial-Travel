@@ -29,6 +29,7 @@ $input_width: 150px;
     }
   }
   &__link {
+    margin: 5px;
     color: #fff;
     text-align: center;
     font-family: Inter;
@@ -37,14 +38,18 @@ $input_width: 150px;
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.8px;
-    background: rgba(0, 0, 0, 0.51);
+    background: #00af83;
     border-radius: 5px;
     padding: 5px 16px;
+    list-style-type: none;
     transition: all 1s ease-out;
     &:hover {
-      background: rgba(0, 0, 0, 0.9);
+      background: #008ab7;
     }
   }
+}
+.nav_li {
+  list-style-type: none;
 }
 .form {
   &__body {

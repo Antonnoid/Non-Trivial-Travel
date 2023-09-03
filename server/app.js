@@ -13,5 +13,5 @@ serverConfig(app);
 app.use('/', indexRouter);
 
 app.listen(PORT, () => {
-  console.log(`Трунь трунь трунь на ${4000} порту`);
+  console.log(`Трунь трунь трунь на ${PORT} порту`);
 });

@@ -2,10 +2,10 @@
   transition: all 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
-*,
-*:hover {
-  @include transition();
-}
+// *,
+// *:hover {
+//   @include transition();
+// }
 
 .container {
   margin: 0 auto;
@@ -29,11 +29,11 @@ code {
 html {
   scroll-behavior: smooth;
 }
-* {
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
+// * {
+//   padding: 0;
+//   margin: 0;
+//   border: 0;
+// }
 
 *,
 *:before,
