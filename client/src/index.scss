@@ -1,11 +1,10 @@
 @mixin transition {
-  transition: all 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  transition: all 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
-// *,
-// *:hover {
-//   @include transition();
-// }
+*:hover {
+  @include transition();
+}
 
 .container {
   margin: 0 auto;

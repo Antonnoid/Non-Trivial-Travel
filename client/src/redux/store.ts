@@ -4,12 +4,14 @@ import {useDispatch} from 'react-redux';
 import authSlice from '../features/auth/authSlice';
 import placesSlice from '../features/place/placesSlice';
 import ImagesSlice from '../features/image/ImagesSlice';
+import citiesSlice from '../features/navbar/citiesSlice';
 
 const store = configureStore({
   reducer: {
     auth: authSlice,
     places: placesSlice,
     images: ImagesSlice,
+    cities: citiesSlice,
   },
 });
 

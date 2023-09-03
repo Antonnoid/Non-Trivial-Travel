@@ -9,6 +9,9 @@ import AuthorizationPage from '../features/auth/AuthorizationPage';
 import RegisterPage from '../features/auth/RegisterPage';
 import {useAppDispatch} from '../redux/store';
 import {authChecUser} from '../features/auth/authSlice';
+import Map from '../features/map/Map';
+import PlacesList from '../features/place/PlacesList';
+
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -24,6 +27,8 @@ function App(): JSX.Element {
           <Route path="/" element={<MainPage />} />
           <Route path="/authorization" element={<AuthorizationPage />} />
           <Route path="/registration" element={<RegisterPage />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="/cities/:cityId" element={<PlacesList />} />
         </Route>
       </Routes>
     </BrowserRouter>
