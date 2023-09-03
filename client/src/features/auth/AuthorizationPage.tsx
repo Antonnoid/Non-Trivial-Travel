@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {authorization} from './authSlice';
 import {useAppDispatch} from '../../redux/store';
-import {fetchAuthUser} from './api';
 
 function AuthorizationPage(): JSX.Element {
   const [email, setEmail] = useState('');
@@ -14,20 +14,18 @@ function AuthorizationPage(): JSX.Element {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-    const data = await fetchAuthUser({email, password});
-    dispatch({type: 'users/auth', payload: data});
+    dispatch(authorization({email, password}));
     navigate('/');
   };
 
   return (
     <div className="registr-auth_container">
-      <h2 className="registr-auth_header">Форма авторизации</h2>
       <form className="registr-auth_form" onSubmit={authUser}>
         <label className="registr-auth_label">Почта</label>
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="registr-auth__input"
+          className="registr-auth_input"
           placeholder="ntt@mail.ru"
           type="text"
         />
@@ -35,14 +33,16 @@ function AuthorizationPage(): JSX.Element {
         <input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="registr-auth__input"
-          placeholder="от 6 символов"
+          className="registr-auth_input"
+          placeholder="от 3 символов"
           type="text"
         />
+        <div className="reg-auth-dutton">
+          <button className="registr-auth_button" type="submit">
+            ОК
+          </button>
+        </div>
       </form>
-      <button className="registr-auth__button" type="submit">
-        ОК
-      </button>
     </div>
   );
 }

@@ -1,7 +1,6 @@
-import {User, UserAuth} from './type';
+import {User} from './type';
 
 export type State = {
   users: User[];
-  userAuth: UserAuth | undefined;
   error: string | undefined;
 };

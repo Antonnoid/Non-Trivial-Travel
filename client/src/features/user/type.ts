@@ -1,20 +1,20 @@
 export type User = {
-  id?: number;
+  id: number;
   name: string;
   email: string;
   password: string;
-  city: string;
+  cityId: number;
   isAdmin: boolean;
 };
 
-export type UserAuth = {
-  email: string;
-  password: string;
-};
-
-export type UserRegister = {
+export type UserAuthReg = {
   name: string;
   email: string;
   password: string;
-  city: string;
+  cityId: number;
+};
+
+export type UserAuthLog = {
+  email: string;
+  password: string;
 };
