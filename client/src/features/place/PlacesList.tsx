@@ -1,22 +1,31 @@
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
+import {useParams} from 'react-router-dom';
 import {RootState, useAppDispatch} from '../../redux/store';
 import PlaceCard from './PlaceCard';
 import {Place} from './type';
-import {placesInit} from './placesSlice';
+import {cityPlacesInit, placesInit} from './placesSlice';
 
 function PlacesList(): JSX.Element {
   const dispatch = useAppDispatch();
-  const places = useSelector((store: RootState) => store.places.places);
+  const {cityId} = useParams();
 
+  const places = useSelector((store: RootState) => store.places.places);
   useEffect(() => {
-    dispatch(placesInit());
-  }, []);
+    if (!cityId) {
+      dispatch(placesInit());
+    } else {
+      dispatch(cityPlacesInit(+cityId));
+    }
+  }, [cityId]);
+
   return (
-    <div>
-      {places.map((place: Place) => (
-        <PlaceCard place={place} key={place.id} />
-      ))}
+    <div className="container">
+      <div className="places">
+        {places.map((place: Place) => (
+          <PlaceCard place={place} key={place.id} />
+        ))}
+      </div>
     </div>
   );
 }

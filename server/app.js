@@ -1,8 +1,10 @@
+require('@babel/register');
+require('dotenv').config();
 const express = require('express');
 
 const app = express();
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 const indexRouter = require('./routes/index');
 
@@ -13,5 +15,5 @@ serverConfig(app);
 app.use('/', indexRouter);
 
 app.listen(PORT, () => {
-  console.log(`Трунь трунь трунь на ${4000} порту`);
+  console.log(`Трунь трунь трунь на ${PORT} порту`);
 });
