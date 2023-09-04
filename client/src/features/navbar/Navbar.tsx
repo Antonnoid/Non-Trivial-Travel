@@ -1,9 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Link, NavLink, Outlet, useParams} from 'react-router-dom';
+import {Link, NavLink, Outlet, useParams, useNavigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {loadCitiesByLetter, loadCitiesPopular} from './citiesSlice';
 import * as api from './api';
+import {fetchLogOut} from '../auth/api';
 import CityItem from './CityItem';
 import {City} from './types/types';
 
@@ -14,8 +15,10 @@ export default function Navbar(): JSX.Element {
   const [input, setInput] = useState('');
   const [dropList, showDropList] = useState(false);
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const cities = useSelector((store: RootState) => store.cities.cities);
+  const user = useSelector((store: RootState) => store.auth.user);
 
   const getCity = async (): Promise<City | undefined> => {
     if (cityId) {
@@ -34,6 +37,14 @@ export default function Navbar(): JSX.Element {
     if (!input) {
       dispatch(loadCitiesPopular());
     }
+  };
+  
+  const userLogOut = async (): Promise<void> => {
+  const data = await fetchLogOut();
+   if (data.message === 'success') {
+     dispatch({type: 'auth/logout'});
+     navigate('/');
+   }
   };
 
   useEffect(() => {
@@ -90,9 +101,28 @@ export default function Navbar(): JSX.Element {
               )}
             </div>
           </form>
-          <NavLink className="navbar__link" to="/">
-            Регистрация
-          </NavLink>
+          {!user ? (
+            <li className="nav_li">
+              <NavLink className="navbar__link" to="/registration">
+                Регистрация
+              </NavLink>
+
+              <NavLink className="navbar__link" to="/authorization">
+                Войти
+              </NavLink>
+            </li>
+          ) : (
+            <>
+              <li className="navbar__link navbar__user_hello">
+                <a href="/"> Привет, {user.name} </a>
+              </li>
+              <li className="navbar__link">
+                <a onClick={userLogOut} href="/">
+                  Выход
+                </a>
+              </li>
+            </>
+          )}
         </div>
       </nav>
       <Outlet />

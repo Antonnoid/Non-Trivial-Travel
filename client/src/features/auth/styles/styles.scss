@@ -1,0 +1,40 @@
+.registr-auth_container {
+  // display: flex;
+  // justify-content: center;
+  max-width: fit-content;
+}
+.registr-auth_form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 15px;
+  background-color: #008ab7a3;
+  color: #ffffff;
+}
+.registr-auth_label {
+  font-size: x-large;
+  font-weight: 555;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.registr-auth_input {
+  width: 450px;
+  height: 45px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+.registr-auth_button {
+  width: 50%;
+  height: 45px;
+  border-radius: 5px;
+  font-size: x-large;
+}
+.reg-auth-dutton {
+  display: flex;
+  justify-content: center;
+}
+
+//#00AF83
+//#008AB7
