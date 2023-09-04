@@ -15,12 +15,16 @@ import UserPage from '../features/user/UserPage';
 import PlacePage from '../features/place/PlacePage';
 import BundlePage from '../features/bundle/BundlePage';
 import Error from '../features/404/Error';
+import { placesInit } from '../features/place/placesSlice';
+import { bundlesInit } from '../features/bundle/bundlesSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(authChecUser());
+    dispatch(placesInit());
+    dispatch(bundlesInit());
   }, []);
 
   return (
