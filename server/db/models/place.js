@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       User,
       Image,
       Route_place,
+      Bundle_place,
       Favorite_place,
       Place_comment,
     }) {
@@ -14,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(User, {foreignKey: 'userId'});
       this.hasMany(Image, {foreignKey: 'placeId'});
       this.hasMany(Route_place, {foreignKey: 'placeId'});
+      this.hasMany(Bundle_place, {foreignKey: 'placeId'});
       this.hasMany(Favorite_place, {foreignKey: 'placeId'});
       this.hasMany(Place_comment, {foreignKey: 'placeId'});
     }
