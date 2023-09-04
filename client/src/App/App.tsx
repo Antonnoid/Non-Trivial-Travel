@@ -12,7 +12,6 @@ import {authChecUser} from '../features/auth/authSlice';
 import Map from '../features/map/Map';
 import PlacesList from '../features/place/PlacesList';
 
-
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
 

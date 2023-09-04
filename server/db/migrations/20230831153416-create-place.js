@@ -18,6 +18,8 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       rating: {
+        allowNull: false,
+        defaultValue: 0.0,
         type: Sequelize.DOUBLE,
       },
       isPublic: {
@@ -32,6 +34,7 @@ module.exports = {
           model: 'Users',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       cityId: {
         allowNull: false,
@@ -40,6 +43,7 @@ module.exports = {
           model: 'Cities',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       latitude: {
         allowNull: false,

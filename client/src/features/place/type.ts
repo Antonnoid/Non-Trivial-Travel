@@ -11,6 +11,11 @@ export type Place = {
   longitude: number;
   images: Image[];
 };
+export type PlaceForAdd = {
+  title: string;
+  description: string;
+  city: string;
+};
 
 export type Image = {
   id: number;
