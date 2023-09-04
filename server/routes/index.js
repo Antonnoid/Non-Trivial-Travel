@@ -13,7 +13,7 @@ router.use('/api/places', placesApiRouter);
 router.use('/api/2gis', mapApiRouter);
 router.use('/api/cities', cityApiRoutes);
 router.use('/api/routes', routesApiRouter);
-router.use('/api/bundles', bundlesApiRouter)
+router.use('/api/bundles', bundlesApiRouter);
 router.use('/api/images', imageApiRouter);
 
 module.exports = router;

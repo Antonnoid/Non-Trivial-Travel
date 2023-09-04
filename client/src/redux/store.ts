@@ -7,6 +7,9 @@ import ImagesSlice from '../features/image/ImagesSlice';
 import citiesSlice from '../features/navbar/citiesSlice';
 import bundlesSlice from '../features/bundle/bundlesSlice';
 import routesSlice from '../features/routes/routesSlice';
+import commentsPlaceSlice from '../features/comment/commentsPlaceSlice';
+import commentsBundleSlice from '../features/comment/commentsBundleSlice';
+import commentsRouteSlice from '../features/comment/commentsRouteSlice';
 
 const store = configureStore({
   reducer: {
@@ -16,6 +19,9 @@ const store = configureStore({
     cities: citiesSlice,
     bundles: bundlesSlice,
     routes: routesSlice,
+    commentsOfPlace: commentsPlaceSlice,
+    commentsOfBundle: commentsBundleSlice,
+    commentsOfRoute: commentsRouteSlice,
   },
 });
 

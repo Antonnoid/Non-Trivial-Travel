@@ -33,7 +33,7 @@ function App(): JSX.Element {
           <Route path="/map" element={<Map />} />
           <Route path="/cities/:cityId" element={<PlacesList />} />
           <Route path="/user/:userId" element={<UserPage />} />
-          <Route path="places/:placeId" element={<PlacePage />} />
+          <Route path="/places/:placeId" element={<PlacePage />} />         
           <Route path='/bundles/:bundleId' element={<BundlePage />}/>
         </Route>
         <Route path="*" element={<Error />} />
