@@ -61,7 +61,6 @@ router.delete('/:placeId', async (req, res) => {
   const admin = await User.findOne({
     where: {id: req.session.userId, isAdmin: true},
   });
-
   const place = await Place.findOne({where: +placeId});
   if (placeId && (admin || place.userId === +req.session.userId)) {
     await Place.destroy({where: {id: +placeId}});
@@ -71,4 +70,18 @@ router.delete('/:placeId', async (req, res) => {
   }
   res.json({message: 'Ошибка доступа'});
 });
+
+router.put('/:placeId', async (req, res) => {
+  try {
+    const {placeId} = req.params;
+    const {isPublic} = req.body;
+    const place = await Place.findOne({where: {id: placeId}});
+    place.isPublic = isPublic;
+    await place.save();
+    res.json(place);
+  } catch ({message}) {
+    res.json({message});
+  }
+});
+
 module.exports = router;
