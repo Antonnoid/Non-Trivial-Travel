@@ -1,9 +1,9 @@
 'use strict';
-const { Model } = require('sequelize');
+const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Image extends Model {
     static associate({Place}) {
-      this.belongsTo(Place, {foreignKey: 'placeId'})
+      this.belongsTo(Place, {foreignKey: 'placeId'});
     }
   }
   Image.init(
@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Places',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
     },
     {
