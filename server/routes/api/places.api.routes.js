@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const {Place} = require('../../db/models');
 const {Image} = require('../../db/models');
+const {Place_comment} = require('../../db/models');
 const {City} = require('../../db/models');
 const {User} = require('../../db/models');
 const {Op} = require('sequelize');
@@ -8,7 +9,7 @@ const {Op} = require('sequelize');
 router.get('/', async (req, res) => {
   try {
     const places = await Place.findAll({
-      include: {model: Image},
+      include: [Image, Place_comment],
     });
     res.json(places);
   } catch ({message}) {
@@ -20,7 +21,7 @@ router.get('/:placeId', async (req, res) => {
   try {
     const place = await Place.findOne({
       where: {id: req.params.placeId},
-      include: {model: Image},
+      include: [Image, Place_comment],
     });
     res.json(place);
   } catch ({message}) {
