@@ -4,10 +4,11 @@ import {useParams} from 'react-router-dom';
 import {Image, Place} from './type';
 import {RootState, useAppDispatch} from '../../redux/store';
 import ImageItem from '../image/ImageItem';
-import { imagesInit } from '../image/ImagesSlice';
+import {imagesInit} from '../image/ImagesSlice';
+import CommentsListPage from '../comment/CommentsListPage';
 
 function PlacePage(): JSX.Element {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const {placeId} = useParams();
   const places = useSelector((store: RootState) => store.places.places);
   const images = useSelector((store: RootState) => store.images.images);
@@ -17,23 +18,26 @@ function PlacePage(): JSX.Element {
     ourPlace = places.find((place: Place) => place.id === +placeId)!!;
     ourImages = images.filter((image: Image) => image.placeId === +placeId)!!;
   }
-  useEffect(()=>{
-    dispatch(imagesInit())
-  },[])
+  useEffect(() => {
+    dispatch(imagesInit());
+  }, []);
 
   return (
     <div>
       {ourPlace ? (
-        <div>
-          <h1>{ourPlace.title}</h1>
-          <div>{ourPlace.rating}</div>
+        <>
           <div>
-            {ourImages?.map((image: Image) => (
-              <ImageItem image={image} key={image.id}/>
-            ))}
+            <h1>{ourPlace.title}</h1>
+            <div>{ourPlace.rating}</div>
+            <div>
+              {ourImages?.map((image: Image) => (
+                <ImageItem image={image} key={image.id} />
+              ))}
+            </div>
+            <h3>{ourPlace.description}</h3>
           </div>
-          <h3>{ourPlace.description}</h3>
-        </div>
+          <CommentsListPage />
+        </>
       ) : (
         <div>
           <p>Ты ошибся переулком</p>

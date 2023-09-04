@@ -53,7 +53,7 @@ export default function Navbar(): JSX.Element {
     dispatch(logOut());
     navigate('/');
   };
-  const clearInput = () => {
+  const clearInput = (): void => {
     setInput('');
   };
   useEffect(() => {
