@@ -53,7 +53,9 @@ export default function Navbar(): JSX.Element {
     dispatch(logOut());
     navigate('/');
   };
-
+  const clearInput = () => {
+    setInput('');
+  };
   useEffect(() => {
     initCities();
     getCity();
@@ -69,7 +71,6 @@ export default function Navbar(): JSX.Element {
         showDropList(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
@@ -107,7 +108,11 @@ export default function Navbar(): JSX.Element {
                         </Link>
                       </li>
                       {cities.map((city) => (
-                        <CityItem key={city.id} city={city} />
+                        <CityItem
+                          onClick={clearInput}
+                          key={city.id}
+                          city={city}
+                        />
                       ))}
                     </ul>
                   )}
