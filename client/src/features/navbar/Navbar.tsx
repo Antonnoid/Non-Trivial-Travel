@@ -82,33 +82,41 @@ export default function Navbar(): JSX.Element {
       <nav className="navbar">
         <div className="mid">
           <div className="navbar__body container">
-            <form action="" className="form navbar__form">
-              <div className="form__body">
-                <input
-                  onFocus={() => showDropList(true)}
-                  onChange={(e) => setInput(e.target.value)}
-                  value={input}
-                  className="form__input"
-                  type="text"
-                  placeholder={placeholder}
-                />
-                {dropList && (
-                  <ul className="drop-down" ref={dropDownRef}>
-                    {cities.length === 0 && (
-                      <li className="drop-down__item">Такого города нет</li>
-                    )}
-                    <li className="drop-down__item">
-                      <Link onClick={() => setPlaceholder('Все города')} to="/">
-                        Все города
-                      </Link>
-                    </li>
-                    {cities.map((city) => (
-                      <CityItem key={city.id} city={city} />
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </form>
+            <div style={{display: 'flex', alignItems: 'center'}}>
+              <form action="" className="form navbar__form">
+                <div className="form__body">
+                  <input
+                    onFocus={() => showDropList(true)}
+                    onChange={(e) => setInput(e.target.value)}
+                    value={input}
+                    className="form__input"
+                    type="text"
+                    placeholder={placeholder}
+                  />
+                  {dropList && (
+                    <ul className="drop-down" ref={dropDownRef}>
+                      {cities.length === 0 && (
+                        <li className="drop-down__item">Такого города нет</li>
+                      )}
+                      <li className="drop-down__item">
+                        <Link
+                          onClick={() => setPlaceholder('Все города')}
+                          to="/"
+                        >
+                          Все города
+                        </Link>
+                      </li>
+                      {cities.map((city) => (
+                        <CityItem key={city.id} city={city} />
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </form>
+              <NavLink className="navbar__link" to="/">
+                Главная
+              </NavLink>
+            </div>
             {!user ? (
               <li className="nav_li">
                 <NavLink className="navbar__link" to="/registration">
@@ -119,16 +127,14 @@ export default function Navbar(): JSX.Element {
                   Войти
                 </NavLink>
               </li>
-              <NavLink className="navbar__link" to={`/user/${user.id}`}>
-                Личный кабинет
-              </NavLink>
-            </>
-          )}
             ) : (
               <>
-                <li className="navbar__link navbar__user_hello">
-                  <a href="/"> Привет, {user.name} </a>
-                </li>
+                <NavLink
+                  className="navbar__link navbar__user_hello"
+                  to={`/user/${user.id}`}
+                >
+                  Привет, {user.name}
+                </NavLink>
                 <li className="navbar__link">
                   <a onClick={userLogOut} href="/">
                     Выход

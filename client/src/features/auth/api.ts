@@ -13,8 +13,6 @@ export const fetchAuthUser = async (user: UserAuthLog): Promise<User> => {
     throw new Error(data.message);
   }
   return res.json();
-  console.log(res, '---летит феч в базу на авториз-----');
-  return res.json();
 };
 
 // фетч в базу на регистрацию !!!
@@ -28,7 +26,6 @@ export const fetchRegisterUser = async (user: UserAuthReg): Promise<User> => {
     const data = await res.json();
     throw new Error(data.message);
   }
-  return res.json();
   console.log(res, '---летит феч в базу на регу-----');
   return res.json();
 };

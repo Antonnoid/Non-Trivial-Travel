@@ -36,7 +36,7 @@ function RegisterPage(): JSX.Element {
 
   return (
     <div className="registr-auth_container">
-      {error && <span style={{fontSize: '25px', color: 'red'}}>{error}</span>}
+      {error && <span className="register-auth_span">{error}</span>}
       <form className="registr-auth_form" onSubmit={registerUser}>
         <label className="registr-auth_label">
           Имя
