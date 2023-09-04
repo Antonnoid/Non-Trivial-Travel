@@ -15,12 +15,16 @@ import UserPage from '../features/user/UserPage';
 import PlacePage from '../features/place/PlacePage';
 import BundlePage from '../features/bundle/BundlePage';
 import Error from '../features/404/Error';
+import { placesInit } from '../features/place/placesSlice';
+import { bundlesInit } from '../features/bundle/bundlesSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(authChecUser());
+    dispatch(placesInit());
+    dispatch(bundlesInit());
   }, []);
 
   return (
@@ -33,7 +37,7 @@ function App(): JSX.Element {
           <Route path="/map" element={<Map />} />
           <Route path="/cities/:cityId" element={<PlacesList />} />
           <Route path="/user/:userId" element={<UserPage />} />
-          <Route path="places/:placeId" element={<PlacePage />} />
+          <Route path="/places/:placeId" element={<PlacePage />} />         
           <Route path='/bundles/:bundleId' element={<BundlePage />}/>
         </Route>
         <Route path="*" element={<Error />} />

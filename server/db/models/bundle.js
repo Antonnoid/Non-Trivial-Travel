@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     }) {
       this.belongsTo(City, {foreignKey: 'cityId'});
       this.belongsTo(User, {foreignKey: 'userId'});
-      this.hasMany(Bundle_place, {foreignKey: 'placeId'});
+      this.hasMany(Bundle_place, {foreignKey: 'bundleId'});
       this.hasMany(Favorite_bundle, {foreignKey: 'bundleId'});
       this.hasMany(Bundle_comment, {foreignKey: 'bundleId'});
     }
