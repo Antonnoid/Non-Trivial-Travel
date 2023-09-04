@@ -121,6 +121,9 @@ export default function Navbar(): JSX.Element {
                   Выход
                 </a>
               </li>
+              <NavLink className="navbar__link" to={`/user/${user.id}`}>
+                Личный кабинет
+              </NavLink>
             </>
           )}
         </div>
