@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAppDispatch} from '../../redux/store';
 import {placeAddfromForm} from './placesSlice';
 
 export default function FormAdd(): JSX.Element {
+  const [message, setMessage] = useState('');
+
   const [title, setTitle] = useState('');
   const [description, setDesc] = useState('');
   const [city, setCity] = useState('');
@@ -11,8 +13,20 @@ export default function FormAdd(): JSX.Element {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-    dispatch(placeAddfromForm({title, description, city}));
+    const result = await dispatch(placeAddfromForm({title, description, city}));
+    if (placeAddfromForm.fulfilled.match(result)) {
+      setMessage('Добавлено');
+      setTimeout(() => {
+        setMessage('');
+      }, 2000);
+    } else {
+      setMessage('Ошибка добавления');
+      setTimeout(() => {
+        setMessage('');
+      }, 2000);
+    }
   };
+
   return (
     <form onSubmit={addPlace}>
       <input
@@ -36,7 +50,7 @@ export default function FormAdd(): JSX.Element {
         type="text"
         placeholder="Город"
       />
-      <div className="message"></div>
+      <div className="message">{message}</div>
       <button type="submit">Добавить место</button>
     </form>
   );
