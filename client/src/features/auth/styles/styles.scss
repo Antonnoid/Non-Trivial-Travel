@@ -1,7 +1,9 @@
 .registr-auth_container {
-  // display: flex;
-  // justify-content: center;
+  display: flex;
   max-width: fit-content;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
 }
 .registr-auth_form {
   display: flex;
@@ -26,14 +28,21 @@
   border-radius: 5px;
 }
 .registr-auth_button {
-  width: 50%;
+  width: 35%;
   height: 45px;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: x-large;
+  font-weight: 500;
+  color: #00af83;
+  background-color: #ffffff;
 }
 .reg-auth-dutton {
   display: flex;
   justify-content: center;
+}
+.img_registr {
+  margin-top: 100px;
+  max-width: 900px;
 }
 
 //#00AF83
