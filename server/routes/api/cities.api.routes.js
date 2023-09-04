@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Sequelize = require('sequelize');
 const {Op} = require('sequelize');
-const {City, Place} = require('../../db/models');
+const {City, Place, Bundle, Route} = require('../../db/models');
 
 router.get('/', async (req, res) => {
   try {
@@ -47,11 +47,7 @@ router.get('/search/id/:id', async (req, res) => {
     const {id} = req.params;
     const city = await City.findOne({
       where: {id},
-      include: [
-        {
-          model: Place,
-        },
-      ],
+      include: [Place, Bundle, Route],
     });
     res.json(city);
   } catch ({message}) {

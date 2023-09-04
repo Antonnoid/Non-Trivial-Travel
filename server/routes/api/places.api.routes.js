@@ -2,6 +2,7 @@ const router = require('express').Router();
 const {Place} = require('../../db/models');
 const {Image} = require('../../db/models');
 const {City} = require('../../db/models');
+const {User} = require('../../db/models');
 const {Op} = require('sequelize');
 
 router.get('/', async (req, res) => {
@@ -54,6 +55,20 @@ router.post('/', async (req, res) => {
   } catch ({message}) {
     console.log(message);
   }
+});
+router.delete('/:placeId', async (req, res) => {
+  const {placeId} = req.params;
+  const admin = await User.findOne({
+    where: {id: req.session.userId, isAdmin: true},
+  });
+  const place = await Place.findOne({where: +placeId});
+  if (placeId && (admin || place.userId === +req.session.userId)) {
+    await Place.destroy({where: {id: +placeId}});
+
+    res.json(placeId);
+    return;
+  }
+  res.json({message: 'Ошибка доступа'});
 });
 
 router.put('/:placeId', async (req, res) => {

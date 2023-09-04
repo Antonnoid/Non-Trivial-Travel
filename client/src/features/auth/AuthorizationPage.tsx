@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import {authorization} from './authSlice';
+import {authorization, clearError} from './authSlice';
 import {RootState, useAppDispatch} from '../../redux/store';
 import logoSlogon from './img/logoSlogon.png';
 
 function AuthorizationPage(): JSX.Element {
   const {error, user} = useSelector((store: RootState) => store.auth);
+  console.log(error, '--error-----');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,20 +21,31 @@ function AuthorizationPage(): JSX.Element {
     dispatch(authorization({email, password}));
   };
 
+  const ChengeEmail: React.ChangeEventHandler<HTMLInputElement> = async (e) => {
+    setEmail(e.target.value);
+    dispatch(clearError());
+  };
+  const ChengePassword: React.ChangeEventHandler<HTMLInputElement> = async (
+    e
+  ) => {
+    setPassword(e.target.value);
+    dispatch(clearError());
+  };
+
   useEffect(() => {
     if (user) {
       navigate('/');
     }
-  }, []);
+  }, [user, navigate]);
 
   return (
     <div className="registr-auth_container">
-      {error && <span style={{fontSize: '25px', color: 'red'}}>{error}</span>}
+      {error && <span className="register-auth_span">{error}</span>}
       <form className="registr-auth_form" onSubmit={authUser}>
         <label className="registr-auth_label">Почта</label>
         <input
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={ChengeEmail}
           className="registr-auth_input"
           placeholder="ntt@mail.ru"
           type="text"
@@ -41,7 +53,7 @@ function AuthorizationPage(): JSX.Element {
         <label className="registr-auth_label">Пароль</label>
         <input
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={ChengePassword}
           className="registr-auth_input"
           placeholder="от 3 символов"
           type="text"

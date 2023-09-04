@@ -52,9 +52,6 @@ const authSlice = createSlice({
     builder.addCase(authChecUser.fulfilled, (state, action) => {
       state.user = action.payload;
     });
-    builder.addCase(authChecUser.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
     builder.addCase(logOut.fulfilled, (state) => {
       state.user = undefined;
     });

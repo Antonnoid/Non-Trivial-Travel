@@ -25,13 +25,13 @@ function App(): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navbar />}>
-          <Route path="/" element={<MainPage />} />
+          <Route index element={<MainPage />} />
           <Route path="/authorization" element={<AuthorizationPage />} />
           <Route path="/registration" element={<RegisterPage />} />
           <Route path="/map" element={<Map />} />
           <Route path="/cities/:cityId" element={<PlacesList />} />
           <Route path="/user/:userId" element={<UserPage />} />
-          <Route path='places/:placeId' element={<PlacePage />} />
+          <Route path="places/:placeId" element={<PlacePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
