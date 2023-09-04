@@ -2,15 +2,15 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Place} from './type';
 import {useAppDispatch} from '../../redux/store';
-import * as api from './api';
+
 import {placeRemove} from './placesSlice';
 
 function PlaceCard({place}: {place: Place}): JSX.Element {
   const dispatch = useAppDispatch();
   const removePlace = async (): Promise<void> => {
-    await api.placeRemove(place.id);
     dispatch(placeRemove(place.id));
   };
+
   return (
     <>
       <div className="gamePage">
@@ -25,6 +25,7 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
               >
                 Подробнее
               </Link>
+              {}
               <button
                 type="button"
                 onClick={removePlace}
