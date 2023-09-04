@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import {City} from '../navbar/types/types';
-import {Place, PlaceForAdd} from './type';
+import {Place, PlaceId, PlaceForAdd} from './type';
 
 export const placesInitFetch = async (): Promise<Place[]> => {
   const res = await fetch('/api/places');
@@ -20,4 +20,9 @@ export const placeAdd = async (place: PlaceForAdd): Promise<Place> => {
     body: JSON.stringify(place),
   });
   return res.json();
+
+export const placePageFetch = async (id: PlaceId): Promise<Place> => {
+  const res = await fetch(`/api/places/${id}`);
+  const data = res.json();
+  return data;
 };

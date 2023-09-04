@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {PlaceForAdd, PlacesState} from './type';
 import * as api from './api';
 import {City} from '../navbar/types/types';
+import {PlaceId} from '../place/type';
 
 export const initialState: PlacesState = {places: [], error: ''};
 
@@ -16,6 +17,9 @@ export const placeAddfromForm = createAsyncThunk(
   'places/add',
   (place: PlaceForAdd) => api.placeAdd(place)
 );
+export const placeInit = createAsyncThunk('place/init', (id: PlaceId) => {
+  api.placePageFetch(id);
+});
 
 const placesSlice = createSlice({
   name: 'places',
