@@ -37,25 +37,25 @@ router.post('/registration', async (req, res) => {
 //авторизация
 router.post('/authorization', async (req, res) => {
   try {
-    let user;
     const {email, password} = req.body;
-    if (email && password) {
-      user = await User.findOne({where: {email}});
-      const compare = await bcrypt.compare(password, user.password);
-      if (user && compare) {
-        req.session.userId = user.id;
-        res.json({message: 'success'});
-        return;
-      } else {
-        res.json({message: 'Неверный логин или пароль'});
-        return;
-      }
-    } else {
-      res.json({message: 'Заполните пожалуйста все поля.'});
+    const user = await User.findOne({where: {email}});
+    if (!email || !password) {
+      res.status(400).json({message: 'Заполните все поля'});
       return;
     }
+    if (!user) {
+      res.status(400).json({message: 'Почта или пароль не совпадают'});
+      return;
+    }
+    const compare = await bcrypt.compare(password, user.password);
+    if (!user || !compare) {
+      res.status(400).json({message: 'Почта или пароль не совпадают'});
+      return;
+    }
+    req.session.userId = user.id;
+    res.status(200).json(user);
   } catch ({message}) {
-    res.json({message});
+    res.status(500).json({message});
   }
 });
 
