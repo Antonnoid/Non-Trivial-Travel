@@ -14,6 +14,7 @@ import PlacesList from '../features/place/PlacesList';
 import UserPage from '../features/user/UserPage';
 import PlacePage from '../features/place/PlacePage';
 import BundlePage from '../features/bundle/BundlePage';
+import Error from '../features/404/Error';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ function App(): JSX.Element {
           <Route path="places/:placeId" element={<PlacePage />} />
           <Route path='/bundles/:bundleId' element={<BundlePage />}/>
         </Route>
+        <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );
