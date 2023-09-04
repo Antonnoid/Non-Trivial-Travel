@@ -13,9 +13,7 @@ export const placesInitFromCity = async (id: City['id']): Promise<Place[]> => {
   const data = await res.json(); // город
   return data.Places; // ключ Places, в котором лежат места этого города
 };
-export const placeAdd = async (
-  place: PlaceForAdd
-): Promise<{newPlace: Place; message: string}> => {
+export const placeAdd = async (place: PlaceForAdd): Promise<Place> => {
   const res = await fetch(`/api/places`, {
     method: 'POST',
     headers: {'Content-type': 'application/json'},

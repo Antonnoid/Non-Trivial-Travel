@@ -1,26 +1,40 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useAppDispatch} from '../../redux/store';
 import {placeAddfromForm} from './placesSlice';
 
 export default function FormAdd(): JSX.Element {
   const [message, setMessage] = useState('');
 
-  const [title, setTitle] = useState('');
   const [description, setDesc] = useState('');
   const [city, setCity] = useState('');
+  const [title, setTitle] = useState('');
+
   const dispatch = useAppDispatch();
   const addPlace = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-    const result = await dispatch(placeAddfromForm({title, description, city}));
-    if (placeAddfromForm.fulfilled.match(result)) {
-      setMessage('Добавлено');
-      setTimeout(() => {
-        setMessage('');
-      }, 2000);
+    if (
+      title.trim() !== '' &&
+      description.trim() !== '' &&
+      city.trim() !== ''
+    ) {
+      const result = await dispatch(
+        placeAddfromForm({title, description, city})
+      );
+      if (placeAddfromForm.fulfilled.match(result)) {
+        setMessage('Добавлено');
+        setTimeout(() => {
+          setMessage('');
+        }, 2000);
+      } else {
+        setMessage('Ошибка добавления');
+        setTimeout(() => {
+          setMessage('');
+        }, 2000);
+      }
     } else {
-      setMessage('Ошибка добавления');
+      setMessage('Заполните все поля');
       setTimeout(() => {
         setMessage('');
       }, 2000);

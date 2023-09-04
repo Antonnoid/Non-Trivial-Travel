@@ -36,7 +36,7 @@ const placesSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(placeAddfromForm.fulfilled, (state, action) => {
-        state.places.push(action.payload.newPlace);
+        state.places.push(action.payload);
       })
       .addCase(placeAddfromForm.rejected, (state, action) => {
         state.error = action.error.message;

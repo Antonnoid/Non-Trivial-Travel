@@ -29,24 +29,26 @@ router.get('/:placeId', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const {title, description, city} = req.body;
-    const cityByName = await City.findOne({
-      where: {
-        name: {
-          [Op.iLike]: city, // Игнорировать регистр
-        },
-      },
-    });
     if (req.session.userId) {
-      const newPlace = await Place.create({
-        title,
-        description,
-        userId: req.session.userId,
-        cityId: cityByName.id,
-        latitude: 45.4535,
-        longitude: 35.32435,
+      const cityByName = await City.findOne({
+        where: {
+          name: {
+            [Op.iLike]: city, // Игнорировать регистр
+          },
+        },
       });
-      res.json({newPlace, message: 'Успешно добавлено'});
-      return;
+      if (cityByName) {
+        const newPlace = await Place.create({
+          title,
+          description,
+          userId: req.session.userId,
+          cityId: cityByName.id,
+          latitude: 45.4535,
+          longitude: 35.32435,
+        });
+        res.json(newPlace);
+        return;
+      }
     }
     res.json({message: 'Войдите или зарегистрируйтесь'});
   } catch ({message}) {
