@@ -20,6 +20,7 @@ module.exports = {
           model: 'Users',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       routeId: {
         allowNull: false,
@@ -28,6 +29,7 @@ module.exports = {
           model: 'Routes',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,

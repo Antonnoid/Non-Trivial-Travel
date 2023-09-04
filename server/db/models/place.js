@@ -2,7 +2,14 @@
 const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Place extends Model {
-    static associate({City, User, Image, Route_place, Favorite_place, Place_comment}) {
+    static associate({
+      City,
+      User,
+      Image,
+      Route_place,
+      Favorite_place,
+      Place_comment,
+    }) {
       this.belongsTo(City, {foreignKey: 'cityId'});
       this.belongsTo(User, {foreignKey: 'userId'});
       this.hasMany(Image, {foreignKey: 'placeId'});
@@ -36,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Users',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       cityId: {
         allowNull: false,
@@ -44,6 +52,7 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Cities',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       latitude: {
         allowNull: false,

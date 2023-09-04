@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Users',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       bundleId: {
         allowNull: false,
@@ -24,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Bundles',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
     },
     {

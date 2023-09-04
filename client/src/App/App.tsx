@@ -13,7 +13,6 @@ import Map from '../features/map/Map';
 import PlacesList from '../features/place/PlacesList';
 import PlacePage from '../features/place/PlacePage';
 
-
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
 

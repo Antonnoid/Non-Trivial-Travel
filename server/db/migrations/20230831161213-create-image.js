@@ -20,6 +20,7 @@ module.exports = {
           model: 'Places',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
