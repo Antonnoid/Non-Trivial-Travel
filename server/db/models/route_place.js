@@ -1,10 +1,10 @@
 'use strict';
-const { Model } = require('sequelize');
+const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Route_place extends Model {
-    static associate({Route,Place}) {
-      this.belongsTo(Route, { foreignKey: 'routeId' });
-      this.belongsTo(Place, { foreignKey: 'placeId' });
+    static associate({Route, Place}) {
+      this.belongsTo(Route, {foreignKey: 'routeId'});
+      this.belongsTo(Place, {foreignKey: 'placeId'});
     }
   }
   Route_place.init(
@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Routes',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       placeId: {
         allowNull: false,
@@ -24,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Places',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
     },
     {

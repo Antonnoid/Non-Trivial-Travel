@@ -23,7 +23,6 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       cityId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: 'Cities',

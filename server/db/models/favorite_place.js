@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Users',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       placeId: {
         allowNull: false,
@@ -24,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Places',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
     },
     {

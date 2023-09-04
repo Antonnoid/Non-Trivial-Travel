@@ -8,6 +8,11 @@ export const fetchAuthUser = async (user: UserAuthLog): Promise<User> => {
     headers: {'Content-type': 'application/json'},
     body: JSON.stringify(user),
   });
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.message);
+  }
+  return res.json();
   console.log(res, '---летит феч в базу на авториз-----');
   return res.json();
 };
@@ -19,6 +24,11 @@ export const fetchRegisterUser = async (user: UserAuthReg): Promise<User> => {
     headers: {'Content-type': 'application/json'},
     body: JSON.stringify(user),
   });
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.message);
+  }
+  return res.json();
   console.log(res, '---летит феч в базу на регу-----');
   return res.json();
 };

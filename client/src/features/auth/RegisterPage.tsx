@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './styles/styles.scss';
 import {useNavigate} from 'react-router-dom';
-import {registration} from './authSlice';
-import {useAppDispatch} from '../../redux/store';
+import {useSelector} from 'react-redux';
+import {clearError, registration} from './authSlice';
+import {RootState, useAppDispatch} from '../../redux/store';
+import logoSlogon from './img/logoSlogon.png';
 
 function RegisterPage(): JSX.Element {
+  const {user, error} = useSelector((store: RootState) => store.auth);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,11 +21,22 @@ function RegisterPage(): JSX.Element {
   ): Promise<void> => {
     e.preventDefault();
     dispatch(registration({name, email, password, cityId}));
-    navigate('/');
   };
+
+  const ChengeEmail: React.ChangeEventHandler<HTMLInputElement> = async (e) => {
+    setEmail(e.target.value);
+    dispatch(clearError());
+  };
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   return (
     <div className="registr-auth_container">
+      {error && <span style={{fontSize: '25px', color: 'red'}}>{error}</span>}
       <form className="registr-auth_form" onSubmit={registerUser}>
         <label className="registr-auth_label">
           Имя
@@ -38,7 +52,7 @@ function RegisterPage(): JSX.Element {
           Почта
           <input
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={ChengeEmail}
             className="registr-auth_input"
             placeholder="ntt@mail.ru"
             type="text"
@@ -70,6 +84,9 @@ function RegisterPage(): JSX.Element {
           </button>
         </div>
       </form>
+      <div className="registr-auth_container">
+        <img src={logoSlogon} className="img_registr" alt="logoSlogon" />
+      </div>
     </div>
   );
 }

@@ -4,9 +4,9 @@ import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {loadCitiesByLetter, loadCitiesPopular} from './citiesSlice';
 import * as api from './api';
-import {fetchLogOut} from '../auth/api';
 import CityItem from './CityItem';
 import {City} from './types/types';
+import {logOut} from '../auth/authSlice';
 
 export default function Navbar(): JSX.Element {
   const {cityId} = useParams();
@@ -38,13 +38,20 @@ export default function Navbar(): JSX.Element {
       dispatch(loadCitiesPopular());
     }
   };
-  
-  const userLogOut = async (): Promise<void> => {
-  const data = await fetchLogOut();
-   if (data.message === 'success') {
-     dispatch({type: 'auth/logout'});
-     navigate('/');
-   }
+
+  // const userLogOut = async (): Promise<void> => {
+  //   const data = await fetchLogOut();
+  //   if (data.message === 'success') {
+  //     dispatch({type: 'auth/logout'});
+  //     navigate('/');
+  //   }
+  // };
+  const userLogOut: React.MouseEventHandler<HTMLAnchorElement> = async (
+    e
+  ): Promise<void> => {
+    e.preventDefault();
+    dispatch(logOut());
+    navigate('/');
   };
 
   useEffect(() => {
@@ -73,59 +80,63 @@ export default function Navbar(): JSX.Element {
   return (
     <>
       <nav className="navbar">
-        <div className="navbar__body container">
-          <form action="" className="form navbar__form">
-            <div className="form__body">
-              <input
-                onFocus={() => showDropList(true)}
-                onChange={(e) => setInput(e.target.value)}
-                value={input}
-                className="form__input"
-                type="text"
-                placeholder={placeholder}
-              />
-              {dropList && (
-                <ul className="drop-down" ref={dropDownRef}>
-                  {cities.length === 0 && (
-                    <li className="drop-down__item">Такого города нет</li>
-                  )}
-                  <li className="drop-down__item">
-                    <Link onClick={() => setPlaceholder('Все города')} to="/">
-                      Все города
-                    </Link>
-                  </li>
-                  {cities.map((city) => (
-                    <CityItem key={city.id} city={city} />
-                  ))}
-                </ul>
-              )}
-            </div>
-          </form>
-          {!user ? (
-            <li className="nav_li">
-              <NavLink className="navbar__link" to="/registration">
-                Регистрация
-              </NavLink>
+        <div className="mid">
+          <div className="navbar__body container">
+            <form action="" className="form navbar__form">
+              <div className="form__body">
+                <input
+                  onFocus={() => showDropList(true)}
+                  onChange={(e) => setInput(e.target.value)}
+                  value={input}
+                  className="form__input"
+                  type="text"
+                  placeholder={placeholder}
+                />
+                {dropList && (
+                  <ul className="drop-down" ref={dropDownRef}>
+                    {cities.length === 0 && (
+                      <li className="drop-down__item">Такого города нет</li>
+                    )}
+                    <li className="drop-down__item">
+                      <Link onClick={() => setPlaceholder('Все города')} to="/">
+                        Все города
+                      </Link>
+                    </li>
+                    {cities.map((city) => (
+                      <CityItem key={city.id} city={city} />
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </form>
+            {!user ? (
+              <li className="nav_li">
+                <NavLink className="navbar__link" to="/registration">
+                  Регистрация
+                </NavLink>
 
-              <NavLink className="navbar__link" to="/authorization">
-                Войти
-              </NavLink>
-            </li>
-          ) : (
-            <>
-              <li className="navbar__link navbar__user_hello">
-                <a href="/"> Привет, {user.name} </a>
-              </li>
-              <li className="navbar__link">
-                <a onClick={userLogOut} href="/">
-                  Выход
-                </a>
+                <NavLink className="navbar__link" to="/authorization">
+                  Войти
+                </NavLink>
               </li>
               <NavLink className="navbar__link" to={`/user/${user.id}`}>
                 Личный кабинет
               </NavLink>
             </>
           )}
+            ) : (
+              <>
+                <li className="navbar__link navbar__user_hello">
+                  <a href="/"> Привет, {user.name} </a>
+                </li>
+                <li className="navbar__link">
+                  <a onClick={userLogOut} href="/">
+                    Выход
+                  </a>
+                </li>
+              </>
+            )}
+          </div>
         </div>
       </nav>
       <Outlet />

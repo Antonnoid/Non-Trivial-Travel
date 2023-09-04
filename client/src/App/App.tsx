@@ -12,7 +12,7 @@ import {authChecUser} from '../features/auth/authSlice';
 import Map from '../features/map/Map';
 import PlacesList from '../features/place/PlacesList';
 import UserPage from '../features/user/UserPage';
-
+import PlacePage from '../features/place/PlacePage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -31,6 +31,7 @@ function App(): JSX.Element {
           <Route path="/map" element={<Map />} />
           <Route path="/cities/:cityId" element={<PlacesList />} />
           <Route path="/user/:userId" element={<UserPage />} />
+          <Route path='places/:placeId' element={<PlacePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 import {authorization} from './authSlice';
-import {useAppDispatch} from '../../redux/store';
+import {RootState, useAppDispatch} from '../../redux/store';
+import logoSlogon from './img/logoSlogon.png';
 
 function AuthorizationPage(): JSX.Element {
+  const {error, user} = useSelector((store: RootState) => store.auth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,11 +18,17 @@ function AuthorizationPage(): JSX.Element {
   ): Promise<void> => {
     e.preventDefault();
     dispatch(authorization({email, password}));
-    navigate('/');
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <div className="registr-auth_container">
+      {error && <span style={{fontSize: '25px', color: 'red'}}>{error}</span>}
       <form className="registr-auth_form" onSubmit={authUser}>
         <label className="registr-auth_label">Почта</label>
         <input
@@ -43,6 +52,9 @@ function AuthorizationPage(): JSX.Element {
           </button>
         </div>
       </form>
+      <div className="registr-auth_container">
+        <img src={logoSlogon} className="img_registr" alt="logoSlogon" />
+      </div>
     </div>
   );
 }
