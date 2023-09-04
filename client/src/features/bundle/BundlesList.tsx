@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
-import {RootState, useAppDispatch} from '../../redux/store';
 import {useSelector} from 'react-redux';
+import {useParams} from 'react-router-dom';
+import {RootState, useAppDispatch} from '../../redux/store';
 import {bundlesInit, cityBundlesInit} from './bundlesSlice';
 import {Bundle} from './type';
 import BundleCard from './BundleCard';
-import {useParams} from 'react-router-dom';
 
 const BundlesList = (): JSX.Element => {
   const dispatch = useAppDispatch();
