@@ -56,4 +56,17 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.put('/:placeId', async (req, res) => {
+  try {
+    const {placeId} = req.params;
+    const {isPublic} = req.body;
+    const place = await Place.findOne({where: {id: placeId}});
+    place.isPublic = isPublic;
+    await place.save();
+    res.json(place);
+  } catch ({message}) {
+    res.json({message});
+  }
+});
+
 module.exports = router;

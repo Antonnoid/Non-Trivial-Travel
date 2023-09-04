@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {PlaceForAdd, PlacesState} from './type';
+import {Place, PlaceForAdd, PlacesState} from './type';
 import * as api from './api';
 import {City} from '../navbar/types/types';
 import {PlaceId} from '../place/type';
@@ -20,6 +20,13 @@ export const placeAddfromForm = createAsyncThunk(
 export const placeInit = createAsyncThunk('place/init', (id: PlaceId) => {
   api.placePageFetch(id);
 });
+
+export const placePublish = createAsyncThunk(
+  'places/publish',
+  (place: Place) => {
+    return api.placePublishFetch(place);
+  }
+);
 
 const placesSlice = createSlice({
   name: 'places',
@@ -44,7 +51,15 @@ const placesSlice = createSlice({
       })
       .addCase(placeAddfromForm.rejected, (state, action) => {
         state.error = action.error.message;
-      });
+      })
+      .addCase(placePublish.fulfilled, (state, action) => {
+        state.places = state.places.map((place) =>
+          place.id === action.payload.id ? action.payload : place
+        );
+      })
+      .addCase(placePublish.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
   },
 });
 
