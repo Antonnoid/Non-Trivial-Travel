@@ -4,6 +4,8 @@ import {RootState, useAppDispatch} from '../../redux/store';
 import PlaceCard from '../place/PlaceCard';
 import {placePublish} from '../place/placesSlice';
 import {Place} from '../place/type';
+import './styles/styles.scss';
+import {NavLink} from 'react-router-dom';
 
 const UserPage = (): JSX.Element => {
   const user = useSelector((store: RootState) => store.auth.user);
@@ -37,7 +39,9 @@ const UserPage = (): JSX.Element => {
               <div>
                 <button type="button">Добавить место</button>
                 <button type="button">Добавить маршрут</button>
-                <button type="button">Добавить подборку </button>
+                <button type="button">
+                  <NavLink to="/bundles/add">Добавить подборку</NavLink>
+                </button>
               </div>
             </div>
           )}
