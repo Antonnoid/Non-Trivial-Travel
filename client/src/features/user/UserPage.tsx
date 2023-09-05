@@ -4,7 +4,6 @@ import {RootState, useAppDispatch} from '../../redux/store';
 import PlaceCard from '../place/PlaceCard';
 import {placePublish} from '../place/placesSlice';
 import {Place} from '../place/type';
-import './styles/styles.scss';
 
 const UserPage = (): JSX.Element => {
   const user = useSelector((store: RootState) => store.auth.user);
@@ -47,7 +46,7 @@ const UserPage = (): JSX.Element => {
               {userPlaces.length > 0 ? (
                 <div>
                   <h1>Твои места</h1>
-                  <div  className="places">
+                  <div className="places">
                     {userPlaces.map((place) => (
                       <div>
                         <PlaceCard key={place.id} place={place} />
