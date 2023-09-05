@@ -41,6 +41,7 @@ function App(): JSX.Element {
           <Route path="/user/:userId" element={<UserPage />} />
           <Route path="/places/:placeId" element={<PlacePage />} />         
           <Route path='/bundles/:bundleId' element={<BundlePage />}/>
+          {/* <Route path='/routes/:routeId' element={<RoutePage/>}> */}
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

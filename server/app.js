@@ -13,6 +13,9 @@ const serverConfig = require('./config/serverConfig');
 serverConfig(app);
 
 app.use('/', indexRouter);
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/build/index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Трунь трунь трунь на ${PORT} порту`);

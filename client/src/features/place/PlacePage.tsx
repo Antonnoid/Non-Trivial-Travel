@@ -1,14 +1,13 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import {Image, Place} from './type';
-import {RootState, useAppDispatch} from '../../redux/store';
+import {RootState} from '../../redux/store';
 import ImageItem from '../image/ImageItem';
-import {imagesInit} from '../image/ImagesSlice';
+
 import CommentsListPage from '../comment/CommentsListPage';
 
 function PlacePage(): JSX.Element {
-  const dispatch = useAppDispatch();
   const {placeId} = useParams();
   const places = useSelector((store: RootState) => store.places.places);
   const images = useSelector((store: RootState) => store.images.images);

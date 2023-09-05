@@ -1,15 +1,17 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, {useEffect} from 'react';
-import {useLocation} from 'react-router';
+import {useLocation, useParams} from 'react-router';
 import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {loadCommentsBundle} from './commentsBundleSlice';
 import {loadCommentsPlace} from './commentsPlaceSlice';
 import {loadCommentsRoute} from './commentsRouteSlice';
 import CommentItem from './CommentItem';
+import FormAddComment from './FormAddComment';
 
 export default function CommentsListPage(): JSX.Element {
   const dispatch = useAppDispatch();
+  const {placeId} = useParams();
   const forRoute = useSelector(
     (store: RootState) => store.commentsOfRoute.commentsRoute
   );
@@ -21,16 +23,17 @@ export default function CommentsListPage(): JSX.Element {
   );
 
   const loadForBundle = async (): Promise<void> => {
-    dispatch(loadCommentsBundle());
+    if (placeId) dispatch(loadCommentsBundle(+placeId));
   };
   const loadForPlace = async (): Promise<void> => {
-    dispatch(loadCommentsPlace());
+    if (placeId) dispatch(loadCommentsPlace(+placeId));
   };
   const loadForRoute = async (): Promise<void> => {
-    dispatch(loadCommentsRoute());
+    if (placeId) dispatch(loadCommentsRoute(+placeId));
   };
 
   const location = useLocation();
+
   const [bundlesName, routesName, placesName] = ['bundles', 'routes', 'places'];
   const {pathname} = location;
   useEffect(() => {
@@ -45,31 +48,27 @@ export default function CommentsListPage(): JSX.Element {
     if (pathname.includes(routesName)) {
       loadForRoute();
     }
-  }, []);
+  }, [pathname]);
 
   return (
     <div className="comments">
-      {pathname.includes(placesName) && forPlace ? (
-        forPlace.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} />
-        ))
-      ) : (
-        <p>Комментариев нет...</p>
-      )}
-      {pathname.includes(bundlesName) && forBundle ? (
-        forBundle.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} />
-        ))
-      ) : (
-        <p>Комментариев нет...</p>
-      )}
-      {pathname.includes(routesName) && forRoute ? (
-        forRoute.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} />
-        ))
-      ) : (
-        <p>Комментариев нет...</p>
-      )}
+      <h2 className="comments__header">Комментарии</h2>
+      {pathname.includes(placesName) && forPlace
+        ? forPlace.map((comment) => (
+            <CommentItem key={comment.id} comment={comment} />
+          ))
+        : pathname.includes(placesName) && <p>Комментариев нет...</p>}
+      {/* {pathname.includes(bundlesName) && forBundle
+        ? forBundle.map((comment) => (
+            <CommentItem key={comment.id} comment={comment} />
+          ))
+        : pathname.includes(bundlesName) && <p>Комментариев нет...</p>}
+      {pathname.includes(routesName) && forRoute
+        ? forRoute.map((comment) => (
+            <CommentItem key={comment.id} comment={comment} />
+          ))
+        : pathname.includes(routesName) && <p>Комментариев нет...</p>}
+      <FormAddComment /> */}
     </div>
   );
 }

@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         onDelete: 'CASCADE',
       },
-      placeId: {
+      routeId: {
         allowNull: false,
         type: DataTypes.INTEGER,
         references: {
