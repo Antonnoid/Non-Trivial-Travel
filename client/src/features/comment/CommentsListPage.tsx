@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, {useEffect} from 'react';
 import {useLocation} from 'react-router';
 import {useSelector} from 'react-redux';

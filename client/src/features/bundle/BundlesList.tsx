@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {bundlesInit, cityBundlesInit} from './bundlesSlice';
 import {Bundle} from './type';
