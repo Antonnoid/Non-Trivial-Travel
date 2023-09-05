@@ -1,0 +1,17 @@
+FROM node
+
+WORKDIR /client/build
+
+COPY package*.json ./
+
+ENV DATABASE_URL=postgresql://postgres:8HhgfcChZMfwVv@db.zyjmwmwllzinbffirzls.supabase.co:5432/postgres
+ENV SESSION_SECRET=hgjhjghjghjghjghjhgjhgjghjgh
+
+
+RUN npm ci 
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "./server/app.js"]
