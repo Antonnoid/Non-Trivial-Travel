@@ -9,7 +9,9 @@ export default function CommentItem({
   return (
     <div className="comment">
       <div className="comment__body">
-        <h5 className="comment__user">Usename</h5>
+        <h5 className="comment__user">
+          {comment.User?.name} - ({comment.User?.email})
+        </h5>
         <p className="comment__text">{comment.text}</p>
       </div>
     </div>
