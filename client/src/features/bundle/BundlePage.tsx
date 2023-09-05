@@ -13,7 +13,7 @@ const BundlePage = (): JSX.Element => {
   let ourBundle;
   let ourPlaces;
   if (bundleId) {
-    ourBundle = bundles.find((bundle: Bundle) => bundle.id === +bundleId)!!;
+    ourBundle = bundles.find((bundle: Bundle) => bundle.id === +bundleId);
     ourPlaces = ourBundle?.Bundle_places.map((bundlePlace) => bundlePlace.Place).flat()
   }
 
