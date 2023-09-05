@@ -17,6 +17,7 @@ import BundlePage from '../features/bundle/BundlePage';
 import Error from '../features/404/Error';
 import { placesInit } from '../features/place/placesSlice';
 import { bundlesInit } from '../features/bundle/bundlesSlice';
+import { imagesInit } from '../features/image/ImagesSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -25,6 +26,7 @@ function App(): JSX.Element {
     dispatch(authChecUser());
     dispatch(placesInit());
     dispatch(bundlesInit());
+    dispatch(imagesInit());
   }, []);
 
   return (
