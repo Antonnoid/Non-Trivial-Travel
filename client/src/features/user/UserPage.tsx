@@ -4,6 +4,7 @@ import {RootState, useAppDispatch} from '../../redux/store';
 import PlaceCard from '../place/PlaceCard';
 import {placePublish} from '../place/placesSlice';
 import {Place} from '../place/type';
+import './styles/styles.scss';
 
 const UserPage = (): JSX.Element => {
   const user = useSelector((store: RootState) => store.auth.user);
@@ -23,7 +24,7 @@ const UserPage = (): JSX.Element => {
   }
 
   return (
-    <div>
+    <div className="account-container">
       {user ? (
         <div>
           <h1>Здравствуй, странник!</h1>
@@ -46,17 +47,19 @@ const UserPage = (): JSX.Element => {
               {userPlaces.length > 0 ? (
                 <div>
                   <h1>Твои места</h1>
-                  {userPlaces.map((place) => (
-                    <div>
-                      <PlaceCard key={place.id} place={place} />
-                      <input
-                        onChange={() => handlePublishPlace(place)}
-                        type="checkbox"
-                        checked={place.isPublic}
-                      />
-                      <button type="button">Изменить</button>
-                    </div>
-                  ))}
+                  <div  className="places">
+                    {userPlaces.map((place) => (
+                      <div>
+                        <PlaceCard key={place.id} place={place} />
+                        <input
+                          onChange={() => handlePublishPlace(place)}
+                          type="checkbox"
+                          checked={place.isPublic}
+                        />
+                        <button type="button">Изменить</button>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ) : (
                 <div>

@@ -8,17 +8,18 @@ import {placeRemove} from './placesSlice';
 
 function PlaceCard({place}: {place: Place}): JSX.Element {
   const images = useSelector((store: RootState) => store.images.images); // временно
+  const placeImages = images.filter((image) => image.placeId === place.id);
   const dispatch = useAppDispatch();
   const removePlace = async (): Promise<void> => {
     dispatch(placeRemove(place.id));
   };
-
-  console.log(images, 'imgimg');
+  const randomImage =
+    placeImages[Math.floor(Math.random() * (placeImages.length - 1))];
 
   return (
     <>
       <div className="gamePage">
-        <img className="place__body-img" src={images[0].url} alt="img" />
+        <img className="place__body-img" src={randomImage?.url} alt="img" />
         <div className="place">
           <div className="place__body">
             <div className="place__element">
@@ -49,17 +50,31 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
                   Подробнее
                 </Link>
               </div>
+              <Link
+                className="place__link place__link_more"
+                to={`/places/${place.id}`}
+              >
+                Подробнее
+              </Link>
+              {}
+              <button
+                type="button"
+                onClick={removePlace}
+                className="place__link place__link_remove"
+              >
+                Удалить
+              </button>
+              <Link
+                className="place__link place__link_update"
+                to={`/places/${place.id}`}
+              >
+                Изменить
+              </Link>
             </div>
           </div>
         </div>
       </div>
-      {/* <img
-        src={
-          place.images[Math.floor(Math.random() * place.images.length + 1)].url
-        }
-        alt="..."
-      /> */}
-    </>
+    </div>
   );
 }
 
