@@ -1,3 +1,4 @@
+import React from 'react';
 import {useParams} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
@@ -12,8 +13,9 @@ const BundlePage = (): JSX.Element => {
   let ourPlaces;
   if (bundleId) {
     ourBundle = bundles.find((bundle: Bundle) => bundle.id === +bundleId)!!;
-    ourPlaces = ourBundle.Bundle_places.map((bundlePlace) => bundlePlace.Place).flat()
-
+    ourPlaces = ourBundle.Bundle_places.map(
+      (bundlePlace) => bundlePlace.Place
+    ).flat();
   }
 
   return (
@@ -21,7 +23,9 @@ const BundlePage = (): JSX.Element => {
       <h1>{ourBundle?.title}</h1>
       <h2>{ourBundle?.description}</h2>
       <div>
-        {ourPlaces?.map((place) => <PlaceCard key={place.id} place={place} />)}
+        {ourPlaces?.map((place) => (
+          <PlaceCard key={place.id} place={place} />
+        ))}
       </div>
     </div>
   );
