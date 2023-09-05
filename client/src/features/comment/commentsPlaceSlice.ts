@@ -2,14 +2,16 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import * as api from './api';
 import {CommentsOfPlaceState} from './types/states';
+import {Place} from '../place/type';
 
 const initialState: CommentsOfPlaceState = {
   commentsPlace: [],
   error: undefined,
 };
 
-export const loadCommentsPlace = createAsyncThunk('comments/place/load', () =>
-  api.fetchCommentOfPlaces()
+export const loadCommentsPlace = createAsyncThunk(
+  'comments/place/load',
+  (id: Place['id']) => api.fetchCommentOfPlaces(id)
 );
 
 const commentsOfPlaceSlice = createSlice({
