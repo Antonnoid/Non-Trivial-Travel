@@ -23,18 +23,17 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
           <div className="place__body">
             <div className="place__element">
               <h1 className="place__title">{place.title}</h1>
-              <p className="place__description">{place.description}</p>
               <div className="place__links">
-                <div className="place__links-published">
-                  <label htmlFor="public">Опубликовано</label>
-                  <input type="checkbox" name="public" id="" />
-                </div>
                 <Link
-                  className="place__link place__link_more"
+                  className="place__link place__link_update"
                   to={`/places/${place.id}`}
                 >
-                  Подробнее
+                  Изменить
                 </Link>
+                {/* <div className="place__links-published">
+                  <label htmlFor="public">Публиковать</label>
+                  <input type="checkbox" name="public" id="" />
+                </div> */}
                 {}
                 <button
                   type="button"
@@ -44,10 +43,10 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
                   Удалить
                 </button>
                 <Link
-                  className="place__link place__link_update"
+                  className="place__link place__link_more"
                   to={`/places/${place.id}`}
                 >
-                  Изменить
+                  Подробнее
                 </Link>
               </div>
             </div>
