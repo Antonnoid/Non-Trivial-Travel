@@ -1,9 +1,9 @@
 'use strict';
-const { Bundle } = require('../models')
+const {Bundle} = require('../models');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await Bundle.bulkCreate([
       {
         title: 'Подборочка. Ижевск',
@@ -24,7 +24,7 @@ module.exports = {
     ]);
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     await Bundle.destroy({});
-  }
+  },
 };
