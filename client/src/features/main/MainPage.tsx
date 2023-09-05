@@ -11,7 +11,7 @@ export default function MainPage(): JSX.Element {
       {/* <FormAdd /> */}
       {/* <CardsList /> */}
       {/* <RoutesList /> */}
-      {/* <BundlesList /> */}
+      <BundlesList />
       <PlacesList />
     </div>
   );
