@@ -20,12 +20,16 @@ function PlacesList(): JSX.Element {
   }, [cityId]);
 
   return (
-    <div className="place_container">
-      <h3 className="place_text-title">Места</h3>
-      <div className="places">
-        {places.map((place: Place) => (
-          <PlaceCard place={place} key={place.id} />
-        ))}
+    <div className="container">
+      <div className="placelist">
+        <div className="place_text-title">
+          <h3>Места</h3>
+        </div>
+        <div className="places">
+          {places.map((place: Place) => (
+            <PlaceCard place={place} key={place.id} />
+          ))}
+        </div>
       </div>
     </div>
   );

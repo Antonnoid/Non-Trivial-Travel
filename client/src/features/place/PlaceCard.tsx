@@ -17,44 +17,22 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
     placeImages[Math.floor(Math.random() * (placeImages.length - 1))];
 
   return (
-    <div className="gamePage">
+    <div className="place__card">
       <img className="place__body-img" src={randomImage?.url} alt="img" />
       <div className="place">
-        <div className="place__body">
-          <div className="place__element">
-            <h1 className="place__title">{place.title}</h1>
-            <div className="place__links">
-              <Link
-                className="place__link place__link_update"
-                to={`/places/${place.id}`}
-              >
-                Изменить
-              </Link>
-              {/* <div className="place__links-published">
+        <div className="place__element">
+          <h1 className="place__title">{place.title}</h1>
+          <div className="place__links">
+            <Link
+              className="place__link place__link_update"
+              to={`/places/${place.id}`}
+            >
+              Изменить
+            </Link>
+            {/* <div className="place__links-published">
                   <label htmlFor="public">Публиковать</label>
                   <input type="checkbox" name="public" id="" />
                 </div> */}
-              {}
-              <button
-                type="button"
-                onClick={removePlace}
-                className="place__link place__link_remove"
-              >
-                Удалить
-              </button>
-              <Link
-                className="place__link place__link_more"
-                to={`/places/${place.id}`}
-              >
-                Подробнее
-              </Link>
-            </div>
-            <Link
-              className="place__link place__link_more"
-              to={`/places/${place.id}`}
-            >
-              Подробнее
-            </Link>
             {}
             <button
               type="button"
@@ -64,13 +42,14 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
               Удалить
             </button>
             <Link
-              className="place__link place__link_update"
+              className="place__link place__link_more"
               to={`/places/${place.id}`}
             >
-              Изменить
+              Подробнее
             </Link>
           </div>
         </div>
+        {/* <div className="place__body" /> */}
       </div>
     </div>
   );
