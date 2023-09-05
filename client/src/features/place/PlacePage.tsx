@@ -18,9 +18,6 @@ function PlacePage(): JSX.Element {
     ourPlace = places.find((place: Place) => place.id === +placeId)!!;
     ourImages = images.filter((image: Image) => image.placeId === +placeId)!!;
   }
-  useEffect(() => {
-    dispatch(imagesInit());
-  }, []);
 
   return (
     <div>

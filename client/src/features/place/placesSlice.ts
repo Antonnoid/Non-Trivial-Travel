@@ -19,9 +19,7 @@ export const placeAddfromForm = createAsyncThunk(
 export const placeRemove = createAsyncThunk('place/remove', (id: PlaceId) =>
   api.placeRemoveOnClick(id)
 );
-export const placeInit = createAsyncThunk('place/init', (id: PlaceId) => {
-  api.placePageFetch(id);
-});
+export const placeInit = createAsyncThunk('place/init', (id: PlaceId) => api.placePageFetch(id));
 
 export const placePublish = createAsyncThunk(
   'places/publish',
