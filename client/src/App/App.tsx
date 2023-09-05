@@ -19,6 +19,7 @@ import { placesInit } from '../features/place/placesSlice';
 import { bundlesInit } from '../features/bundle/bundlesSlice';
 import { imagesInit } from '../features/image/ImagesSlice';
 import BundleAddPage from '../features/bundle/BundleAddPage';
+import RoutePage from '../features/routes/RoutePage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -43,6 +44,7 @@ function App(): JSX.Element {
           <Route path="/places/:placeId" element={<PlacePage />} />         
           <Route path='/bundles/:bundleId' element={<BundlePage />}/>
           <Route path='/bundles/add' element={<BundleAddPage />}/>
+          <Route path='/routes/:routeId' element={<RoutePage/>}/>
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

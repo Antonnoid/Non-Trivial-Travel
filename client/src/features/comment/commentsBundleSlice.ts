@@ -2,14 +2,16 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import * as api from './api';
 import {CommentsOfBundleState} from './types/states';
+import {Bundle} from '../bundle/type';
 
 const initialState: CommentsOfBundleState = {
   commentsBundle: [],
   error: undefined,
 };
 
-export const loadCommentsBundle = createAsyncThunk('comments/bundle/load', () =>
-  api.fetchCommentOfBundles()
+export const loadCommentsBundle = createAsyncThunk(
+  'comments/bundle/load',
+  (id: Bundle['id']) => api.fetchCommentOfBundles(id)
 );
 
 const commentsOfBundleSlice = createSlice({
