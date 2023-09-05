@@ -1,6 +1,6 @@
-$remove_color: #707070;
-$update_color: #00af83;
-$more_color: #008ab7;
+$remove_color: #ffffff;
+$update_color: #008ab7;
+$more_color: #00af83;
 .places {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -14,8 +14,8 @@ $more_color: #008ab7;
   position: relative;
   background: linear-gradient(
     to right,
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0.3)
+    rgba(0, 138, 183, 0.5),
+    rgba(0, 138, 183, 0.5)
   );
   width: 555px;
   height: 415px;
@@ -26,24 +26,31 @@ $more_color: #008ab7;
     align-items: center;
   }
   &__links {
-    margin-bottom: 20px;
+    display: flex;
+    height: 75px;
     font-size: initial;
     font-weight: 555;
-  }
-  &__link:not(:last-of-type) {
-    margin-right: 20px;
+    gap: 92px;
   }
   &__link {
-    padding: 15px 30px;
+    padding: 10px 25px;
     border-radius: 6px;
     &_remove {
+      color: #008ab7;
       background: $remove_color;
+      outline: auto;
     }
     &_update {
       background: $update_color;
+      border-bottom-left-radius: 25px;
+      display: flex;
+      align-items: center;
     }
     &_more {
       background: $more_color;
+      border-bottom-right-radius: 25px;
+      display: flex;
+      align-items: center;
     }
   }
 }
@@ -57,25 +64,25 @@ $more_color: #008ab7;
 .place__title {
   margin: auto;
   width: 100%;
-  padding: 10px;
-  font-size: x-large;
+  padding: 130px;
+  font-size: xxx-large;
   display: flex;
   justify-content: center;
   height: 50px;
-  color: #00af83;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.7),
-    rgba(255, 255, 255, 0.7)
-  );
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
+  color: #ffffff;
+  // background: linear-gradient(
+  //   to right,
+  //   rgba(255, 255, 255, 0.7),
+  //   rgba(255, 255, 255, 0.7)
+  // );
+  // border-top-left-radius: 25px;
+  // border-top-right-radius: 25px;
 }
 
 .place__element {
   display: flex;
   flex-direction: column;
-  gap: 120px;
+  gap: 80px;
   align-items: center;
   width: 100%;
 }

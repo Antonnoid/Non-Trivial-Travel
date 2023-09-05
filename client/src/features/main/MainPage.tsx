@@ -8,8 +8,8 @@ import BundlesList from '../bundle/BundlesList';
 export default function MainPage(): JSX.Element {
   return (
     <div>
-      {/* <FormAdd /> */}
-      {/* <CardsList /> */}
+      <FormAdd />
+      <CardsList />
       {/* <RoutesList /> */}
       <BundlesList />
       <PlacesList />
