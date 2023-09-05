@@ -7,7 +7,7 @@ import {RootState, useAppDispatch} from '../../redux/store';
 import {placeRemove} from './placesSlice';
 
 function PlaceCard({place}: {place: Place}): JSX.Element {
-  const images = useSelector((store: RootState) => store.images.images); // временно
+  const images = useSelector((store: RootState) => store.images.images);
   const placeImages = images.filter((image) => image.placeId === place.id);
   const dispatch = useAppDispatch();
   const removePlace = async (): Promise<void> => {
@@ -33,7 +33,7 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
                   <label htmlFor="public">Публиковать</label>
                   <input type="checkbox" name="public" id="" />
                 </div> */}
-            {}
+            {/* {} */}
             <button
               type="button"
               onClick={removePlace}

@@ -20,10 +20,15 @@ const BundlesList = (): JSX.Element => {
   }, []);
   return (
     <div className="container">
-      <div className="bundles">
-        {bundles.map((bundle: Bundle) => (
-          <BundleCard bundle={bundle} key={bundle.id} />
-        ))}
+      <div className="placelist">
+        <div className="place_text-title">
+          <h3>Подборки</h3>
+        </div>
+        <div className="bundles">
+          {bundles.map((bundle: Bundle) => (
+            <BundleCard bundle={bundle} key={bundle.id} />
+          ))}
+        </div>
       </div>
     </div>
   );
