@@ -5,11 +5,11 @@ import {Bundle} from './type';
 import {RootState} from '../../redux/store';
 
 const BundleCard = ({bundle}: {bundle: Bundle}): JSX.Element => {
-  const bundlePlacesId = bundle.Bundle_places.map((el) => el.placeId);
+  const bundlePlacesId = bundle?.Bundle_places?.map((el) => el.placeId);
 
   const images = useSelector((store: RootState) => store.images.images);
   const ourImages = images.filter((image) =>
-    bundlePlacesId.find((id) => image.placeId === id)
+    bundlePlacesId?.find((id) => image.placeId === id)
   );
 
   const randomImage =

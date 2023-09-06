@@ -14,13 +14,20 @@ export default function CommentItem({
   const removeComment = async (): Promise<void> => {
     dispatch(removeCommentPlace(comment.id));
   };
+
   return (
     <div className="comment">
       <div className="comment__body">
+        <span className="comment__date">{`${comment.createdAt?.slice(
+          0,
+          10
+        )} ${comment.createdAt?.slice(11, 19)}`}</span>
         <h5 className="comment__user">
-          <span className="comment__autor">{comment.User?.name}</span>
+          <span className="comment__autor">
+            {comment.User?.id === user?.id ? 'Я ' : comment.User?.name}{' '}
+          </span>
           <span className="comment__autor comment__autor_city">
-            ({comment.User?.City?.name})
+            - г. {comment.User?.City?.name}:
           </span>
         </h5>
         <p className="comment__text">{comment.text}</p>

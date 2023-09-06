@@ -18,6 +18,9 @@ function PlacesList(): JSX.Element {
       dispatch(cityPlacesInit(+cityId));
     }
   }, [cityId]);
+  const cityPlaces = places.filter((place) =>
+    cityId ? place.cityId === +cityId : place
+  );
 
   return (
     <div className="container">
@@ -26,10 +29,17 @@ function PlacesList(): JSX.Element {
           <h3>Места</h3>
         </div>
         <div className="places">
-          {places?.length > 0 &&
-            places.map((place: Place) => (
-              <PlaceCard place={place} key={place.id} />
-            ))}
+          {!cityId
+            ? places &&
+              places.length > 0 &&
+              places.map((place: Place) => (
+                <PlaceCard place={place} key={place.id} />
+              ))
+            : cityPlaces &&
+              cityPlaces.length > 0 &&
+              cityPlaces.map((place) => (
+                <PlaceCard place={place} key={place.id} />
+              ))}
         </div>
       </div>
     </div>

@@ -14,10 +14,17 @@ const BundlesList = (): JSX.Element => {
   useEffect(() => {
     if (!cityId) {
       dispatch(bundlesInit());
-    } else {
+      return;
+    }
+    if (cityId) {
       dispatch(cityBundlesInit(+cityId));
     }
   }, []);
+
+  const cityBundles = bundles.filter((bundle) =>
+    cityId ? bundle.cityId === +cityId : bundle
+  );
+
   return (
     <div className="container">
       <div className="bundleslist">
@@ -25,10 +32,15 @@ const BundlesList = (): JSX.Element => {
           <h3>Подборки</h3>
         </div>
         <div className="bundles">
-          {bundles.length > 0 &&
-            bundles.map((bundle: Bundle) => (
-              <BundleCard bundle={bundle} key={bundle.id} />
-            ))}
+          {!cityId
+            ? bundles &&
+              bundles.length > 0 &&
+              bundles.map((bundle: Bundle) => (
+                <BundleCard bundle={bundle} key={bundle.id} />
+              ))
+            : cityBundles.map((bundle) => (
+                <BundleCard bundle={bundle} key={bundle.id} />
+              ))}
         </div>
       </div>
     </div>

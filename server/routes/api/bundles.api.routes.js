@@ -35,9 +35,9 @@ router.post('/', async (req, res) => {
       userId,
       cityId,
     });
-  //  bundlePlaces.map(async (placeId) => {
-  //      await Bundle_place.create({bundleId: newBundle.id, placeId})
-  //   });
+   bundlePlaces.map(async (placeId) => {
+       await Bundle_place.create({bundleId: newBundle.id, placeId})
+    });
   console.log(newBundle);
     res.json(newBundle);
   } catch ({message}) {

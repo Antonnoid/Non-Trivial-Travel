@@ -38,7 +38,9 @@ const UserPage = (): JSX.Element => {
               </div>
               <div>
                 <button type="button">Добавить место</button>
-                <button type="button">Добавить маршрут</button>
+                <button type="button">
+                  <NavLink to="/routes/add">Добавить маршрут</NavLink>
+                </button>
                 <button type="button">
                   <NavLink to="/bundles/add">Добавить подборку</NavLink>
                 </button>
