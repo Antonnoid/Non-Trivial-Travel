@@ -2,6 +2,8 @@ $remove_color: #ffffff;
 $update_color: #008ab7;
 $more_color: #00af83;
 .places {
+  font-family: Inter;
+  color: #008ab7;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
@@ -34,23 +36,30 @@ $more_color: #00af83;
     height: 44px;
     font-size: initial;
     font-weight: 540;
-    gap: 14px;
+    gap: 29px;
   }
   &__link {
-    padding: 25px 40px;
+    font-family: Inter;
+    color: #008ab7;
+    padding: 15px 25px;
     border-radius: 6px;
     &_remove {
+      font-family: Inter;
       color: #008ab7;
       background: $remove_color;
       outline: auto;
     }
     &_update {
+      font-family: Inter;
+      color: #fff;
       background: $update_color;
       border-bottom-left-radius: 25px;
       display: flex;
       align-items: center;
     }
     &_more {
+      font-family: Inter;
+      color: #fff;
       background: $more_color;
       border-bottom-right-radius: 25px;
       display: flex;
@@ -76,6 +85,7 @@ $more_color: #00af83;
 }
 
 .place__title {
+  font-family: Inter;
   margin: auto;
   width: 100%;
   padding: 50px;
@@ -112,6 +122,7 @@ $more_color: #00af83;
   gap: 5px;
 }
 .place_text-title {
+  font-family: Inter;
   display: flex;
   justify-content: center;
   max-width: 1500px;
