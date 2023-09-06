@@ -26,10 +26,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.TEXT,
       },
-      rating: {
-        allowNull: false,
-        type: DataTypes.DOUBLE,
-      },
       isPublic: {
         allowNull: false,
         defaultValue: false,

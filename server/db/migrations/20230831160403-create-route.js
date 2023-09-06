@@ -21,9 +21,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      rating: {
-        type: Sequelize.DOUBLE,
-      },
       isPublic: {
         allowNull: false,
         defaultValue: false,

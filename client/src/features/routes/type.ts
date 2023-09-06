@@ -5,7 +5,6 @@ export type Route = {
   title: string;
   description: string;
   time: string;
-  rating: number;
   isPublic: boolean;
   userId: number;
   cityId: number;

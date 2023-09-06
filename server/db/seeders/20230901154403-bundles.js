@@ -8,7 +8,6 @@ module.exports = {
       {
         title: 'Подборочка. Ижевск',
         description: 'Я здесь был, пиво пил',
-        rating: '5.0',
         isPublic: true,
         userId: 1,
         cityId: 2279,
@@ -16,7 +15,6 @@ module.exports = {
       {
         title: 'Опасно. Пятигорск',
         description: 'Не ходи здесь... без меня',
-        rating: '5.0',
         isPublic: true,
         userId: 2,
         cityId: 2033,

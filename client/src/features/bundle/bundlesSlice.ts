@@ -14,6 +14,33 @@ export const cityBundlesInit = createAsyncThunk(
   (id: City['id']) => api.bundlesInitFromCity(id)
 );
 
+export const addBundle = createAsyncThunk(
+  'bundles/add',
+  ({
+    title,
+    description,
+    isPublic,
+    userId,
+    cityId,
+    bundlePlaces,
+  }: {
+    title: string;
+    description: string;
+    isPublic: boolean;
+    userId: number;
+    cityId: number;
+    bundlePlaces: number[];
+  }) => 
+    api.bundleAddFetch({
+      title,
+      description,
+      isPublic,
+      userId,
+      cityId,
+      bundlePlaces,
+    })
+);
+
 const bundlesSlice = createSlice({
   name: 'bundles',
   initialState,
@@ -30,6 +57,12 @@ const bundlesSlice = createSlice({
         state.bundles = action.payload;
       })
       .addCase(cityBundlesInit.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(addBundle.fulfilled, (state, action) => {
+        state.bundles.push(action.payload);
+      })
+      .addCase(addBundle.rejected, (state, action) => {
         state.error = action.error.message;
       });
   },
