@@ -22,4 +22,19 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.post('/:routeId/rating', async (req, res) => {
+  try {
+    const {routeId} = req.params;
+    const rating = await Rating.create({
+      rate,
+      type,
+      userId: req.session.userId,
+      itemId: +routeId,
+    });
+    res.json(rating);
+  } catch ({message}) {
+    res.json({message});
+  }
+});
+
 module.exports = router;

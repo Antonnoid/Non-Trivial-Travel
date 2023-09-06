@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
+import {Rate} from 'antd';
 import {Bundle} from './type';
 import PlaceCard from '../place/PlaceCard';
 import CommentsListPage from '../comment/CommentsListPage';
@@ -9,6 +10,7 @@ import CommentsListPage from '../comment/CommentsListPage';
 import './styles/styles.scss';
 
 const BundlePage = (): JSX.Element => {
+  const [rating, setRating] = useState(0);
   const {bundleId} = useParams();
   const bundles = useSelector((store: RootState) => store.bundles.bundles);
 
@@ -20,6 +22,10 @@ const BundlePage = (): JSX.Element => {
       (bundlePlace) => bundlePlace.Place
     ).flat();
   }
+
+  const handleRatingChange = (value: number): void => {
+    setRating(value);
+  };
 
   return (
     <div className="bundle__container">
@@ -36,6 +42,10 @@ const BundlePage = (): JSX.Element => {
       </div>
       <div className="bundle__text">
         <h2 className="bundle__desc">{ourBundle?.description}</h2>
+      </div>
+      <div className="rating">
+        <Rate onChange={handleRatingChange} />
+        <p>{rating}</p>
       </div>
     </div>
   );
