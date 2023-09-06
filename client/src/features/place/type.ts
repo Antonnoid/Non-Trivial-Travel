@@ -26,6 +26,7 @@ export type PlacesState = {
   places: Place[];
   allPlaces: Place[];
   error: string | undefined;
+  pending: boolean;
 };
 
 export type PlaceId = number;

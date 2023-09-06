@@ -11,6 +11,7 @@ import {
 const initialState: AuthState = {
   user: undefined,
   error: undefined,
+  pending: false,
 };
 export const registration = createAsyncThunk(
   'auth/registration',
@@ -35,6 +36,9 @@ const authSlice = createSlice({
     clearError: (state) => {
       state.error = undefined;
     },
+    stopPending: (state) => {
+      state.pending = false;
+    },
   },
   extraReducers(builder) {
     builder.addCase(registration.fulfilled, (state, action) => {
@@ -49,6 +53,9 @@ const authSlice = createSlice({
     builder.addCase(authorization.rejected, (state, action) => {
       state.error = action.error.message;
     });
+    builder.addCase(authChecUser.pending, (state) => {
+      state.pending = true;
+    });
     builder.addCase(authChecUser.fulfilled, (state, action) => {
       state.user = action.payload;
     });
@@ -61,5 +68,5 @@ const authSlice = createSlice({
   },
 });
 
-export const {clearError} = authSlice.actions;
+export const {clearError, stopPending} = authSlice.actions;
 export default authSlice.reducer;
