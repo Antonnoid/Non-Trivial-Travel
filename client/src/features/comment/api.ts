@@ -55,7 +55,7 @@ export const fetchCommentAddInRoute = async ({
 }: {
   text: string;
   routeId: string;
-}): Promise<Comment> => {
+}): Promise<CommentOfRoute> => {
   const res = await fetch(`/api/comments/route`, {
     method: 'POST',
     headers: {'Content-type': 'application/json'},
@@ -71,7 +71,7 @@ export const fetchCommentAddInBundle = async ({
 }: {
   text: string;
   bundleId: string;
-}): Promise<Comment> => {
+}): Promise<CommentOfBundle> => {
   const res = await fetch(`/api/comments/bundle`, {
     method: 'POST',
     headers: {'Content-type': 'application/json'},
@@ -86,5 +86,21 @@ export const fetchCommentRemoveInPlace = async (
   id: CommentOfPlace['id']
 ): Promise<number> => {
   const res = await fetch(`/api/comments/place/${id}`, {method: 'DELETE'});
+  return res.json();
+};
+
+// удалить комментарий к маршруту
+export const fetchCommentRemoveInRoute = async (
+  id: CommentOfRoute['id']
+): Promise<number> => {
+  const res = await fetch(`/api/comments/route/${id}`, {method: 'DELETE'});
+  return res.json();
+};
+
+// удалить комментарий к подборке
+export const fetchCommentRemoveInBundle = async (
+  id: CommentOfBundle['id']
+): Promise<number> => {
+  const res = await fetch(`/api/comments/bundle/${id}`, {method: 'DELETE'});
   return res.json();
 };

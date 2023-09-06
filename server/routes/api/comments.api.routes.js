@@ -7,6 +7,7 @@ const {City} = require('../../db/models');
 
 // добавление
 router.post('/place', async (req, res) => {
+  // места
   try {
     const {text, placeId} = req.body;
     console.log(req.body);
@@ -30,14 +31,19 @@ router.post('/place', async (req, res) => {
   }
 });
 router.post('/bundle', async (req, res) => {
+  // подборки
   try {
     const {text, bundleId} = req.body;
 
     if (req.session.userId) {
-      const comment = await Bundle_comment.create({
+      const newComment = await Bundle_comment.create({
         text,
         bundleId,
         userId: req.session.userId,
+      });
+      const comment = await Bundle_comment.findOne({
+        where: {id: newComment.id},
+        include: [{model: User, include: [{model: City}]}],
       });
       res.json(comment);
       return;
@@ -52,10 +58,14 @@ router.post('/route', async (req, res) => {
     const {text, routeId} = req.body;
 
     if (req.session.userId) {
-      const comment = await Route_comment.create({
+      const newComment = await Route_comment.create({
         text,
         routeId,
         userId: req.session.userId,
+      });
+      const comment = await Route_comment.findOne({
+        where: {id: newComment.id},
+        include: [{model: User, include: [{model: City}]}],
       });
       res.json(comment);
       return;
@@ -69,6 +79,7 @@ router.post('/route', async (req, res) => {
 //удаление
 
 router.delete('/place/:commentId', async (req, res) => {
+  // места
   try {
     const {commentId} = req.params;
     console.log(commentId);
@@ -92,6 +103,7 @@ router.delete('/place/:commentId', async (req, res) => {
   }
 });
 router.delete('/bundle/:commentId', async (req, res) => {
+  // подборки
   try {
     const {commentId} = req.params;
     console.log(commentId);
@@ -114,7 +126,9 @@ router.delete('/bundle/:commentId', async (req, res) => {
     console.log(message);
   }
 });
+
 router.delete('/route/:commentId', async (req, res) => {
+  //маршруты
   try {
     const {commentId} = req.params;
     console.log(commentId);
