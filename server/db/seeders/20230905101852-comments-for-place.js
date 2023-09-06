@@ -29,6 +29,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await Place_comments.destroy({});
+    await Place_comment.destroy({});
   },
 };

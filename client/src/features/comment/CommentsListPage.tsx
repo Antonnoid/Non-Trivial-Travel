@@ -58,7 +58,7 @@ export default function CommentsListPage(): JSX.Element {
             <CommentItem key={comment.id} comment={comment} />
           ))
         : pathname.includes(placesName) && <p>Комментариев нет...</p>}
-      {/* {pathname.includes(bundlesName) && forBundle
+      {pathname.includes(bundlesName) && forBundle
         ? forBundle.map((comment) => (
             <CommentItem key={comment.id} comment={comment} />
           ))
@@ -68,7 +68,7 @@ export default function CommentsListPage(): JSX.Element {
             <CommentItem key={comment.id} comment={comment} />
           ))
         : pathname.includes(routesName) && <p>Комментариев нет...</p>}
-      <FormAddComment /> */}
+      <FormAddComment />
     </div>
   );
 }
