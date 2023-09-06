@@ -9,6 +9,7 @@ import './styles/styles.scss';
 const RoutesList = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const {cityId} = useParams();
+  const routes = useSelector((store: RootState) => store.routes.routes);
 
   useEffect(() => {
     if (!cityId) {
@@ -16,9 +17,11 @@ const RoutesList = (): JSX.Element => {
     } else {
       dispatch(cityRoutesInit(+cityId));
     }
-  }, []);
+  }, [cityId]);
+  const cityRoutes =
+    routes &&
+    routes.filter((route) => (cityId ? route.cityId === +cityId : route));
 
-  const routes = useSelector((store: RootState) => store.routes.routes);
   return (
     <div className="container">
       <div className="routeslist">
@@ -26,9 +29,15 @@ const RoutesList = (): JSX.Element => {
           <h3>Маршруты</h3>
         </div>
         <div className="routes">
-          {routes &&
-            routes.length > 0 &&
-            routes.map((route) => <RouteCard route={route} key={route.id} />)}
+          {cityId
+            ? routes &&
+              routes.length > 0 &&
+              routes.map((route) => <RouteCard route={route} key={route.id} />)
+            : cityRoutes &&
+              cityRoutes.length > 0 &&
+              cityRoutes.map((route) => (
+                <RouteCard route={route} key={route.id} />
+              ))}
         </div>
       </div>
     </div>
