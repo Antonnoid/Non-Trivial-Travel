@@ -56,7 +56,7 @@ function AuthorizationPage(): JSX.Element {
           onChange={ChengePassword}
           className="registr-auth_input"
           placeholder="от 3 символов"
-          type="text"
+          type="password"
         />
         <div className="reg-auth-dutton">
           <button className="registr-auth_button" type="submit">
