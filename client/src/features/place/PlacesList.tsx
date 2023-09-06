@@ -26,7 +26,7 @@ function PlacesList(): JSX.Element {
           <h3>Места</h3>
         </div>
         <div className="places">
-          {places.length > 0 &&
+          {places?.length > 0 &&
             places.map((place: Place) => (
               <PlaceCard place={place} key={place.id} />
             ))}
