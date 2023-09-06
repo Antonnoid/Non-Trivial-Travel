@@ -123,4 +123,19 @@ router.put('/:placeId', async (req, res) => {
   }
 });
 
+router.post('/:placeId/rating', async (req, res) => {
+  try {
+    const {placeId} = req.params;
+    const rating = await Rating.create({
+      rate,
+      type,
+      userId: req.session.userId,
+      itemId: +placeId,
+    });
+    res.json(rating);
+  } catch ({message}) {
+    res.json({message});
+  }
+});
+
 module.exports = router;

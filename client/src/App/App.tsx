@@ -15,12 +15,12 @@ import UserPage from '../features/user/UserPage';
 import PlacePage from '../features/place/PlacePage';
 import BundlePage from '../features/bundle/BundlePage';
 import Error from '../features/404/Error';
-import { placesInit, allPlacesInit } from '../features/place/placesSlice';
-import { bundlesInit } from '../features/bundle/bundlesSlice';
-import { imagesInit } from '../features/image/ImagesSlice';
+import {placesInit, allPlacesInit} from '../features/place/placesSlice';
+import {bundlesInit} from '../features/bundle/bundlesSlice';
+import {imagesInit} from '../features/image/ImagesSlice';
 import BundleAddPage from '../features/bundle/BundleAddPage';
 import RoutePage from '../features/routes/RoutePage';
-import { allCitiesInit } from '../features/navbar/citiesSlice';
+import {allCitiesInit} from '../features/city/citiesSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -44,10 +44,10 @@ function App(): JSX.Element {
           <Route path="/map" element={<Map />} />
           <Route path="/cities/:cityId" element={<PlacesList />} />
           <Route path="/user/:userId" element={<UserPage />} />
-          <Route path="/places/:placeId" element={<PlacePage />} />         
-          <Route path='/bundles/:bundleId' element={<BundlePage />}/>
-          <Route path='/bundles/add' element={<BundleAddPage />}/>
-          <Route path='/routes/:routeId' element={<RoutePage/>}/>
+          <Route path="/places/:placeId" element={<PlacePage />} />
+          <Route path="/bundles/:bundleId" element={<BundlePage />} />
+          <Route path="/bundles/add" element={<BundleAddPage />} />
+          <Route path="/routes/:routeId" element={<RoutePage />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

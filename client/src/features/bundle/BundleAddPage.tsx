@@ -5,6 +5,7 @@ import {Place} from '../place/type';
 import {City} from '../navbar/types/types';
 import {addBundle} from './bundlesSlice';
 
+
 const BundleAddPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const allPlaces = useSelector((store: RootState) => store.places.allPlaces);

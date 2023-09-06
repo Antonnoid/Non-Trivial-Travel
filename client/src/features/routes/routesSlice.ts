@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {RoutesState} from './type';
 import * as api from './api';
-import {City} from '../navbar/types/types';
+import {City} from '../city/types/types';
 
 export const initialState: RoutesState = {routes: [], error: ''};
 

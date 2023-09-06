@@ -1,4 +1,5 @@
-import {City} from '../navbar/types/types';
+import {City} from '../city/types/types';
+import { Rating } from '../place/type';
 import {Bundle} from './type';
 
 /* eslint-disable import/prefer-default-export */
@@ -47,4 +48,19 @@ export const bundleAddFetch = async ({
   });
   const data = await res.json();
   return data;
+};
+export const bundleRatingAddFetch = async (
+  rating: Rating,
+  bundle: Bundle
+): Promise<Rating> => {
+  const res = await fetch(`/api/bundles/${bundle.id}/rating`, {
+    method: 'POST',
+    headers: {'content-type': 'application/json'},
+    body: JSON.stringify({
+      rate: rating.rate,
+      type: 'place',
+    }),
+  });
+  const data = res.json();
+  return data
 };

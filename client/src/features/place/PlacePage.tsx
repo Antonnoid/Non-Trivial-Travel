@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { Rate } from 'antd';
 import './styles/stylesPage.scss';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
@@ -9,6 +10,7 @@ import CommentsListPage from '../comment/CommentsListPage';
 import starImg from './img/5-Star.png';
 
 function PlacePage(): JSX.Element {
+  const [rating, setRating] = useState(0)
   const {placeId} = useParams();
   const places = useSelector((store: RootState) => store.places.places);
   const images = useSelector((store: RootState) => store.images.images);
@@ -18,6 +20,11 @@ function PlacePage(): JSX.Element {
     ourPlace = places.find((place: Place) => place.id === +placeId)!!;
     ourImages = images.filter((image: Image) => image.placeId === +placeId)!!;
   }
+
+  const handleRatingChange = (value: number):void => {
+    setRating(value)
+  }
+  
 
   return (
     <div className="placePage__container">
@@ -37,6 +44,11 @@ function PlacePage(): JSX.Element {
               {ourImages?.map((image: Image) => (
                 <ImageItem image={image} key={image.id} />
               ))}
+            </div>
+            <h3>{ourPlace.description}</h3>
+            <div className='rating'>
+              <Rate onChange={handleRatingChange}/>
+              <p>{rating}</p>
             </div>
             <div className="placePage__contents-desc">
               <h3>{ourPlace.description}</h3>
