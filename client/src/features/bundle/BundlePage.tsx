@@ -8,7 +8,6 @@ import CommentsListPage from '../comment/CommentsListPage';
 
 import './styles/styles.scss';
 
-
 const BundlePage = (): JSX.Element => {
   const {bundleId} = useParams();
   const bundles = useSelector((store: RootState) => store.bundles.bundles);
@@ -31,6 +30,8 @@ const BundlePage = (): JSX.Element => {
         {ourPlaces?.map((place) => (
           <PlaceCard key={place.id} place={place} />
         ))}
+      </div>
+      <div className="bundle__comments">
         <CommentsListPage />
       </div>
       <div className="bundle__text">
