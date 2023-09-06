@@ -8,8 +8,8 @@ import RoutesList from '../routes/RoutesList';
 export default function MainPage(): JSX.Element {
   return (
     <div>
-      <FormAdd />
-      <CardsList />
+      {/* <FormAdd /> */}
+      {/* <CardsList /> */}
       <RoutesList />
       <BundlesList />
       <PlacesList />

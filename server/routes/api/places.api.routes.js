@@ -9,7 +9,19 @@ const {Op} = require('sequelize');
 router.get('/', async (req, res) => {
   try {
     const places = await Place.findAll({
-      include: [Image, Place_comment],
+      include: [
+        {
+          model: Image, // Включаем модель Image, связанную с Place
+        },
+        {
+          model: Place_comment,
+          include: [
+            {
+              model: User,
+            },
+          ],
+        },
+      ],
     });
     res.json(places);
   } catch ({message}) {
@@ -21,7 +33,24 @@ router.get('/:placeId', async (req, res) => {
   try {
     const place = await Place.findOne({
       where: {id: req.params.placeId},
-      include: [Image, Place_comment],
+      include: [
+        {
+          model: Image, // Включаем модель Image, связанную с Place
+        },
+        {
+          model: Place_comment,
+          include: [
+            {
+              model: User,
+              include: [
+                {
+                  model: City,
+                },
+              ],
+            },
+          ],
+        },
+      ],
     });
     res.json(place);
   } catch ({message}) {

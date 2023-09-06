@@ -138,7 +138,7 @@ export default function Navbar(): JSX.Element {
                   className="navbar__link navbar__user_hello"
                   to={`/user/${user.id}`}
                 >
-                  Привет, {user.name}
+                  Привет, <span className="username">{user.name}</span>
                 </NavLink>
                 <li className="navbar__link">
                   <a onClick={userLogOut} href="/">
