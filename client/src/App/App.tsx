@@ -21,6 +21,7 @@ import {imagesInit} from '../features/image/ImagesSlice';
 import BundleAddPage from '../features/bundle/BundleAddPage';
 import RoutePage from '../features/routes/RoutePage';
 import {allCitiesInit} from '../features/city/citiesSlice';
+import RouteAddPage from '../features/routes/RouteAddPage';
 import RoutesList from '../features/routes/RoutesList';
 import CityPage from '../features/city/CityPage';
 
@@ -49,6 +50,7 @@ function App(): JSX.Element {
           <Route path="/places/:placeId" element={<PlacePage />} />
           <Route path="/bundles/:bundleId" element={<BundlePage />} />
           <Route path="/bundles/add" element={<BundleAddPage />} />
+          <Route path="/routes/add" element={<RouteAddPage />} />
           <Route path="/routes/:routeId" element={<RoutePage />} />
         </Route>
         <Route path="*" element={<Error />} />

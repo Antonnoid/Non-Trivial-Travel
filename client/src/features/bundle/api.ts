@@ -32,7 +32,6 @@ export const bundleAddFetch = async ({
   cityId: number;
   bundlePlaces: number[];
 }): Promise<Bundle> => {
-  console.log('Фетч улетел');
 
   const res = await fetch('/api/bundles', {
     method: 'POST',
