@@ -1,12 +1,24 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 import {Bundle} from './type';
+import {RootState} from '../../redux/store';
 
 const BundleCard = ({bundle}: {bundle: Bundle}): JSX.Element => {
+  const bundlePlacesId = bundle.Bundle_places.map((el) => el.placeId);
+
+  const images = useSelector((store: RootState) => store.images.images);
+  const ourImages = images.filter((image) =>
+    bundlePlacesId.find((id) => image.placeId === id)
+  );
+
+  const randomImage =
+    ourImages[Math.floor(Math.random() * (ourImages.length - 1))];
+
   return (
     <div>
       <div className="bundle">
-        <img className="bundle__front-img" src="/" alt="img" />
+        <img className="bundle__front-img" src={randomImage?.url} alt="img" />
         <div className="bundle__front">
           <div className="bundle__front-elements">
             <h1 className="bundle__front-title">{bundle.title}</h1>
