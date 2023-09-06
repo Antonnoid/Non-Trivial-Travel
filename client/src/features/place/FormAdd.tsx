@@ -64,6 +64,7 @@ export default function FormAdd(): JSX.Element {
         type="text"
         placeholder="Город"
       />
+      {/* <input type="file" ref={} /> */}
       <div className="message">{message}</div>
       <button type="submit">Добавить место</button>
     </form>
