@@ -25,9 +25,10 @@ const BundlesList = (): JSX.Element => {
           <h3>Подборки</h3>
         </div>
         <div className="bundles">
-          {bundles.map((bundle: Bundle) => (
-            <BundleCard bundle={bundle} key={bundle.id} />
-          ))}
+          {bundles.length > 0 &&
+            bundles.map((bundle: Bundle) => (
+              <BundleCard bundle={bundle} key={bundle.id} />
+            ))}
         </div>
       </div>
     </div>
