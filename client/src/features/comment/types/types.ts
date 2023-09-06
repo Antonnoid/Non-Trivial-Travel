@@ -12,7 +12,6 @@ export type CommentOfRoute = {
   text: string;
   userId?: number;
   routeId?: number;
-
   User?: User;
 };
 export type CommentOfBundle = {
@@ -20,6 +19,5 @@ export type CommentOfBundle = {
   text: string;
   userId?: number;
   bundleId?: number;
-
   User?: User;
 };

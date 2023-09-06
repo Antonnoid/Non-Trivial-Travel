@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
           model: Place_comment,
           include: [
             {
-              model: User, // Включаем модель User, связанную с Place_comment
+              model: User,
             },
           ],
         },
@@ -41,7 +41,12 @@ router.get('/:placeId', async (req, res) => {
           model: Place_comment,
           include: [
             {
-              model: User, // Включаем модель User, связанную с Place_comment
+              model: User,
+              include: [
+                {
+                  model: City,
+                },
+              ],
             },
           ],
         },

@@ -1,7 +1,7 @@
 import {Bundle} from '../bundle/type';
 import {Place} from '../place/type';
 import {Route} from '../routes/type';
-import {User} from '../user/type';
+
 import {CommentOfBundle, CommentOfPlace, CommentOfRoute} from './types/types';
 
 // место по id => массив с комментариями
@@ -10,7 +10,6 @@ export const fetchCommentOfPlaces = async (
 ): Promise<CommentOfPlace[]> => {
   const res = await fetch(`/api/places/${id}`);
   const data = await res.json();
-  console.log(data);
   return data.Place_comments;
 };
 
@@ -45,8 +44,7 @@ export const fetchCommentAddInPlace = async ({
     headers: {'Content-type': 'application/json'},
     body: JSON.stringify({text, placeId}),
   });
-  const data = await res.json();
-  console.log(data);
+
   return res.json();
 };
 
@@ -79,5 +77,14 @@ export const fetchCommentAddInBundle = async ({
     headers: {'Content-type': 'application/json'},
     body: JSON.stringify({text, bundleId}),
   });
+  return res.json();
+};
+
+// удалить комментарий к месту
+
+export const fetchCommentRemoveInPlace = async (
+  id: CommentOfPlace['id']
+): Promise<number> => {
+  const res = await fetch(`/api/comments/place/${id}`, {method: 'DELETE'});
   return res.json();
 };

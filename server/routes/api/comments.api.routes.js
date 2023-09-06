@@ -3,14 +3,14 @@ const {Place_comment} = require('../../db/models');
 const {Bundle_comment} = require('../../db/models');
 const {Route_comment} = require('../../db/models');
 const {User} = require('../../db/models');
+const {City} = require('../../db/models');
 
 // добавление
 router.post('/place', async (req, res) => {
   try {
     const {text, placeId} = req.body;
-    console.log(req.session.userId);
-    if (req.session.userId) {
-      const user = await User.findOne({where: {id: +req.session.userId}});
+    console.log(req.body);
+    if (req.session.userId && text.trim()) {
       const newComment = await Place_comment.create({
         text,
         placeId,
@@ -18,9 +18,9 @@ router.post('/place', async (req, res) => {
       });
       const comment = await Place_comment.findOne({
         where: {id: newComment.id},
-        include: [User],
+        include: [{model: User, include: [{model: City}]}],
       });
-      console.log(comment);
+
       res.json(comment);
       return;
     }
@@ -61,6 +61,78 @@ router.post('/route', async (req, res) => {
       return;
     }
     res.json({message: 'Войдите или зарегистрируйтесь'});
+  } catch ({message}) {
+    console.log(message);
+  }
+});
+
+//удаление
+
+router.delete('/place/:commentId', async (req, res) => {
+  try {
+    const {commentId} = req.params;
+    console.log(commentId);
+    const comment = await Place_comment.findOne({
+      where: {id: +commentId},
+      include: [{model: User}],
+    });
+
+    if (
+      req.session.userId &&
+      (comment.User.isAdmin || comment.userId === +req.session.userId)
+    ) {
+      const data = await Place_comment.destroy({where: {id: commentId}});
+      console.log(data);
+      res.json(commentId);
+      return;
+    }
+    res.json({message: 'Ошибка удаления'});
+  } catch ({message}) {
+    console.log(message);
+  }
+});
+router.delete('/bundle/:commentId', async (req, res) => {
+  try {
+    const {commentId} = req.params;
+    console.log(commentId);
+    const comment = await Bundle_comment.findOne({
+      where: {id: +commentId},
+      include: [{model: User}],
+    });
+
+    if (
+      req.session.userId &&
+      (comment.User.isAdmin || comment.userId === +req.session.userId)
+    ) {
+      const data = await Bundle_comment.destroy({where: {id: commentId}});
+      console.log(data);
+      res.json(commentId);
+      return;
+    }
+    res.json({message: 'Ошибка удаления'});
+  } catch ({message}) {
+    console.log(message);
+  }
+});
+router.delete('/route/:commentId', async (req, res) => {
+  try {
+    const {commentId} = req.params;
+    console.log(commentId);
+    const comment = await Route_comment.findOne({
+      where: {id: +commentId},
+      include: [{model: User}],
+    });
+
+    if (
+      req.session.userId &&
+      (comment.User.isAdmin || comment.userId === +req.session.userId)
+    ) {
+      const data = await Route_comment.destroy({where: {id: commentId}});
+      console.log(data);
+      res.json(commentId);
+      return;
+    }
+    res.json({message: 'Ошибка удаления'});
   } catch ({message}) {
     console.log(message);
   }
