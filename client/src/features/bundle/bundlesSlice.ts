@@ -3,7 +3,7 @@ import {BundlesState} from './type';
 import * as api from './api';
 import {City} from '../city/types/types';
 
-const initialState: BundlesState = {bundles: [], error: ''};
+const initialState: BundlesState = {bundles: [], error: '', pending: false};
 
 export const bundlesInit = createAsyncThunk('bundles/init', () =>
   api.bundleInitFetch()
@@ -44,9 +44,16 @@ export const addBundle = createAsyncThunk(
 const bundlesSlice = createSlice({
   name: 'bundles',
   initialState,
-  reducers: {},
+  reducers: {
+    stopPending: (state) => {
+      state.pending = false;
+    },
+  },
   extraReducers(builder) {
     builder
+      .addCase(bundlesInit.pending, (state) => {
+        state.pending = true;
+      })
       .addCase(bundlesInit.fulfilled, (state, action) => {
         state.bundles = action.payload;
       })
@@ -68,4 +75,5 @@ const bundlesSlice = createSlice({
   },
 });
 
+export const {stopPending} = bundlesSlice.actions;
 export default bundlesSlice.reducer;

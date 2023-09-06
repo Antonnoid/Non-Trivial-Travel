@@ -3,7 +3,11 @@ import {RoutesState} from './type';
 import * as api from './api';
 import {City} from '../city/types/types';
 
-export const initialState: RoutesState = {routes: [], error: ''};
+export const initialState: RoutesState = {
+  routes: [],
+  error: '',
+  pending: false,
+};
 
 export const routesInit = createAsyncThunk('routes/init', () =>
   api.routeInitFetch()
@@ -46,7 +50,11 @@ export const addRoute = createAsyncThunk(
 const routesSlice = createSlice({
   name: 'routes',
   initialState,
-  reducers: {},
+  reducers: {
+    stopPending: (state) => {
+      state.pending = false;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(routesInit.fulfilled, (state, action) => {
@@ -55,7 +63,11 @@ const routesSlice = createSlice({
       .addCase(routesInit.rejected, (state, action) => {
         state.error = action.error.message;
       })
+      .addCase(cityRoutesInit.pending, (state) => {
+        state.pending = true;
+      })
       .addCase(cityRoutesInit.fulfilled, (state, action) => {
+        state.pending = false;
         state.routes = action.payload;
       })
       .addCase(cityRoutesInit.rejected, (state, action) => {
@@ -70,4 +82,5 @@ const routesSlice = createSlice({
   },
 });
 
+export const {stopPending} = routesSlice.actions;
 export default routesSlice.reducer;

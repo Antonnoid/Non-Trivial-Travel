@@ -3,7 +3,12 @@ import {Place, PlaceForAdd, PlacesState, PlaceId} from './type';
 import * as api from './api';
 import {City} from '../city/types/types';
 
-export const initialState: PlacesState = {places: [], allPlaces: [], error: ''};
+export const initialState: PlacesState = {
+  places: [],
+  allPlaces: [],
+  error: '',
+  pending: false,
+};
 
 export const placesInit = createAsyncThunk('places/init', () =>
   api.placesInitFetch()
@@ -37,7 +42,11 @@ export const allPlacesInit = createAsyncThunk('places/all/init', () =>
 const placesSlice = createSlice({
   name: 'places',
   initialState,
-  reducers: {},
+  reducers: {
+    stopPending: (state) => {
+      state.pending = false;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(placesInit.fulfilled, (state, action) => {
@@ -58,7 +67,11 @@ const placesSlice = createSlice({
       .addCase(cityPlacesInit.rejected, (state, action) => {
         state.error = action.error.message;
       })
+      .addCase(placeAddfromForm.pending, (state) => {
+        state.pending = true;
+      })
       .addCase(placeAddfromForm.fulfilled, (state, action) => {
+        state.pending = false;
         state.places.push(action.payload);
       })
       .addCase(placeAddfromForm.rejected, (state, action) => {
@@ -83,4 +96,5 @@ const placesSlice = createSlice({
   },
 });
 
+export const {stopPending} = placesSlice.actions;
 export default placesSlice.reducer;

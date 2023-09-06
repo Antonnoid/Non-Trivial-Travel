@@ -1,4 +1,4 @@
-import { Place } from "../place/type";
+import {Place} from '../place/type';
 
 export type Bundle = {
   id: number;
@@ -13,6 +13,7 @@ export type Bundle = {
 export type BundlesState = {
   bundles: Bundle[];
   error: string | undefined;
+  pending: boolean;
 };
 
 export type BundlePlace = {
@@ -20,4 +21,4 @@ export type BundlePlace = {
   bundleId: number;
   placeId: number;
   Place: Place[];
-}
+};

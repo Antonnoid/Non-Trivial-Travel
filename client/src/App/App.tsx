@@ -3,11 +3,12 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import './App.scss';
 // import Map from '../features/map/Map';
+import {useSelector} from 'react-redux';
 import Navbar from '../features/navbar/Navbar';
 import MainPage from '../features/main/MainPage';
 import AuthorizationPage from '../features/auth/AuthorizationPage';
 import RegisterPage from '../features/auth/RegisterPage';
-import {useAppDispatch} from '../redux/store';
+import {RootState, useAppDispatch} from '../redux/store';
 import {authChecUser} from '../features/auth/authSlice';
 import Map from '../features/map/Map';
 import PlacesList from '../features/place/PlacesList';
@@ -15,7 +16,11 @@ import UserPage from '../features/user/UserPage';
 import PlacePage from '../features/place/PlacePage';
 import BundlePage from '../features/bundle/BundlePage';
 import Error from '../features/404/Error';
-import {placesInit, allPlacesInit} from '../features/place/placesSlice';
+import {
+  placesInit,
+  allPlacesInit,
+  stopPending,
+} from '../features/place/placesSlice';
 import {bundlesInit} from '../features/bundle/bundlesSlice';
 import {imagesInit} from '../features/image/ImagesSlice';
 import BundleAddPage from '../features/bundle/BundleAddPage';
@@ -24,9 +29,17 @@ import {allCitiesInit} from '../features/city/citiesSlice';
 import RouteAddPage from '../features/routes/RouteAddPage';
 import RoutesList from '../features/routes/RoutesList';
 import CityPage from '../features/city/CityPage';
+import imgPrealoader from './prealoder.gif';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
+
+  // const pendingPlaces = useSelector((store: RootState) => store.places.pending);
+  // const pendingRoutes = useSelector((store: RootState) => store.routes.pending);
+  // const pendingBundles = useSelector(
+  //   (store: RootState) => store.bundles.pending
+  // );
+  // const {pending} = useSelector((store: RootState) => store.auth);
 
   useEffect(() => {
     dispatch(authChecUser());
@@ -37,8 +50,17 @@ function App(): JSX.Element {
     dispatch(imagesInit());
   }, []);
 
+  // useEffect(() => {
+  //   setTimeout(() => dispatch(stopPending()), 2000);
+  // }, [pending]);
+
   return (
     <BrowserRouter>
+      {/* {pending ? (
+        <div>
+          <img src={imgPrealoader} alt="prealoader" />
+        </div>
+      ) : ( */}
       <Routes>
         <Route path="/" element={<Navbar />}>
           <Route index element={<MainPage />} />
@@ -55,6 +77,7 @@ function App(): JSX.Element {
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
+      {/* )} */}
     </BrowserRouter>
   );
 }
