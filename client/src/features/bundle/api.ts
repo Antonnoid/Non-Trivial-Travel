@@ -12,7 +12,7 @@ export const bundleInitFetch = async (): Promise<Bundle[]> => {
 export const bundlesInitFromCity = async (
   id: City['id']
 ): Promise<Bundle[]> => {
-  const res = await fetch(`api/cities/search/id/${id}`);
+  const res = await fetch(`/api/cities/search/id/${id}`);
   const data = await res.json();
   return data.Bundles;
 };

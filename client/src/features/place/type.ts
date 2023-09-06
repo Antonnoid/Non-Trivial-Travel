@@ -2,7 +2,7 @@ export type Place = {
   id: number;
   title: string;
   description: string;
-  city: string;
+  cityId: number;
   userId: number;
   bundleId: number;
   isPublic: boolean;

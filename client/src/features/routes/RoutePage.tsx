@@ -17,7 +17,7 @@ const RoutePage = (): JSX.Element => {
   let ourPlaces;
   if (routeId) {
     ourRoute = routes.find((route: Route) => route.id === +routeId);
-    ourPlaces = ourRoute?.Route_places.map(
+    ourPlaces = ourRoute?.Route_places?.map(
       (routePlace) => routePlace.Place
     ).flat();
   }

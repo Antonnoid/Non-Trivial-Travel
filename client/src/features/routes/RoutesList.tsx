@@ -17,7 +17,10 @@ const RoutesList = (): JSX.Element => {
     } else {
       dispatch(cityRoutesInit(+cityId));
     }
-  }, []);
+  }, [cityId]);
+  const cityRoutes =
+    routes &&
+    routes.filter((route) => (cityId ? route.cityId === +cityId : route));
 
   return (
     <div className="container">
@@ -26,9 +29,15 @@ const RoutesList = (): JSX.Element => {
           <h3>Маршруты</h3>
         </div>
         <div className="routes">
-          {routes &&
-            routes.length > 0 &&
-            routes.map((route) => <RouteCard route={route} key={route.id} />)}
+          {cityId
+            ? routes &&
+              routes.length > 0 &&
+              routes.map((route) => <RouteCard route={route} key={route.id} />)
+            : cityRoutes &&
+              cityRoutes.length > 0 &&
+              cityRoutes.map((route) => (
+                <RouteCard route={route} key={route.id} />
+              ))}
         </div>
       </div>
     </div>
