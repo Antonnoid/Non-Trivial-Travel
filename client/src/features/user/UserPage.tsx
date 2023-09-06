@@ -1,11 +1,10 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
+import {NavLink} from 'react-router-dom';
 import {RootState, useAppDispatch} from '../../redux/store';
 import PlaceCard from '../place/PlaceCard';
 import {placePublish} from '../place/placesSlice';
 import {Place} from '../place/type';
-import './styles/styles.scss';
-import {NavLink} from 'react-router-dom';
 
 const UserPage = (): JSX.Element => {
   const user = useSelector((store: RootState) => store.auth.user);
