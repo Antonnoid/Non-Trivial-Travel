@@ -5,7 +5,6 @@ export type Place = {
   city: string;
   userId: number;
   bundleId: number;
-  rating: number;
   isPublic: boolean;
   atitude: number;
   longitude: number;

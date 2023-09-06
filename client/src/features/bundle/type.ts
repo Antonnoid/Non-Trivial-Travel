@@ -4,7 +4,6 @@ export type Bundle = {
   id: number;
   title: string;
   description: string;
-  rating: number;
   isPublic: boolean;
   userId: number;
   cityId: number;

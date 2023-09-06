@@ -1,23 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store';
+import {RootState, useAppDispatch} from '../../redux/store';
 import {Place} from '../place/type';
 import {City} from '../navbar/types/types';
+import {addBundle} from './bundlesSlice';
 
 const BundleAddPage = (): JSX.Element => {
+  const dispatch = useAppDispatch();
   const allPlaces = useSelector((store: RootState) => store.places.allPlaces);
   const allCities = useSelector((store: RootState) => store.cities.allCities);
+  const userId = useSelector((store: RootState) => store.auth.user)?.id;
 
   const [findPlace, setFindPlace] = useState('');
   console.log('-', findPlace.trim().toLowerCase(), '-');
 
   const [bundlePlaces, setBundlePlaces] = useState<number[]>([]);
-  const [bundleTitle, setBundleTitle] = useState('');
-  const [bundleDescription, setBundleDescription] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [findCity, setFindCity] = useState('');
-  const [bundleIsPublished, setBundleIsPublished] = useState(false);
+  const [isPublic, setIsPublic] = useState(false);
   const [bundleCity, setCity] = useState<City>({id: 0, name: 'Не выбрано'});
-  console.log(bundleCity);
 
   const filtredCities = allCities.filter((city) =>
     city.name.includes(findCity)
@@ -39,6 +41,26 @@ const BundleAddPage = (): JSX.Element => {
   const handleSetCity = (city: City): void => {
     setCity(city);
     setFindCity('');
+  };
+
+  const handleAddBundle = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault();
+    if (userId) {
+      console.log('Саночка');
+
+      dispatch(
+        addBundle({
+          title,
+          description,
+          isPublic,
+          cityId: bundleCity.id,
+          userId,
+          bundlePlaces,
+        })
+      );
+    }
   };
 
   const liPlaces = filtredPlaces.map((place) => {
@@ -81,7 +103,7 @@ const BundleAddPage = (): JSX.Element => {
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleAddBundle}>
         <div>
           <label>
             Выберите город
@@ -104,7 +126,10 @@ const BundleAddPage = (): JSX.Element => {
           <label>
             Выберите места
             <br />
-            <input value={findPlace} onChange={(e) => setFindPlace(e.target.value)} />
+            <input
+              value={findPlace}
+              onChange={(e) => setFindPlace(e.target.value)}
+            />
           </label>
           {findPlace && findPlace.trim().toLowerCase() !== ' ' && (
             <ul style={{visibility: `${findPlace ? 'visible' : 'collapse'}`}}>
@@ -119,18 +144,15 @@ const BundleAddPage = (): JSX.Element => {
         </div>
         <label>
           <h1>Введите название</h1>
-          <input onChange={(e) => setBundleTitle(e.target.value)} />
+          <input onChange={(e) => setTitle(e.target.value)} />
         </label>
         <label>
           <h1>Введите описание</h1>
-          <input onChange={(e) => setBundleDescription(e.target.value)} />
+          <input onChange={(e) => setDescription(e.target.value)} />
         </label>
         <label>
           <h1>Опубликовать</h1>
-          <input
-            onChange={() => setBundleIsPublished(!bundleIsPublished)}
-            type="checkbox"
-          />
+          <input onChange={() => setIsPublic(!isPublic)} type="checkbox" />
         </label>
         <div>
           <button type="submit">Создать подборку</button>

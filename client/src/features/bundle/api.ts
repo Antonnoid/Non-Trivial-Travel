@@ -15,3 +15,36 @@ export const bundlesInitFromCity = async (
   const data = await res.json();
   return data.Bundle;
 };
+
+export const bundleAddFetch = async ({
+  title,
+  description,
+  isPublic,
+  userId,
+  cityId,
+  bundlePlaces,
+}: {
+  title: string;
+  description: string;
+  isPublic: boolean;
+  userId: number;
+  cityId: number;
+  bundlePlaces: number[];
+}): Promise<Bundle> => {
+  console.log('Фетч улетел');
+  
+  const res = await fetch('/api/bundles', {
+    method: 'POST',
+    headers: {'Content-type': 'application/json'},
+    body: JSON.stringify({
+      title,
+      description,
+      isPublic,
+      userId,
+      cityId,
+      bundlePlaces,
+    }),
+  });
+  const data = await res.json();
+  return data;
+};

@@ -31,7 +31,7 @@ function PlacePage(): JSX.Element {
             </div>
             <div className="placePage__contents-rating">
               <img className="img-rating" src={starImg} alt="star" />
-              <p className="points-rating">{ourPlace.rating}</p>
+              <p className="points-rating"></p>
             </div>
             <div className="placePage__contents-img">
               {ourImages?.map((image: Image) => (

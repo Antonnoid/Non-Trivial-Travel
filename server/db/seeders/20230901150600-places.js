@@ -8,7 +8,6 @@ module.exports = {
       {
         title: 'Юпитер 5. Ижевский паб',
         description: 'Говорят, Антоха работал. Одобряет.',
-        rating: 4.2,
         isPublic: true,
         userId: 1,
         cityId: 2279,
@@ -18,7 +17,6 @@ module.exports = {
       {
         title: 'Пристань Ижевск',
         description: 'Паромный причал. Уплыть, приплыть - норм.',
-        rating: 3.5,
         isPublic: true,
         userId: 1,
         cityId: 2279,
@@ -28,7 +26,6 @@ module.exports = {
       {
         title: 'Центральный рынок',
         description: 'Приехал в город и не сходил на рынок? Ууууу...',
-        rating: 4.0,
         isPublic: true,
         userId: 1,
         cityId: 2279,
@@ -38,7 +35,6 @@ module.exports = {
       {
         title: 'Fast food',
         description: 'Позиционируют себя как ресторан',
-        rating: 2.2,
         isPublic: true,
         userId: 2,
         cityId: 2033,
@@ -49,7 +45,6 @@ module.exports = {
         title: 'Китайская беседка',
         description:
           'Китайская беседка, построенная в 1976 году на месте старого павильона, от которой открывается прекрасный вид.',
-        rating: 4.8,
         isPublic: true,
         userId: 2,
         cityId: 2033,
@@ -59,7 +54,6 @@ module.exports = {
       {
         title: 'Провал',
         description: '12 стульев смотрели? Ну вот.',
-        rating: 4.6,
         isPublic: true,
         userId: 2,
         cityId: 2033,
