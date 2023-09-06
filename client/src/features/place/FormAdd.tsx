@@ -1,8 +1,8 @@
 import React, {useEffect, useState, useRef} from 'react';
+import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {placeAddfromForm} from './placesSlice';
 import DropList from '../droplist/DropList';
-import {useSelector} from 'react-redux';
 import {loadCitiesByLetter, loadCitiesPopular} from '../city/citiesSlice';
 
 export default function FormAdd(): JSX.Element {
