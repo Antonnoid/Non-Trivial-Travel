@@ -9,6 +9,7 @@ import './styles/styles.scss';
 const RoutesList = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const {cityId} = useParams();
+  const routes = useSelector((store: RootState) => store.routes.routes);
 
   useEffect(() => {
     if (!cityId) {
@@ -18,7 +19,6 @@ const RoutesList = (): JSX.Element => {
     }
   }, []);
 
-  const routes = useSelector((store: RootState) => store.routes.routes);
   return (
     <div className="container">
       <div className="routeslist">

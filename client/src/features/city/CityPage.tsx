@@ -6,9 +6,9 @@ import BundlesList from '../bundle/BundlesList';
 export default function CityPage(): JSX.Element {
   return (
     <div className="container">
-      <PlacesList />
       <RoutesList />
       <BundlesList />
+      <PlacesList />
     </div>
   );
 }

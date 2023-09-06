@@ -49,6 +49,7 @@ router.get('/search/id/:id', async (req, res) => {
       where: {id},
       include: [Place, Bundle, Route],
     });
+    console.log(city);
     res.json(city);
   } catch ({message}) {
     res.json(message);

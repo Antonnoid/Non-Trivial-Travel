@@ -30,7 +30,7 @@ export const addBundle = createAsyncThunk(
     userId: number;
     cityId: number;
     bundlePlaces: number[];
-  }) => 
+  }) =>
     api.bundleAddFetch({
       title,
       description,
