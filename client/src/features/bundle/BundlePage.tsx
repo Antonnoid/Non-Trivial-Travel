@@ -8,7 +8,6 @@ import CommentsListPage from '../comment/CommentsListPage';
 
 import './styles/styles.scss';
 
-
 const BundlePage = (): JSX.Element => {
   const {bundleId} = useParams();
   const bundles = useSelector((store: RootState) => store.bundles.bundles);

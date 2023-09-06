@@ -1,4 +1,4 @@
-import {City} from '../navbar/types/types';
+import {City} from '../city/types/types';
 import {Route} from './type';
 
 export const routeInitFetch = async (): Promise<Route[]> => {

@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import {City} from '../navbar/types/types';
+import {City} from '../city/types/types';
 import {Place, PlaceId, PlaceForAdd} from './type';
 
 export const placesInitFetch = async (): Promise<Place[]> => {
@@ -40,6 +40,6 @@ export const placePublishFetch = async (place: Place): Promise<Place> => {
     body: JSON.stringify({isPublic: !place.isPublic}),
   });
   const data = res.json();
-  
+
   return data;
 };

@@ -1,16 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {useEffect, useRef, useState} from 'react';
-import {Link, NavLink, Outlet, useParams, useNavigate} from 'react-router-dom';
+import {NavLink, Outlet, useParams, useNavigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
-import {loadCitiesByLetter, loadCitiesPopular} from './citiesSlice';
-import * as api from './api';
-import CityItem from './CityItem';
-import {City} from './types/types';
+import {loadCitiesByLetter, loadCitiesPopular} from '../city/citiesSlice';
+import * as api from '../city/api';
+import {City} from '../city/types/types';
 import {logOut} from '../auth/authSlice';
+import DropList from '../droplist/DropList';
 
 export default function Navbar(): JSX.Element {
   const {cityId} = useParams();
-
+  const [allCity, setAllCity] = useState(true);
   const [placeholder, setPlaceholder] = useState('Все города');
   const [input, setInput] = useState('');
   const [dropList, showDropList] = useState(false);
@@ -39,13 +40,6 @@ export default function Navbar(): JSX.Element {
     }
   };
 
-  // const userLogOut = async (): Promise<void> => {
-  //   const data = await fetchLogOut();
-  //   if (data.message === 'success') {
-  //     dispatch({type: 'auth/logout'});
-  //     navigate('/');
-  //   }
-  // };
   const userLogOut: React.MouseEventHandler<HTMLAnchorElement> = async (
     e
   ): Promise<void> => {
@@ -53,9 +47,11 @@ export default function Navbar(): JSX.Element {
     dispatch(logOut());
     navigate('/');
   };
-  const clearInput = (): void => {
+  const onClickCity = (e?: any): void => {
     setInput('');
+    showDropList(false);
   };
+
   useEffect(() => {
     initCities();
     getCity();
@@ -69,6 +65,7 @@ export default function Navbar(): JSX.Element {
         !dropDownRef.current.contains(e.target as Node)
       ) {
         showDropList(false);
+        setInput('');
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -87,7 +84,7 @@ export default function Navbar(): JSX.Element {
               <form action="" className="form navbar__form">
                 <div className="form__body">
                   <input
-                    onFocus={() => showDropList(true)}
+                    onFocus={() => showDropList((prev) => !prev)}
                     onChange={(e) => setInput(e.target.value)}
                     value={input}
                     className="form__input"
@@ -95,26 +92,13 @@ export default function Navbar(): JSX.Element {
                     placeholder={placeholder}
                   />
                   {dropList && (
-                    <ul className="drop-down" ref={dropDownRef}>
-                      {cities.length === 0 && (
-                        <li className="drop-down__item">Такого города нет</li>
-                      )}
-                      <li className="drop-down__item">
-                        <Link
-                          onClick={() => setPlaceholder('Все города')}
-                          to="/"
-                        >
-                          Все города
-                        </Link>
-                      </li>
-                      {cities.map((city) => (
-                        <CityItem
-                          onClick={clearInput}
-                          key={city.id}
-                          city={city}
-                        />
-                      ))}
-                    </ul>
+                    <DropList
+                      allCity={allCity}
+                      dropDownRef={dropDownRef}
+                      cities={cities}
+                      setPlaceholder={setPlaceholder}
+                      onClickCity={onClickCity}
+                    />
                   )}
                 </div>
               </form>

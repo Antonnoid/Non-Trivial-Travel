@@ -15,6 +15,7 @@ module.exports = {
         routeId: 2,
         text: 'Патрулирование прошло успешно',
       },
+      {userId: 2, routeId: 1, text: 'Отлично!!!'},
     ]);
   },
 
