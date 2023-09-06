@@ -1,4 +1,5 @@
 .registr-auth_container {
+  font-family: Inter;
   display: flex;
   max-width: fit-content;
   margin: auto;
@@ -6,6 +7,7 @@
   align-items: center;
 }
 .registr-auth_form {
+  font-family: Inter;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -15,19 +17,23 @@
   color: #ffffff;
 }
 .registr-auth_label {
+  font-family: Inter;
   font-size: x-large;
   font-weight: 555;
   display: flex;
   flex-direction: column;
+  padding: 5px;
   gap: 5px;
 }
 .registr-auth_input {
+  font-family: Inter;
   width: 450px;
   height: 45px;
   margin-bottom: 15px;
   border-radius: 5px;
 }
 .registr-auth_button {
+  font-family: Inter;
   width: 35%;
   height: 45px;
   border-radius: 6px;
@@ -37,6 +43,7 @@
   background-color: #ffffff;
 }
 .reg-auth-dutton {
+  font-family: Inter;
   display: flex;
   justify-content: center;
 }
@@ -46,6 +53,7 @@
 }
 
 .register-auth_span {
+  font-family: Inter;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,6 +66,11 @@
   font-size: 25px;
   color: #ffffff;
   margin: 10px;
+}
+
+.img_registr {
+  margin: 30px;
+  width: 500px;
 }
 
 //#00AF83

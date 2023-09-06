@@ -8,8 +8,9 @@ import {placeRemove} from './placesSlice';
 
 function PlaceCard({place}: {place: Place}): JSX.Element {
   const images = useSelector((store: RootState) => store.images.images);
-  const placeImages = images.filter((image) => image.placeId === place.id);
   const user = useSelector((store: RootState) => store.auth.user);
+  const placeImages = images.filter((image) => image.placeId === place.id);
+
   const dispatch = useAppDispatch();
   const removePlace = async (): Promise<void> => {
     dispatch(placeRemove(place.id));
@@ -51,7 +52,6 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
             </Link>
           </div>
         </div>
-        {/* <div className="place__body" /> */}
       </div>
     </div>
   );

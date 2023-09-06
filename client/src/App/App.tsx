@@ -15,11 +15,12 @@ import UserPage from '../features/user/UserPage';
 import PlacePage from '../features/place/PlacePage';
 import BundlePage from '../features/bundle/BundlePage';
 import Error from '../features/404/Error';
-import { placesInit } from '../features/place/placesSlice';
+import { placesInit, allPlacesInit } from '../features/place/placesSlice';
 import { bundlesInit } from '../features/bundle/bundlesSlice';
 import { imagesInit } from '../features/image/ImagesSlice';
 import BundleAddPage from '../features/bundle/BundleAddPage';
 import RoutePage from '../features/routes/RoutePage';
+import { allCitiesInit } from '../features/navbar/citiesSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -27,6 +28,8 @@ function App(): JSX.Element {
   useEffect(() => {
     dispatch(authChecUser());
     dispatch(placesInit());
+    dispatch(allPlacesInit());
+    dispatch(allCitiesInit());
     dispatch(bundlesInit());
     dispatch(imagesInit());
   }, []);

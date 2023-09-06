@@ -1,11 +1,12 @@
 import React from 'react';
+import './styles/stylesPage.scss';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import {Image, Place} from './type';
 import {RootState} from '../../redux/store';
 import ImageItem from '../image/ImageItem';
-
 import CommentsListPage from '../comment/CommentsListPage';
+import starImg from './img/5-Star.png';
 
 function PlacePage(): JSX.Element {
   const {placeId} = useParams();
@@ -19,20 +20,31 @@ function PlacePage(): JSX.Element {
   }
 
   return (
-    <div>
+    <div className="placePage__container">
       {ourPlace ? (
         <>
-          <div>
-            <h1>{ourPlace.title}</h1>
-            <div>{ourPlace.rating}</div>
-            <div>
+          <div className="placePage__contents">
+            <div className="placePage__contents-header">
+              <h1 className="placePage__contents-header-text">
+                {ourPlace.title}
+              </h1>
+            </div>
+            <div className="placePage__contents-rating">
+              <img className="img-rating" src={starImg} alt="star" />
+              <p className="points-rating">{ourPlace.rating}</p>
+            </div>
+            <div className="placePage__contents-img">
               {ourImages?.map((image: Image) => (
                 <ImageItem image={image} key={image.id} />
               ))}
             </div>
-            <h3>{ourPlace.description}</h3>
+            <div className="placePage__contents-desc">
+              <h3>{ourPlace.description}</h3>
+            </div>
           </div>
-          <CommentsListPage />
+          <div className="placePage__contents-comments">
+            <CommentsListPage />
+          </div>
         </>
       ) : (
         <div>

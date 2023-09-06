@@ -15,6 +15,7 @@ const store = configureStore({
   reducer: {
     auth: authSlice,
     places: placesSlice,
+    allPlaces: placesSlice,
     images: ImagesSlice,
     cities: citiesSlice,
     bundles: bundlesSlice,

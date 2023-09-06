@@ -3,7 +3,7 @@ import {Place, PlaceForAdd, PlacesState, PlaceId} from './type';
 import * as api from './api';
 import {City} from '../city/types/types';
 
-export const initialState: PlacesState = {places: [], error: ''};
+export const initialState: PlacesState = {places: [], allPlaces: [], error: ''};
 
 export const placesInit = createAsyncThunk('places/init', () =>
   api.placesInitFetch()
@@ -30,6 +30,10 @@ export const placePublish = createAsyncThunk(
   }
 );
 
+export const allPlacesInit = createAsyncThunk('places/all/init', () =>
+  api.placesInitFetch()
+);
+
 const placesSlice = createSlice({
   name: 'places',
   initialState,
@@ -40,6 +44,12 @@ const placesSlice = createSlice({
         state.places = action.payload;
       })
       .addCase(placesInit.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(allPlacesInit.fulfilled, (state, action) => {
+        state.allPlaces = action.payload;
+      })
+      .addCase(allPlacesInit.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(cityPlacesInit.fulfilled, (state, action) => {
