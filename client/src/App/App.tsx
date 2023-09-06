@@ -21,6 +21,8 @@ import {imagesInit} from '../features/image/ImagesSlice';
 import BundleAddPage from '../features/bundle/BundleAddPage';
 import RoutePage from '../features/routes/RoutePage';
 import {allCitiesInit} from '../features/city/citiesSlice';
+import RoutesList from '../features/routes/RoutesList';
+import CityPage from '../features/city/CityPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -42,7 +44,7 @@ function App(): JSX.Element {
           <Route path="/authorization" element={<AuthorizationPage />} />
           <Route path="/registration" element={<RegisterPage />} />
           <Route path="/map" element={<Map />} />
-          <Route path="/cities/:cityId" element={<PlacesList />} />
+          <Route path="/cities/:cityId" element={<CityPage />} />
           <Route path="/user/:userId" element={<UserPage />} />
           <Route path="/places/:placeId" element={<PlacePage />} />
           <Route path="/bundles/:bundleId" element={<BundlePage />} />
