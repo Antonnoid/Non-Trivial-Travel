@@ -26,9 +26,8 @@ const RoutesList = (): JSX.Element => {
           <h3>Маршруты</h3>
         </div>
         <div className="routes">
-          {routes.map((route) => (
-            <RouteCard route={route} key={route.id} />
-          ))}
+          {routes.length > 0 &&
+            routes.map((route) => <RouteCard route={route} key={route.id} />)}
         </div>
       </div>
     </div>
