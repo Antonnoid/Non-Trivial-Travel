@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {Place} from '../place/type';
-import {City} from '../navbar/types/types';
+import {City} from '../city/types/types';
 
 const BundleAddPage = (): JSX.Element => {
   const allPlaces = useSelector((store: RootState) => store.places.allPlaces);
@@ -104,7 +104,10 @@ const BundleAddPage = (): JSX.Element => {
           <label>
             Выберите места
             <br />
-            <input value={findPlace} onChange={(e) => setFindPlace(e.target.value)} />
+            <input
+              value={findPlace}
+              onChange={(e) => setFindPlace(e.target.value)}
+            />
           </label>
           {findPlace && findPlace.trim().toLowerCase() !== ' ' && (
             <ul style={{visibility: `${findPlace ? 'visible' : 'collapse'}`}}>
