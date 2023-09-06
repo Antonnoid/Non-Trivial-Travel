@@ -1,8 +1,11 @@
 require('@babel/register');
 require('dotenv').config();
 const express = require('express');
+const upload = require('express-fileupload')
 
 const app = express();
+
+app.use(upload())
 
 const PORT = process.env.PORT || 4000;
 
