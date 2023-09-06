@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {Place} from '../place/type';
-import {City} from '../navbar/types/types';
+import { City } from '../city/types/types'; 
 import {addBundle} from './bundlesSlice';
 
 
