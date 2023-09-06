@@ -1,40 +1,41 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {Place} from '../place/type';
 import {City} from '../city/types/types';
-import {addBundle} from './bundlesSlice';
+import { addRoute } from './routesSlice';
 
 
-const BundleAddPage = (): JSX.Element => {
+const RouteAddPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const allPlaces = useSelector((store: RootState) => store.places.allPlaces);
   const allCities = useSelector((store: RootState) => store.cities.allCities);
   const userId = useSelector((store: RootState) => store.auth.user)?.id;
 
   const [findPlace, setFindPlace] = useState('');
-  console.log('-', findPlace.trim().toLowerCase(), '-');
 
-  const [bundlePlaces, setBundlePlaces] = useState<number[]>([]);
+  const [routePlaces, setRoutePlaces] = useState<number[]>([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [findCity, setFindCity] = useState('');
   const [isPublic, setIsPublic] = useState(false);
-  const [bundleCity, setCity] = useState<City>({id: 0, name: 'Не выбрано'});
+  const [timeValue, setTimeValue] = useState('');
+  const [timeUnits, setTimeUnits] = useState('');
+  const [routeCity, setCity] = useState<City>({id: 0, name: 'Не выбрано'});
 
   const filtredCities = allCities.filter((city) =>
     city.name.trim().toLowerCase().includes(findCity.trim().toLowerCase())
   );
   const filtredPlaces = allPlaces.filter((place) =>
     place.title.trim().toLowerCase().includes(findPlace.trim().toLowerCase())
-    && (place.cityId === bundleCity.id));
+    && (place.cityId === routeCity.id));
 
-  const handleAddToBundle = (place: Place): void => {
-    setBundlePlaces((prev) => [...prev, place.id]);
+  const handleAddToRoute = (place: Place): void => {
+    setRoutePlaces((prev) => [...prev, place.id]);
   };
 
-  const handleDeleteToBundle = (place: Place): void => {
-    setBundlePlaces((prev) =>
+  const handleDeleteFromRoute = (place: Place): void => {
+    setRoutePlaces((prev) =>
       prev.filter((prevPlace) => prevPlace !== place.id)
     );
   };
@@ -44,21 +45,21 @@ const BundleAddPage = (): JSX.Element => {
     setFindCity('');
   };
 
-  const handleAddBundle = async (
+  const handleAddRoute = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
     if (userId) {
-      console.log('Саночка');
 
       dispatch(
-        addBundle({
+        addRoute({
           title,
           description,
           isPublic,
-          cityId: bundleCity.id,
+          time: `${timeValue} ${timeUnits}`,
+          cityId: routeCity.id,
           userId,
-          bundlePlaces,
+          routePlaces,
         })
       );
     }
@@ -67,7 +68,7 @@ const BundleAddPage = (): JSX.Element => {
   const liPlaces = filtredPlaces.map((place) => {
     return (
       <li>
-        <button onClick={() => handleAddToBundle(place)} type="button">
+        <button onClick={() => handleAddToRoute(place)} type="button">
           {place.title}
         </button>
       </li>
@@ -85,7 +86,7 @@ const BundleAddPage = (): JSX.Element => {
   });
 
   const placesInBundle = allPlaces.filter((place) =>
-    bundlePlaces.find((el) => el === place.id)
+    routePlaces.find((el) => el === place.id)
   );
 
   const addedPlaces = placesInBundle
@@ -94,7 +95,7 @@ const BundleAddPage = (): JSX.Element => {
       <div>
         <p>{placeInBundle.title}</p>
         <button
-          onClick={() => handleDeleteToBundle(placeInBundle)}
+          onClick={() => handleDeleteFromRoute(placeInBundle)}
           type="button"
         >
           Удалить
@@ -104,7 +105,7 @@ const BundleAddPage = (): JSX.Element => {
 
   return (
     <div>
-      <form onSubmit={handleAddBundle}>
+      <form onSubmit={handleAddRoute}>
         <div>
           <label>
             Выберите город
@@ -120,7 +121,7 @@ const BundleAddPage = (): JSX.Element => {
             </ul>
           )}
           <div>
-            <h1>Подборка для города: {bundleCity.name}</h1>
+            <h1>Маршрут по городу: {routeCity.name}</h1>
           </div>
         </div>
         <div>
@@ -167,4 +168,4 @@ const BundleAddPage = (): JSX.Element => {
   );
 };
 
-export default BundleAddPage;
+export default RouteAddPage;
