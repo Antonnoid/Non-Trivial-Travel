@@ -43,3 +43,9 @@ export const placePublishFetch = async (place: Place): Promise<Place> => {
   
   return data;
 };
+
+export const allPlacesInitFetch = async (): Promise<Place[]> => {
+  const res = await fetch('/api/places');
+  const data = await res.json();
+  return data;
+};

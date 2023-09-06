@@ -25,6 +25,7 @@ export type Image = {
 
 export type PlacesState = {
   places: Place[];
+  allPlaces: Place[];
   error: string | undefined;
 };
 
