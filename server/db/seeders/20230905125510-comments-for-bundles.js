@@ -15,6 +15,7 @@ module.exports = {
         bundleId: 2,
         text: 'Класс',
       },
+      {userId: 2, bundleId: 2, text: 'Отлично!!!'},
     ]);
   },
 

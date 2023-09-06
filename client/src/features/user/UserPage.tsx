@@ -7,9 +7,10 @@ import {placePublish} from '../place/placesSlice';
 import {Place} from '../place/type';
 // import './styles/styles.scss';
 
+
 const UserPage = (): JSX.Element => {
   const user = useSelector((store: RootState) => store.auth.user);
-  const places = useSelector((store: RootState) => store.places.places);
+  const allPlaces = useSelector((store: RootState) => store.places.allPlaces);
   const cities = useSelector((store: RootState) => store.cities.cities);
   const dispatch = useAppDispatch();
 
@@ -20,7 +21,7 @@ const UserPage = (): JSX.Element => {
   let userPlaces;
   let userCity;
   if (user) {
-    userPlaces = places.filter((place) => place.userId === user.id);
+    userPlaces = allPlaces.filter((place) => place.userId === user.id);
     userCity = cities.find((city) => city.id === user.cityId);
   }
 
@@ -28,13 +29,13 @@ const UserPage = (): JSX.Element => {
     <div className="account-container">
       {user ? (
         <div>
-          <h1>Здравствуй, странник!</h1>
+          <h1>Информация о пользователе</h1>
 
-          <p>Твое имя: {user.name}</p>
+          <p>Имя: {user.name}</p>
           {userCity && (
             <div>
               <div>
-                <p>Твой город: {userCity.name}</p>
+                <p>Город: {userCity.name}</p>
               </div>
               <div>
                 <button type="button">Добавить место</button>
@@ -49,17 +50,17 @@ const UserPage = (): JSX.Element => {
             <div>
               {userPlaces.length > 0 ? (
                 <div>
-                  <h1>Твои места</h1>
+                  <h1>Места</h1>
                   <div className="places">
                     {userPlaces.map((place) => (
                       <div>
                         <PlaceCard key={place.id} place={place} />
+                        Опубликовано
                         <input
                           onChange={() => handlePublishPlace(place)}
                           type="checkbox"
                           checked={place.isPublic}
                         />
-                        <button type="button">Изменить</button>
                       </div>
                     ))}
                   </div>

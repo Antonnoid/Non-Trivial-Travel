@@ -4,6 +4,7 @@ import * as api from './api';
 
 const initialState: State = {
   cities: [],
+  allCities: [],
   error: undefined,
 };
 
@@ -18,6 +19,10 @@ export const loadCitiesByLetter = createAsyncThunk(
   (name: string) => api.fetchCityByLetter(name)
 );
 
+export const allCitiesInit = createAsyncThunk('cities/all/init', () =>
+  api.fetchCity()
+);
+
 const citiesSlice = createSlice({
   name: 'cities',
   initialState,
@@ -29,6 +34,12 @@ const citiesSlice = createSlice({
       })
       .addCase(loadCitiesPopular.fulfilled, (state, action) => {
         state.cities = action.payload;
+      })
+      .addCase(allCitiesInit.fulfilled, (state, action) => {
+        state.allCities = action.payload;
+      })
+      .addCase(allCitiesInit.rejected, (state, action) => {
+        state.error = action.error.message;
       })
       .addCase(loadCitiesByLetter.fulfilled, (state, action) => {
         state.cities = action.payload;

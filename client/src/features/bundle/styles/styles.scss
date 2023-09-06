@@ -1,6 +1,7 @@
 $more_color: #008ab7;
 .bundleslist {
   display: flex;
+  font-family: Inter;
   flex-direction: column;
 }
 
@@ -63,7 +64,7 @@ $more_color: #008ab7;
   justify-content: center;
   gap: 50px;
 }
-.bundle {
+.bundle__front {
   border: 1px solid #000;
   z-index: 1;
   border-radius: 25px;
@@ -81,9 +82,7 @@ $more_color: #008ab7;
   z-index: 0;
   position: absolute;
   display: flex;
-  // border: 1px solid #000;
   border-radius: 25px;
-  // background-size: 100% auto;
   width: 398px;
   height: 298px;
 }
@@ -93,14 +92,13 @@ $more_color: #008ab7;
   height: 48px;
   font-size: initial;
   font-weight: 555;
-  margin-left: 259px;
+  margin-left: 272px;
 }
 .bundle__front-link {
   z-index: 5;
   padding: 10px 25px;
   border-radius: 6px;
   color: #ffffff;
-  // outline: auto;
 }
 
 .bundle__front-link_more {
@@ -127,4 +125,9 @@ $more_color: #008ab7;
   gap: 150px;
   align-items: center;
   width: 100%;
+}
+
+.bundle__comments {
+  display: flex;
+  justify-content: center;
 }

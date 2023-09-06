@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import authSlice from '../features/auth/authSlice';
 import placesSlice from '../features/place/placesSlice';
 import ImagesSlice from '../features/image/ImagesSlice';
-import citiesSlice from '../features/navbar/citiesSlice';
+import citiesSlice from '../features/city/citiesSlice';
 import bundlesSlice from '../features/bundle/bundlesSlice';
 import routesSlice from '../features/routes/routesSlice';
 import commentsPlaceSlice from '../features/comment/commentsPlaceSlice';
@@ -15,6 +15,7 @@ const store = configureStore({
   reducer: {
     auth: authSlice,
     places: placesSlice,
+    allPlaces: placesSlice,
     images: ImagesSlice,
     cities: citiesSlice,
     bundles: bundlesSlice,

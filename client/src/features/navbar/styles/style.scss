@@ -1,6 +1,7 @@
 $input_width: 150px;
 $hover_color: #3eae7f;
 .navbar {
+  font-family: Inter;
   background: url('../img/background.png');
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   margin-bottom: 100px;
@@ -18,12 +19,12 @@ $hover_color: #3eae7f;
     input {
       max-width: $input_width;
       margin-right: 20px;
-      padding: 3px 0;
+      padding: 8px 0;
       text-align: center;
       border-radius: 6px;
     }
     button {
-      padding: 3px 12px;
+      padding: 6px 12px;
       background: #fff;
       border-radius: 6px;
     }
@@ -33,7 +34,7 @@ $hover_color: #3eae7f;
     color: #00af83;
     text-align: center;
     font-family: Inter;
-    font-size: 20px;
+    font-size: 25px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -52,38 +53,8 @@ $hover_color: #3eae7f;
 .nav_li {
   list-style-type: none;
 }
-.form {
-  &__body {
-  }
-
-  &__submit {
-  }
-}
 
 .mid {
   margin: 0 auto;
   background: hsla(196, 97%, 38%, 0.146);
-}
-
-.drop-down {
-  position: absolute;
-  background: #fff;
-  width: $input_width;
-  text-align: center;
-  padding: unset;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.3));
-  &__item {
-    padding: 3px 0;
-    border-bottom: 1px solid #d9d9d9;
-    a {
-      display: block;
-      padding: 10px;
-      &:hover {
-        background: $hover_color;
-        color: #fff;
-      }
-    }
-  }
-}
-.btn {
 }

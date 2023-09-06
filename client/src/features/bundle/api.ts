@@ -1,4 +1,4 @@
-import {City} from '../navbar/types/types';
+import {City} from '../city/types/types';
 import {Bundle} from './type';
 
 /* eslint-disable import/prefer-default-export */

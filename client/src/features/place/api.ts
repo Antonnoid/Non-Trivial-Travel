@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import {City} from '../navbar/types/types';
 import {Place, PlaceId, PlaceForAdd, Rating} from './type';
+import {City} from '../city/types/types';
 
 export const placesInitFetch = async (): Promise<Place[]> => {
   const res = await fetch('/api/places');
@@ -57,5 +57,11 @@ export const placeRatingAddFetch = async (
     }),
   });
   const data = res.json();
+  return data
+};
+
+export const allPlacesInitFetch = async (): Promise<Place[]> => {
+  const res = await fetch('/api/places');
+  const data = await res.json();
   return data;
 };
