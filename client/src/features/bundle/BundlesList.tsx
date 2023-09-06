@@ -20,8 +20,8 @@ const BundlesList = (): JSX.Element => {
   }, []);
   return (
     <div className="container">
-      <div className="placelist">
-        <div className="place_text-title">
+      <div className="bundleslist">
+        <div className="bundles_text-title">
           <h3>Подборки</h3>
         </div>
         <div className="bundles">
