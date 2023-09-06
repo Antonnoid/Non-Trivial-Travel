@@ -34,9 +34,10 @@ export default function DropList({
           </Link>
         </li>
       )}
-      {cities.map((city) => (
-        <CityItem onClick={onClickCity} key={city.id} city={city} />
-      ))}
+      {cities.length > 0 &&
+        cities.map((city) => (
+          <CityItem onClick={onClickCity} key={city.id} city={city} />
+        ))}
     </ul>
   );
 }
