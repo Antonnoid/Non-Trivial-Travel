@@ -34,11 +34,13 @@ $more_color: #00af83;
     align-items: center;
   }
   &__links {
+    min-width: 100%;
     display: flex;
     height: 44px;
     font-size: initial;
     font-weight: 540;
     gap: 29px;
+    justify-content: end;
   }
   &__link {
     font-family: Inter;
