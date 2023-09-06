@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
+import {Place, PlaceId, PlaceForAdd, Rating} from './type';
 import {City} from '../city/types/types';
-import {Place, PlaceId, PlaceForAdd} from './type';
 
 export const placesInitFetch = async (): Promise<Place[]> => {
   const res = await fetch('/api/places');
@@ -42,6 +42,22 @@ export const placePublishFetch = async (place: Place): Promise<Place> => {
   const data = res.json();
 
   return data;
+};
+
+export const placeRatingAddFetch = async (
+  rating: Rating,
+  place: Place
+): Promise<Rating> => {
+  const res = await fetch(`/api/places/${place.id}/rating`, {
+    method: 'POST',
+    headers: {'content-type': 'application/json'},
+    body: JSON.stringify({
+      rate: rating.rate,
+      type: 'place',
+    }),
+  });
+  const data = res.json();
+  return data
 };
 
 export const allPlacesInitFetch = async (): Promise<Place[]> => {
