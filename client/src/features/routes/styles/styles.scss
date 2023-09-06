@@ -1,10 +1,16 @@
-$more_color: #008ab7;
-.bundleslist {
+$more_color: #ffffff;
+.routes {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.routeslist {
   display: flex;
   flex-direction: column;
 }
 
-.bundles_text-title {
+.routes_text-title {
   display: flex;
   justify-content: center;
   max-width: 1500px;
@@ -19,13 +25,13 @@ $more_color: #008ab7;
   width: 96%;
 }
 
-.bundle__text {
+.routes__text {
   display: flex;
   justify-content: center;
   margin: 50px;
 }
 
-.bundle__title {
+.routes__title {
   display: flex;
   justify-content: center;
   height: 100px;
@@ -39,31 +45,7 @@ $more_color: #008ab7;
   width: 96%;
 }
 
-.bundle__desc {
-  display: flex;
-  justify-content: center;
-  height: 100px;
-  border: 1px solid rgb(152, 152, 152);
-  background: #ffffff;
-  border-radius: 6px;
-  font-size: 25px;
-  color: #008ab7;
-  margin: 10px;
-  align-items: center;
-  width: 55%;
-}
-
-.bundle__cards {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-.bundles {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-}
-.bundle {
+.routeCard {
   border: 1px solid #000;
   z-index: 1;
   border-radius: 25px;
@@ -74,10 +56,10 @@ $more_color: #008ab7;
     rgba(60, 60, 60, 0.5)
   );
   width: 400px;
-  height: 300px;
+  height: 150px;
 }
 
-.bundle__front-img {
+.route__img {
   z-index: 0;
   position: absolute;
   display: flex;
@@ -87,49 +69,44 @@ $more_color: #008ab7;
   width: 398px;
   height: 298px;
 }
-
-.bundle__front-links {
+.route__body {
   display: flex;
-  height: 48px;
-  font-size: initial;
-  font-weight: 555;
-  margin-left: 259px;
-}
-.bundle__front-link {
-  z-index: 5;
-  padding: 10px 25px;
-  border-radius: 6px;
-  color: #ffffff;
-  // outline: auto;
-}
-
-.bundle__front-link_more {
-  background: $more_color;
-  border-bottom-right-radius: 25px;
-  display: flex;
+  flex-direction: column;
+  gap: 50px;
   align-items: center;
+  width: 100%;
 }
 
-.bundle__front-title {
+.route__title {
+  display: flex;
+  justify-content: flex-start;
   margin: auto;
   width: 100%;
-  padding: 50px;
-  font-size: xxx-large;
-  display: flex;
-  justify-content: center;
+  padding: 20px;
+  font-size: xx-large;
   height: 50px;
   color: #ffffff;
 }
 
-.bundle__front-elements {
+.route__links {
   display: flex;
-  flex-direction: column;
-  gap: 150px;
-  align-items: center;
-  width: 100%;
+  height: 48px;
+  font-size: initial;
+  font-weight: 555;
+  margin-left: 258px;
 }
 
-.bundle__comments {
+.route__link {
+  z-index: 5;
+  padding: 10px 25px;
+  border-radius: 6px;
+  color: #00af83;
+  // outline: auto;
+}
+
+.route__link_more {
+  background: $more_color;
+  border-bottom-right-radius: 25px;
   display: flex;
-  justify-content: center;
+  align-items: center;
 }

@@ -44,7 +44,7 @@ function RegisterPage(): JSX.Element {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="registr-auth_input"
-            placeholder="Введите имя"
+            placeholder="  Введите имя"
             type="text"
           />
         </label>
@@ -54,7 +54,7 @@ function RegisterPage(): JSX.Element {
             value={email}
             onChange={ChengeEmail}
             className="registr-auth_input"
-            placeholder="ntt@mail.ru"
+            placeholder="  ntt@mail.ru"
             type="text"
           />
         </label>
@@ -64,7 +64,7 @@ function RegisterPage(): JSX.Element {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="registr-auth_input"
-            placeholder="от 6 символов"
+            placeholder="  от 3 символов"
             type="text"
           />
         </label>
@@ -74,7 +74,7 @@ function RegisterPage(): JSX.Element {
             value={cityId}
             onChange={(e) => setCityId(+e.target.value)}
             className="registr-auth_input"
-            placeholder="ваш город"
+            placeholder="  Ваш город"
             type="number"
           />
         </label>

@@ -1,3 +1,5 @@
+import {City} from '../navbar/types/types';
+
 export type User = {
   id: number;
   name: string;
@@ -5,6 +7,7 @@ export type User = {
   password: string;
   cityId: number;
   isAdmin: boolean;
+  City?: City;
 };
 
 export type UserAuthReg = {

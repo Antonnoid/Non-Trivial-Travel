@@ -4,6 +4,8 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {Bundle} from './type';
 import PlaceCard from '../place/PlaceCard';
+import CommentsListPage from '../comment/CommentsListPage';
+
 import './styles/styles.scss';
 
 const BundlePage = (): JSX.Element => {
@@ -28,6 +30,9 @@ const BundlePage = (): JSX.Element => {
         {ourPlaces?.map((place) => (
           <PlaceCard key={place.id} place={place} />
         ))}
+      </div>
+      <div className="bundle__comments">
+        <CommentsListPage />
       </div>
       <div className="bundle__text">
         <h2 className="bundle__desc">{ourBundle?.description}</h2>
