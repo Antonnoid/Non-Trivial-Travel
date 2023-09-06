@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import RouteCard from './RouteCard';
 import {cityRoutesInit, routesInit} from './routesSlice';
+import './styles/styles.scss';
 
 const RoutesList = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -20,10 +21,15 @@ const RoutesList = (): JSX.Element => {
   const routes = useSelector((store: RootState) => store.routes.routes);
   return (
     <div className="container">
-      <div className="routes">
-        {routes.map((route) => (
-          <RouteCard route={route} key={route.id} />
-        ))}
+      <div className="routeslist">
+        <div className="routes_text-title">
+          <h3>Маршруты</h3>
+        </div>
+        <div className="routes">
+          {routes.map((route) => (
+            <RouteCard route={route} key={route.id} />
+          ))}
+        </div>
       </div>
     </div>
   );

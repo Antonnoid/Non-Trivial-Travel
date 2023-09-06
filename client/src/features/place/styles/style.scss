@@ -31,13 +31,13 @@ $more_color: #00af83;
   }
   &__links {
     display: flex;
-    height: 45px;
+    height: 44px;
     font-size: initial;
-    font-weight: 555;
+    font-weight: 540;
     gap: 14px;
   }
   &__link {
-    padding: 10px 25px;
+    padding: 25px 40px;
     border-radius: 6px;
     &_remove {
       color: #008ab7;
