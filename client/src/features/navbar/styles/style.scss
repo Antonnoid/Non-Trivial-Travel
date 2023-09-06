@@ -58,34 +58,3 @@ $hover_color: #3eae7f;
   margin: 0 auto;
   background: hsla(196, 97%, 38%, 0.146);
 }
-
-// a {
-//   background: #ffffff;
-//   color: #00af83;
-// }
-
-.drop-down {
-  position: absolute;
-  background: #fff;
-  width: $input_width;
-  text-align: center;
-  padding: unset;
-  border-radius: 6px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.3));
-  &__item {
-    border-radius: 6px;
-    margin: 1px;
-    a {
-      display: block;
-      padding: 10px;
-      color: #000000;
-      background: #fff;
-      border-radius: 6px;
-
-      &:hover {
-        background: $hover_color;
-        color: #fff;
-      }
-    }
-  }
-}

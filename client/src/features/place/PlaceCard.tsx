@@ -10,6 +10,7 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
   const images = useSelector((store: RootState) => store.images.images);
   const user = useSelector((store: RootState) => store.auth.user);
   const placeImages = images.filter((image) => image.placeId === place.id);
+
   const dispatch = useAppDispatch();
   const removePlace = async (): Promise<void> => {
     dispatch(placeRemove(place.id));
@@ -24,7 +25,7 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
         <div className="place__element">
           <h1 className="place__title">{place.title}</h1>
           <div className="place__links">
-            {user ? (
+            {(user?.isAdmin || user?.id === place.userId) && (
               <>
                 <Link
                   className="place__link place__link_update"
@@ -32,43 +33,17 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
                 >
                   Изменить
                 </Link>
-                {/* <div className="place__links-published">
-                  <label htmlFor="public">Публиковать</label>
-                  <input type="checkbox" name="public" id="" />
-                </div> */}
-                {/* {} */}
+
                 <button
                   type="button"
                   onClick={removePlace}
                   className="place__link place__link_remove"
-                >
-                  Удалить
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  className="place__link place__link_update"
-                  to={`/places/${place.id}`}
-                  style={{visibility: 'hidden'}}
-                >
-                  Изменить
-                </Link>
-                {/* <div className="place__links-published">
-              <label htmlFor="public">Публиковать</label>
-              <input type="checkbox" name="public" id="" />
-            </div> */}
-                {/* {} */}
-                <button
-                  type="button"
-                  onClick={removePlace}
-                  className="place__link place__link_remove"
-                  style={{visibility: 'hidden'}}
                 >
                   Удалить
                 </button>
               </>
             )}
+
             <Link
               className="place__link place__link_more"
               to={`/places/${place.id}`}
@@ -77,7 +52,6 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
             </Link>
           </div>
         </div>
-        {/* <div className="place__body" /> */}
       </div>
     </div>
   );

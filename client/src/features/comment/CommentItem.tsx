@@ -1,6 +1,7 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import {CommentOfPlace, CommentOfBundle, CommentOfRoute} from './types/types';
-import {useAppDispatch} from '../../redux/store';
+import {RootState, useAppDispatch} from '../../redux/store';
 import {removeCommentPlace} from './commentsPlaceSlice';
 
 export default function CommentItem({
@@ -9,6 +10,7 @@ export default function CommentItem({
   comment: CommentOfPlace | CommentOfBundle | CommentOfRoute;
 }): JSX.Element {
   const dispatch = useAppDispatch();
+  const user = useSelector((store: RootState) => store.auth.user);
   const removeComment = async (): Promise<void> => {
     dispatch(removeCommentPlace(comment.id));
   };
@@ -22,13 +24,15 @@ export default function CommentItem({
           </span>
         </h5>
         <p className="comment__text">{comment.text}</p>
-        <button
-          onClick={removeComment}
-          type="button"
-          className="comment__delete"
-        >
-          Удалить
-        </button>
+        {user && (user.isAdmin || comment.userId === user.id) && (
+          <button
+            onClick={removeComment}
+            type="button"
+            className="comment__delete"
+          >
+            Удалить
+          </button>
+        )}
       </div>
     </div>
   );

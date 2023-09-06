@@ -1,6 +1,9 @@
-import React, {useState} from 'react';
-import {useAppDispatch} from '../../redux/store';
+import React, {useEffect, useState, useRef} from 'react';
+import {useSelector} from 'react-redux';
+import {RootState, useAppDispatch} from '../../redux/store';
 import {placeAddfromForm} from './placesSlice';
+import DropList from '../droplist/DropList';
+import {loadCitiesByLetter, loadCitiesPopular} from '../city/citiesSlice';
 
 export default function FormAdd(): JSX.Element {
   const [message, setMessage] = useState('');
@@ -8,6 +11,7 @@ export default function FormAdd(): JSX.Element {
   const [description, setDesc] = useState('');
   const [city, setCity] = useState('');
   const [title, setTitle] = useState('');
+  const [allCity, setAllCity] = useState(false);
 
   const dispatch = useAppDispatch();
   const addPlace = async (
@@ -40,12 +44,53 @@ export default function FormAdd(): JSX.Element {
       }, 2000);
     }
   };
+  const dropDownRef = useRef<HTMLUListElement | null>(null);
+  const cities = useSelector((store: RootState) => store.cities.cities);
+  const [placeholder, setPlaceholder] = useState('Все города');
+  const [dropList, showDropList] = useState(false);
+  const [disable, setDisabled] = useState(true);
+
+  const initCities = async (): Promise<void> => {
+    if (city) {
+      dispatch(loadCitiesByLetter(city.toLowerCase()));
+      return;
+    }
+    if (!city) {
+      dispatch(loadCitiesPopular());
+    }
+  };
+  useEffect(() => {
+    initCities();
+  }, [city]);
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent): void => {
+      if (
+        dropList &&
+        dropDownRef.current &&
+        !dropDownRef.current.contains(e.target as Node)
+      ) {
+        showDropList(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropList]);
+  const onClickCity = (e: any): void => {
+    e.preventDefault();
+    showDropList(false);
+    setPlaceholder('');
+    setCity(e.target.innerHTML);
+    if (dropList) setDisabled(false);
+  };
 
   return (
-    <form onSubmit={addPlace}>
+    <form className="addPlaceForm" onSubmit={addPlace}>
       <input
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e): void => setTitle(e.target.value)}
         name="title"
         type="text"
         placeholder="Название"
@@ -57,15 +102,33 @@ export default function FormAdd(): JSX.Element {
         type="text"
         placeholder="Описание"
       />
-      <input
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        name="city"
-        type="text"
-        placeholder="Город"
-      />
+      <div className="city">
+        <input
+          onFocus={() => showDropList(true)}
+          value={city}
+          onChange={(e) => {
+            setCity(e.target.value);
+            setDisabled(true);
+          }}
+          name="city"
+          type="text"
+          placeholder="Город"
+          autoComplete="off"
+        />
+        {dropList && (
+          <DropList
+            allCity={allCity}
+            dropDownRef={dropDownRef}
+            cities={cities}
+            setPlaceholder={setPlaceholder}
+            onClickCity={onClickCity}
+          />
+        )}
+      </div>
       <div className="message">{message}</div>
-      <button type="submit">Добавить место</button>
+      <button disabled={disable} type="submit">
+        Добавить место
+      </button>
     </form>
   );
 }

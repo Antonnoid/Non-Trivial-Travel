@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {Place, PlaceForAdd, PlacesState, PlaceId} from './type';
 import * as api from './api';
-import {City} from '../navbar/types/types';
+import {City} from '../city/types/types';
 
 export const initialState: PlacesState = {places: [], allPlaces: [], error: ''};
 

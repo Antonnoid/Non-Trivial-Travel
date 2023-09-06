@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {Route} from './type';
 import PlaceCard from '../place/PlaceCard';
+
 import './styles/stylesPage.scss';
 
 const RoutePage = (): JSX.Element => {
