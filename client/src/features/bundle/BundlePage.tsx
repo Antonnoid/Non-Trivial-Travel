@@ -6,6 +6,9 @@ import {Bundle} from './type';
 import PlaceCard from '../place/PlaceCard';
 import CommentsListPage from '../comment/CommentsListPage';
 
+import './styles/styles.scss';
+
+
 const BundlePage = (): JSX.Element => {
   const {bundleId} = useParams();
   const bundles = useSelector((store: RootState) => store.bundles.bundles);
@@ -20,14 +23,18 @@ const BundlePage = (): JSX.Element => {
   }
 
   return (
-    <div>
-      <h1>{ourBundle?.title}</h1>
-      <h2>{ourBundle?.description}</h2>
-      <div>
+    <div className="bundle__container">
+      <div className="bundle__text">
+        <h1 className="bundle__title">{ourBundle?.title}</h1>
+      </div>
+      <div className="bundle__cards">
         {ourPlaces?.map((place) => (
           <PlaceCard key={place.id} place={place} />
         ))}
         <CommentsListPage />
+      </div>
+      <div className="bundle__text">
+        <h2 className="bundle__desc">{ourBundle?.description}</h2>
       </div>
     </div>
   );

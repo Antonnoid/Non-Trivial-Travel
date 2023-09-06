@@ -3,6 +3,12 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Route_places', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
       routeId: {
         allowNull: false,
         type: Sequelize.INTEGER,

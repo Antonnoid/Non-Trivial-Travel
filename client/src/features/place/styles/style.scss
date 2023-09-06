@@ -5,32 +5,36 @@ $more_color: #00af83;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  min-height: 300px;
+  width: 400px;
+  height: 300px;
+  border-radius: 6px;
+  width: 100%;
 }
 .place {
   // padding: 30px;
   // border: 1px solid #000;
+  z-index: 1;
   border-radius: 25px;
   position: relative;
   background: linear-gradient(
     to right,
-    rgba(0, 138, 183, 0.5),
-    rgba(0, 138, 183, 0.5)
+    rgba(60, 60, 60, 0.5),
+    rgba(60, 60, 60, 0.5)
   );
-  width: 555px;
-  height: 415px;
+  width: 400px;
+  height: 300px;
   &__body {
     display: flex;
     flex-direction: column;
-    max-height: 415px;
+    max-height: 15px;
     align-items: center;
   }
   &__links {
     display: flex;
-    height: 75px;
+    height: 45px;
     font-size: initial;
     font-weight: 555;
-    gap: 92px;
+    gap: 14px;
   }
   &__link {
     padding: 10px 25px;
@@ -56,15 +60,25 @@ $more_color: #00af83;
 }
 
 .place__body-img {
+  z-index: 0;
   position: absolute;
+  display: flex;
   border: 1px solid #000;
   border-radius: 25px;
+  background-size: 100% auto;
+  width: 400px;
+  height: 300px;
+}
+
+.place__card-container {
+  width: 400px;
+  height: 300px;
 }
 
 .place__title {
   margin: auto;
   width: 100%;
-  padding: 130px;
+  padding: 50px;
   font-size: xxx-large;
   display: flex;
   justify-content: center;
@@ -82,7 +96,7 @@ $more_color: #00af83;
 .place__element {
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 155px;
   align-items: center;
   width: 100%;
 }
@@ -100,19 +114,25 @@ $more_color: #00af83;
 .place_text-title {
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 45%;
-  height: 55px;
-  font-weight: 500;
+  max-width: 1500px;
+  height: 100px;
   border: 1px solid rgb(152, 152, 152);
   background: #00af83;
   border-radius: 6px;
-  font-size: 45px;
+  font-size: 70px;
   color: #ffffff;
   margin: 10px;
+  align-items: center;
+  width: 96%;
 }
 .place_container {
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+  //   object-fit: cover;
+  //   border-radius: 6px;
+}
+.placelist {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
