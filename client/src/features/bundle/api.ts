@@ -49,14 +49,14 @@ export const bundleAddFetch = async ({
   return data;
 };
 export const bundleRatingAddFetch = async (
-  rating: Rating,
+  rate: number,
   bundle: Bundle
 ): Promise<Rating> => {
   const res = await fetch(`/api/bundles/${bundle.id}/rating`, {
     method: 'POST',
     headers: {'content-type': 'application/json'},
     body: JSON.stringify({
-      rate: rating.rate,
+      rate,
       type: 'bundle',
     }),
   });

@@ -2,6 +2,7 @@ const router = require('express').Router();
 const {Bundle} = require('../../db/models');
 const {Bundle_place, Place} = require('../../db/models'); // Импортируем Bundle_place и Place
 const {Bundle_comment} = require('../../db/models');
+const {Rating} = require('../../db/models')
 
 router.get('/', async (req, res) => {
   try {
@@ -50,8 +51,8 @@ router.post('/:bundleId/rating', async (req, res) => {
   try {
     const {bundleId} = req.params;
     const rating = await Rating.create({
-      rate,
-      type,
+      rate: req.body.rate,
+      type: req.body.type,
       userId: req.session.userId,
       itemId: +bundleId,
     });
