@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import { Rate } from 'antd';
 import {Place} from './type';
 import {RootState, useAppDispatch} from '../../redux/store';
 
@@ -9,7 +10,10 @@ import {placeRemove} from './placesSlice';
 function PlaceCard({place}: {place: Place}): JSX.Element {
   const images = useSelector((store: RootState) => store.images.images);
   const user = useSelector((store: RootState) => store.auth.user);
+  const rating = useSelector((store: RootState) => store.ratings.ratings)
   const placeImages = images.filter((image) => image.placeId === place.id);
+  const ourRating = rating.filter((el) => el.itemId === place.id && el.type === 'place')
+  const averageRating = ourRating.reduce((acc, el) => el.rate + acc, 0)/ourRating.length
 
   const dispatch = useAppDispatch();
   const removePlace = async (): Promise<void> => {
@@ -24,6 +28,7 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
       <div className="place">
         <div className="place__element">
           <h1 className="place__title">{place.title}</h1>
+          <Rate disabled defaultValue={averageRating}/>
           <div className="place__links">
             {(user?.isAdmin || user?.id === place.userId) && (
               <>

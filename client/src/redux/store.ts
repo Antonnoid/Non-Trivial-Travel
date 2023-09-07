@@ -10,6 +10,7 @@ import routesSlice from '../features/routes/routesSlice';
 import commentsPlaceSlice from '../features/comment/commentsPlaceSlice';
 import commentsBundleSlice from '../features/comment/commentsBundleSlice';
 import commentsRouteSlice from '../features/comment/commentsRouteSlice';
+import ratingsSlice from '../features/rating/ratingsSlice';
 
 const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ const store = configureStore({
     commentsOfPlace: commentsPlaceSlice,
     commentsOfBundle: commentsBundleSlice,
     commentsOfRoute: commentsRouteSlice,
+    ratings: ratingsSlice,
   },
 });
 

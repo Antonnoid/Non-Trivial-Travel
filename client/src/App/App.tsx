@@ -21,6 +21,7 @@ import {imagesInit} from '../features/image/ImagesSlice';
 import BundleAddPage from '../features/bundle/BundleAddPage';
 import RoutePage from '../features/routes/RoutePage';
 import {allCitiesInit} from '../features/city/citiesSlice';
+import { ratingsInit } from '../features/rating/ratingsSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -32,6 +33,7 @@ function App(): JSX.Element {
     dispatch(allCitiesInit());
     dispatch(bundlesInit());
     dispatch(imagesInit());
+    dispatch(ratingsInit())
   }, []);
 
   return (

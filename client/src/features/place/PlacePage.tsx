@@ -1,30 +1,34 @@
 import React, {useState} from 'react';
-import { Rate } from 'antd';
+import {Rate} from 'antd';
 import './styles/stylesPage.scss';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import {Image, Place} from './type';
-import {RootState} from '../../redux/store';
+import {RootState, useAppDispatch} from '../../redux/store';
 import ImageItem from '../image/ImageItem';
 import CommentsListPage from '../comment/CommentsListPage';
 import starImg from './img/5-Star.png';
+import * as api from './api';
+import {addRating} from '../rating/ratingsSlice';
 
 function PlacePage(): JSX.Element {
-  const [rating, setRating] = useState(0)
+  const dispatch = useAppDispatch();
+  const [rating, setRating] = useState(0);
   const {placeId} = useParams();
   const places = useSelector((store: RootState) => store.places.places);
   const images = useSelector((store: RootState) => store.images.images);
-  let ourPlace;
+  let ourPlace: Place | undefined;
   let ourImages;
   if (placeId) {
-    ourPlace = places.find((place: Place) => place.id === +placeId)!!;
+    ourPlace = places.find((place: Place) => place.id === +placeId);
     ourImages = images.filter((image: Image) => image.placeId === +placeId)!!;
   }
-
-  const handleRatingChange = (value: number):void => {
-    setRating(value)
-  }
-  
+  const handleRatingChange = (value: number): void => {
+    setRating(value);
+    if (ourPlace) {
+      dispatch(addRating({rate: value, place: ourPlace}));
+    }
+  };
 
   return (
     <div className="placePage__container">
@@ -46,8 +50,8 @@ function PlacePage(): JSX.Element {
               ))}
             </div>
             <h3>{ourPlace.description}</h3>
-            <div className='rating'>
-              <Rate onChange={handleRatingChange}/>
+            <div className="rating">
+              <Rate onChange={handleRatingChange} />
               <p>{rating}</p>
             </div>
             <div className="placePage__contents-desc">
