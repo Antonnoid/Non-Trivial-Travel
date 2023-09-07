@@ -25,6 +25,8 @@ function PlacePage(): JSX.Element {
   const {placeId} = useParams();
   const places = useSelector((store: RootState) => store.places.places);
   const images = useSelector((store: RootState) => store.images.images);
+  const ratings = useSelector((store: RootState) => store.ratings.ratings)
+  const currentUser = useSelector((store: RootState) => store.auth.user)
   const ratings = useSelector((store: RootState) => store.ratings.ratings);
   let ourPlace: Place | undefined;
   let ourImages;
@@ -39,6 +41,8 @@ function PlacePage(): JSX.Element {
     averageRating =
       ourRating.reduce((acc, el) => el.rate + acc, 0) / ourRating.length;
   }
+  const usersId = ourRating?.map((el) => el.userId)
+  const checkId = usersId?.filter((el) => el === currentUser?.id)
 
   const handleRatingChange = (value: number): void => {
     setRating(value);
@@ -57,10 +61,11 @@ function PlacePage(): JSX.Element {
                 {ourPlace.title}
               </h1>
             </div>
-            <div className="rating">
+{!checkId?.length && (<div className="rating">
               <p className="rating-number">Оценить место</p>
               <Rate onChange={handleRatingChange} />
-            </div>
+            </div>)}
+            
             <Swiper
               spaceBetween={30}
               effect="fade"
