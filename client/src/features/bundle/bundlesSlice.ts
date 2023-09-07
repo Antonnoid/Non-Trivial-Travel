@@ -3,9 +3,13 @@ import {Bundle, BundlesState} from './type';
 import * as api from './api';
 import {City} from '../city/types/types';
 
-const initialState: BundlesState = {bundles: [], error: ''};
+const initialState: BundlesState = {bundles: [], allBundles:[], error: ''};
 
 export const bundlesInit = createAsyncThunk('bundles/init', () =>
+  api.bundleInitFetch()
+);
+
+export const allBundlesInit = createAsyncThunk('bundles/all/init', () =>
   api.bundleInitFetch()
 );
 
@@ -56,6 +60,12 @@ const bundlesSlice = createSlice({
         state.bundles = action.payload;
       })
       .addCase(bundlesInit.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(allBundlesInit.fulfilled, (state, action) => {
+        state.allBundles = action.payload;
+      })
+      .addCase(allBundlesInit.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(cityBundlesInit.fulfilled, (state, action) => {

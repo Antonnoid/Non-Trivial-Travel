@@ -15,7 +15,7 @@ import PlacePage from '../features/place/PlacePage';
 import BundlePage from '../features/bundle/BundlePage';
 import Error from '../features/404/Error';
 import {placesInit, allPlacesInit} from '../features/place/placesSlice';
-import {bundlesInit} from '../features/bundle/bundlesSlice';
+import {allBundlesInit, bundlesInit} from '../features/bundle/bundlesSlice';
 import {imagesInit} from '../features/image/ImagesSlice';
 import BundleAddPage from '../features/bundle/BundleAddPage';
 import RoutePage from '../features/routes/RoutePage';
@@ -27,7 +27,7 @@ import CityPage from '../features/city/CityPage';
 import imgPrealoader from './prealoder.gif';
 import logo from './logo.png';
 
-import {routesInit} from '../features/routes/routesSlice';
+import {allRoutesInit, routesInit} from '../features/routes/routesSlice';
 
 import FormAdd from '../features/place/FormAdd';
 
@@ -41,9 +41,11 @@ function App(): JSX.Element {
     dispatch(allPlacesInit());
     dispatch(allCitiesInit());
     dispatch(bundlesInit());
+    dispatch(allBundlesInit());
     dispatch(imagesInit());
     dispatch(ratingsInit());
     dispatch(routesInit());
+    dispatch(allRoutesInit());
   }, []);
 
   useEffect(() => {
