@@ -10,12 +10,7 @@ import {EffectCards, Navigation} from 'swiper/modules';
 
 export default function SwiperItem(): JSX.Element {
   return (
-    <Swiper
-      effect="cards"
-      grabCursor
-      modules={[EffectCards, Navigation]}
-      className="mySwiper"
-    >
+    <Swiper grabCursor modules={[EffectCards, Navigation]} className="mySwiper">
       <SwiperSlide>Slide 1</SwiperSlide>
       <SwiperSlide>Slide 2</SwiperSlide>
       <SwiperSlide>Slide 3</SwiperSlide>
