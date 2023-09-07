@@ -13,7 +13,6 @@ export type Bundle = {
 export type BundlesState = {
   bundles: Bundle[];
   error: string | undefined;
-  pending: boolean;
 };
 
 export type BundlePlace = {
