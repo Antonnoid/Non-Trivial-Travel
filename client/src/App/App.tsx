@@ -24,6 +24,7 @@ import {allCitiesInit} from '../features/city/citiesSlice';
 import RouteAddPage from '../features/routes/RouteAddPage';
 import RoutesList from '../features/routes/RoutesList';
 import CityPage from '../features/city/CityPage';
+import SwiperItem from '../features/swiper/SwiperItem';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -52,8 +53,9 @@ function App(): JSX.Element {
           <Route path="/bundles/add" element={<BundleAddPage />} />
           <Route path="/routes/add" element={<RouteAddPage />} />
           <Route path="/routes/:routeId" element={<RoutePage />} />
+          <Route path="/swiper" element={<SwiperItem />} />
+          <Route path="*" element={<Error />} />
         </Route>
-        <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );
