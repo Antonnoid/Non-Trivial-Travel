@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {RoutesState} from './type';
+import {Route, RoutesState} from './type';
 import * as api from './api';
 import {City} from '../city/types/types';
 
@@ -10,6 +10,10 @@ export const initialState: RoutesState = {
 
 export const routesInit = createAsyncThunk('routes/init', () =>
   api.routeInitFetch()
+);
+export const routerRemove = createAsyncThunk(
+  'routes/remove',
+  (id: Route['id']) => api.fetchRemoveRoute(id)
 );
 export const cityRoutesInit = createAsyncThunk(
   'routes/init/city',
@@ -68,6 +72,14 @@ const routesSlice = createSlice({
         state.routes.push(action.payload);
       })
       .addCase(addRoute.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(routerRemove.fulfilled, (state, action) => {
+        state.routes = state.routes.filter(
+          (route) => route.id !== +action.payload
+        );
+      })
+      .addCase(routerRemove.rejected, (state, action) => {
         state.error = action.error.message;
       });
   },

@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {BundlesState} from './type';
+import {Bundle, BundlesState} from './type';
 import * as api from './api';
 import {City} from '../city/types/types';
 
@@ -12,6 +12,11 @@ export const bundlesInit = createAsyncThunk('bundles/init', () =>
 export const cityBundlesInit = createAsyncThunk(
   'bundles/init/city',
   (id: City['id']) => api.bundlesInitFromCity(id)
+);
+
+export const bundleRemove = createAsyncThunk(
+  'bundle/remove',
+  (id: Bundle['id']) => api.fetchRemoveBundle(id)
 );
 
 export const addBundle = createAsyncThunk(
@@ -63,6 +68,14 @@ const bundlesSlice = createSlice({
         state.bundles.push(action.payload);
       })
       .addCase(addBundle.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(bundleRemove.fulfilled, (state, action) => {
+        state.bundles = state.bundles.filter(
+          (bundle) => bundle.id !== +action.payload
+        );
+      })
+      .addCase(bundleRemove.rejected, (state, action) => {
         state.error = action.error.message;
       });
   },

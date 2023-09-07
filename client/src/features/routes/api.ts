@@ -1,5 +1,6 @@
+import {Bundle} from '../bundle/type';
 import {City} from '../city/types/types';
-import { Rating } from '../rating/type'; 
+import {Rating} from '../rating/type';
 import {Route} from './type';
 
 export const routeInitFetch = async (): Promise<Route[]> => {
@@ -31,7 +32,6 @@ export const routeAddFetch = async ({
   cityId: number;
   routePlaces: number[];
 }): Promise<Route> => {
-  
   const res = await fetch('/api/bundles', {
     method: 'POST',
     headers: {'Content-type': 'application/json'},
@@ -62,5 +62,14 @@ export const routeRatingAddFetch = async (
     }),
   });
   const data = res.json();
-  return data
+  return data;
+};
+
+// удаление
+export const fetchRemoveRoute = async (
+  id: Route['id']
+): Promise<Route['id'] | {message: string}> => {
+  const res = await fetch(`/api/routes/${id}`, {method: 'DELETE'});
+  const data = await res.json();
+  return data;
 };

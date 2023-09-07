@@ -1,5 +1,12 @@
 const router = require('express').Router();
-const {Route, Route_comment, Route_place, Place} = require('../../db/models');
+const {
+  Rating,
+  Route,
+  Route_comment,
+  Route_place,
+  Place,
+  User,
+} = require('../../db/models');
 
 router.get('/', async (req, res) => {
   try {
@@ -34,6 +41,25 @@ router.post('/:routeId/rating', async (req, res) => {
     res.json(rating);
   } catch ({message}) {
     res.json({message});
+  }
+});
+
+// удаление
+router.delete('/:routeId', async (req, res) => {
+  try {
+    const {routeId} = req.params;
+    const user = await User.findOne({
+      where: {id: req.session.userId},
+    });
+    const route = await Route.findOne({where: {id: +routeId}});
+    if (user.isAdmin || route.userId === user.id) {
+      await Route.destroy({where: {id: routeId}});
+      res.json(routeId);
+      return;
+    }
+    res.status(403).json({message: 'Ошибка доступа'});
+  } catch ({message}) {
+    console.log(message);
   }
 });
 
