@@ -7,7 +7,6 @@ export const initialState: PlacesState = {
   places: [],
   allPlaces: [],
   error: '',
-  pending: false,
 };
 
 export const placesInit = createAsyncThunk('places/init', () =>
@@ -42,11 +41,7 @@ export const allPlacesInit = createAsyncThunk('places/all/init', () =>
 const placesSlice = createSlice({
   name: 'places',
   initialState,
-  reducers: {
-    stopPending: (state) => {
-      state.pending = false;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(placesInit.fulfilled, (state, action) => {
@@ -67,11 +62,7 @@ const placesSlice = createSlice({
       .addCase(cityPlacesInit.rejected, (state, action) => {
         state.error = action.error.message;
       })
-      .addCase(placeAddfromForm.pending, (state) => {
-        state.pending = true;
-      })
       .addCase(placeAddfromForm.fulfilled, (state, action) => {
-        state.pending = false;
         state.places.push(action.payload);
       })
       .addCase(placeAddfromForm.rejected, (state, action) => {
@@ -96,5 +87,4 @@ const placesSlice = createSlice({
   },
 });
 
-export const {stopPending} = placesSlice.actions;
 export default placesSlice.reducer;

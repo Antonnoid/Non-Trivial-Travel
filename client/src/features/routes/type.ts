@@ -14,7 +14,6 @@ export type Route = {
 export type RoutesState = {
   routes: Route[];
   error: string | undefined;
-  pending: boolean;
 };
 
 export type RoutePlace = {

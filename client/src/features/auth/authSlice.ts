@@ -37,6 +37,8 @@ const authSlice = createSlice({
       state.error = undefined;
     },
     stopPending: (state) => {
+      console.log(state.pending);
+
       state.pending = false;
     },
   },
