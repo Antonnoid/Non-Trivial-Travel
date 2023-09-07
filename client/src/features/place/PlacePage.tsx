@@ -26,6 +26,7 @@ function PlacePage(): JSX.Element {
   const places = useSelector((store: RootState) => store.places.places);
   const images = useSelector((store: RootState) => store.images.images);
   const ratings = useSelector((store: RootState) => store.ratings.ratings)
+  const currentUser = useSelector((store: RootState) => store.auth.user)
   let ourPlace: Place | undefined;
   let ourImages;
   let ourRating
@@ -36,6 +37,8 @@ function PlacePage(): JSX.Element {
     ourRating = ratings.filter((el) => el.itemId === +placeId && el.type === 'place')
     averageRating = ourRating.reduce((acc, el) => el.rate + acc, 0)/ourRating.length
   }
+  const usersId = ourRating?.map((el) => el.userId)
+  const checkId = usersId?.filter((el) => el === currentUser?.id)
 
   const handleRatingChange = (value: number): void => {
     setRating(value);
@@ -54,6 +57,7 @@ function PlacePage(): JSX.Element {
                 {ourPlace.title}
               </h1>
             </div>
+            {/* {ourRating?.some((el) el.userId !== ) } */}
             <div className="placePage__contents-rating">
               <Rate disabled defaultValue={averageRating} />
               <p className="points-rating" />
@@ -72,10 +76,11 @@ function PlacePage(): JSX.Element {
               ))}
             </Swiper>
             <h3>{ourPlace.description}</h3>
-            <div className="rating">
+            {!checkId?.length && (<div className="rating">
               <Rate onChange={handleRatingChange} />
               <p>{rating}</p>
-            </div>
+            </div>)}
+            
             <div className="placePage__contents-desc">
               <h3>{ourPlace.description}</h3>
             </div>
