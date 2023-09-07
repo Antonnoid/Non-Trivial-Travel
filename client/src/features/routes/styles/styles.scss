@@ -74,7 +74,7 @@ $more_color: #ffffff;
 .route__body {
   display: flex;
   flex-direction: column;
-  gap: 43px;
+  gap: 42px;
   align-items: center;
   width: 100%;
 }
@@ -95,7 +95,8 @@ $more_color: #ffffff;
   height: 50px;
   font-size: x-large;
   font-weight: 555;
-  margin-left: 220px;
+  // margin-left: 0px;
+  gap: 90px;
 }
 
 .route__link {
@@ -110,6 +111,12 @@ $more_color: #ffffff;
   background: $more_color;
   border-bottom-right-radius: 25px;
   border-top-left-radius: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.route__rating {
+  z-index: 5;
   display: flex;
   align-items: center;
 }

@@ -116,3 +116,23 @@ h5,
 h6 {
   font-size: inherit;
 }
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(152, 152, 152, 0.525);
+  background: #0089b73c;
+  border-radius: 6px;
+  padding: 10px 5px;
+  justify-content: center;
+  margin: 0 500px;
+  margin-bottom: 10px;
+}
+
+.rating-number {
+  margin: 0;
+  padding-top: 3px;
+  font-family: Inter;
+  font-size: 20px;
+}

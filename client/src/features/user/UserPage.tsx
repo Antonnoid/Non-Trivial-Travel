@@ -28,30 +28,35 @@ const UserPage = (): JSX.Element => {
     <div className="account-container">
       {user ? (
         <div>
-          <h1>Информация о пользователе</h1>
+          <h1 className="account-info-title">Информация о пользователе</h1>
 
-          <p>Имя: {user.name}</p>
+          <p className="account-info-name">Имя: {user.name}</p>
           {userCity && (
             <div>
               <div>
-                <p>Город: {userCity.name}</p>
+                <p className="account-info-city">Город: {userCity.name}</p>
               </div>
-              <div>
-                <button type="button">Добавить место</button>
-                <button type="button">
-                  <NavLink to="/routes/add">Добавить маршрут</NavLink>
-                </button>
-                <button type="button">
-                  <NavLink to="/bundles/add">Добавить подборку</NavLink>
-                </button>
+              <div className="account_addButtons">
+                <h5 className="account_addButtons-title">Добавить</h5>
+                <div className="account_addButtons-button">
+                  <button className="account_button" type="button">
+                    <NavLink to="/place/add">Место</NavLink>
+                  </button>
+                  <button className="account_button" type="button">
+                    <NavLink to="/routes/add">Маршрут</NavLink>
+                  </button>
+                  <button className="account_button" type="button">
+                    <NavLink to="/bundles/add">Подборка</NavLink>
+                  </button>
+                </div>
               </div>
             </div>
           )}
           {userPlaces && (
             <div>
               {userPlaces.length > 0 ? (
-                <div>
-                  <h1>Места</h1>
+                <div className="account">
+                  <h1 className="account_text-title">Места</h1>
                   <div className="places">
                     {userPlaces.map((place) => (
                       <div>

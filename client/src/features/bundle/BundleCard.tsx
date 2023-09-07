@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import { Rate } from 'antd';
 import {Bundle} from './type';
 import {RootState} from '../../redux/store';
 
@@ -8,9 +9,13 @@ const BundleCard = ({bundle}: {bundle: Bundle}): JSX.Element => {
   const bundlePlacesId = bundle?.Bundle_places?.map((el) => el.placeId);
 
   const images = useSelector((store: RootState) => store.images.images);
+  const rating = useSelector((store: RootState) => store.ratings.ratings)
   const ourImages = images.filter((image) =>
     bundlePlacesId?.find((id) => image.placeId === id)
   );
+
+  const ourRating = rating.filter((el) => el.itemId === bundle.id && el.type === 'bundle')
+  const averageRating = ourRating.reduce((acc, el) => el.rate + acc, 0)/ourRating.length
 
   const randomImage =
     ourImages[Math.floor(Math.random() * (ourImages.length - 1))];
@@ -22,6 +27,7 @@ const BundleCard = ({bundle}: {bundle: Bundle}): JSX.Element => {
         <div className="bundle__front">
           <div className="bundle__front-elements">
             <h1 className="bundle__front-title">{bundle.title}</h1>
+            <Rate disabled defaultValue={averageRating}/>
             {/* <p className="bundle__description">{bundle.description}</p> */}
             <div className="bundle__front-links">
               <Link

@@ -50,14 +50,14 @@ export const routeAddFetch = async ({
 };
 
 export const routeRatingAddFetch = async (
-  rating: Rating,
+  rate: number,
   route: Route
 ): Promise<Rating> => {
   const res = await fetch(`/api/places/${route.id}/rating`, {
     method: 'POST',
     headers: {'content-type': 'application/json'},
     body: JSON.stringify({
-      rate: rating.rate,
+      rate,
       type: 'route',
     }),
   });

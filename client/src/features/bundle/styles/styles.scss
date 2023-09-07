@@ -25,7 +25,7 @@ $more_color: #008ab7;
   font-family: Inter;
   display: flex;
   justify-content: center;
-  margin: 50px;
+  margin: 0 50px;
 }
 
 .bundle__title {
@@ -125,7 +125,7 @@ $more_color: #008ab7;
 .bundle__front-elements {
   display: flex;
   flex-direction: column;
-  gap: 142px;
+  gap: 60px;
   align-items: center;
   width: 100%;
 }
@@ -134,3 +134,9 @@ $more_color: #008ab7;
   display: flex;
   justify-content: center;
 }
+
+// .bundle__rating {
+//   display: flex;
+//   justify-content: center;
+//   padding: 100px;
+// }

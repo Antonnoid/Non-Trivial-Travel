@@ -26,7 +26,10 @@ import CityPage from '../features/city/CityPage';
 
 import imgPrealoader from './prealoder.gif';
 import logo from './logo.png';
+
 import {routesInit} from '../features/routes/routesSlice';
+
+import FormAdd from '../features/place/FormAdd';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -74,6 +77,7 @@ function App(): JSX.Element {
             <Route path="/bundles/:bundleId" element={<BundlePage />} />
             <Route path="/bundles/add" element={<BundleAddPage />} />
             <Route path="/routes/add" element={<RouteAddPage />} />
+            <Route path="/place/add" element={<FormAdd />} />
             <Route path="/routes/:routeId" element={<RoutePage />} />
           </Route>
           <Route path="*" element={<Error />} />
