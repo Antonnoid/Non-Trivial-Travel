@@ -44,7 +44,7 @@ const RoutePage = (): JSX.Element => {
       <div className="bundle__text">
         <h1 className="bundle__title">{ourRoute?.title}</h1>
       </div>
-      {!checkId?.length && (<div className="rating">
+      {!checkId?.length && currentUser && (<div className="rating">
         <p className="rating-number">Оценить маршрут</p>
         <Rate onChange={handleRatingChange} />
       </div>)}

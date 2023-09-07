@@ -116,6 +116,7 @@ export default function FormAdd(): JSX.Element {
             placeholder="Город"
             autoComplete="off"
           />
+          <input type="file" />
           {dropList && (
             <DropList
               allCity={allCity}
