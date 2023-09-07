@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import {RootState, useAppDispatch} from '../../redux/store';
 import {Rate} from 'antd';
+import {RootState, useAppDispatch} from '../../redux/store';
 import {Route} from './type';
 import PlaceCard from '../place/PlaceCard';
 
@@ -44,9 +44,9 @@ const RoutePage = (): JSX.Element => {
       <div className="bundle__text">
         <h1 className="bundle__title">{ourRoute?.title}</h1>
       </div>
-      <div className="placePage__contents-rating">
-        <Rate disabled defaultValue={averageRating} />
-        <p className="points-rating" />
+      <div className="rating">
+        <p className="rating-number">Оценить маршрут</p>
+        <Rate onChange={handleRatingChange} />
       </div>
       <div className="bundle__cards">
         {ourPlaces?.map((place) => (
@@ -55,10 +55,6 @@ const RoutePage = (): JSX.Element => {
       </div>
       <div className="bundle__text">
         <h2 className="bundle__desc">{ourRoute?.description}</h2>
-      </div>
-      <div className="rating">
-        <Rate onChange={handleRatingChange} />
-        <p>{rating}</p>
       </div>
     </div>
   );

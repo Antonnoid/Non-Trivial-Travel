@@ -4,6 +4,7 @@ import {Rate} from 'antd';
 import './styles/stylesPage.scss';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
+import {EffectFade, Navigation} from 'swiper/modules';
 import {Image, Place} from './type';
 import {RootState, useAppDispatch} from '../../redux/store';
 import ImageItem from '../image/ImageItem';
@@ -17,7 +18,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-creative';
 import '../swiper/styles/style.scss';
-import {EffectFade, Navigation} from 'swiper/modules';
 
 function PlacePage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -27,15 +27,19 @@ function PlacePage(): JSX.Element {
   const images = useSelector((store: RootState) => store.images.images);
   const ratings = useSelector((store: RootState) => store.ratings.ratings)
   const currentUser = useSelector((store: RootState) => store.auth.user)
+  const ratings = useSelector((store: RootState) => store.ratings.ratings);
   let ourPlace: Place | undefined;
   let ourImages;
-  let ourRating
-  let averageRating
+  let ourRating;
+  let averageRating;
   if (placeId) {
     ourPlace = places.find((place: Place) => place.id === +placeId);
     ourImages = images.filter((image: Image) => image.placeId === +placeId)!!;
-    ourRating = ratings.filter((el) => el.itemId === +placeId && el.type === 'place')
-    averageRating = ourRating.reduce((acc, el) => el.rate + acc, 0)/ourRating.length
+    ourRating = ratings.filter(
+      (el) => el.itemId === +placeId && el.type === 'place'
+    );
+    averageRating =
+      ourRating.reduce((acc, el) => el.rate + acc, 0) / ourRating.length;
   }
   const usersId = ourRating?.map((el) => el.userId)
   const checkId = usersId?.filter((el) => el === currentUser?.id)
@@ -57,15 +61,15 @@ function PlacePage(): JSX.Element {
                 {ourPlace.title}
               </h1>
             </div>
-            {/* {ourRating?.some((el) el.userId !== ) } */}
-            <div className="placePage__contents-rating">
-              <Rate disabled defaultValue={averageRating} />
-              <p className="points-rating" />
-            </div>
+{!checkId?.length && (<div className="rating">
+              <p className="rating-number">Оценить место</p>
+              <Rate onChange={handleRatingChange} />
+            </div>)}
+            
             <Swiper
               spaceBetween={30}
-              effect={'fade'}
-              navigation={true}
+              effect="fade"
+              navigation
               modules={[EffectFade, Navigation]}
               className="mySwiper"
             >
@@ -75,12 +79,6 @@ function PlacePage(): JSX.Element {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <h3>{ourPlace.description}</h3>
-            {!checkId?.length && (<div className="rating">
-              <Rate onChange={handleRatingChange} />
-              <p>{rating}</p>
-            </div>)}
-            
             <div className="placePage__contents-desc">
               <h3>{ourPlace.description}</h3>
             </div>
