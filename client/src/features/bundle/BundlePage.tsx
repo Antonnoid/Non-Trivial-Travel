@@ -16,11 +16,11 @@ const BundlePage = (): JSX.Element => {
   const {bundleId} = useParams();
   const bundles = useSelector((store: RootState) => store.bundles.bundles);
   const ratings = useSelector((store: RootState) => store.ratings.ratings);
+  const currentUser = useSelector((store: RootState) => store.auth.user);
 
   let ourBundle: Bundle | undefined;
   let ourPlaces;
   let ourRating;
-  let averageRating;
   if (bundleId) {
     ourBundle = bundles.find((bundle: Bundle) => bundle.id === +bundleId);
     ourPlaces = ourBundle?.Bundle_places?.map(
@@ -29,9 +29,9 @@ const BundlePage = (): JSX.Element => {
     ourRating = ratings.filter(
       (el) => el.itemId === +bundleId && el.type === 'bundle'
     );
-    averageRating =
-      ourRating.reduce((acc, el) => el.rate + acc, 0) / ourRating.length;
   }
+  const usersId = ourRating?.map((el) => el.userId);
+  const checkId = usersId?.filter((el) => el === currentUser?.id);
 
   const handleRatingChange = (value: number): void => {
     setRating(value);
@@ -45,10 +45,13 @@ const BundlePage = (): JSX.Element => {
       <div className="bundle__text">
         <h1 className="bundle__title">{ourBundle?.title}</h1>
       </div>
-      <div className="rating bundle__rating">
-        <p className="rating-number">Оценить подборку</p>
-        <Rate onChange={handleRatingChange} />
-      </div>
+      {!checkId?.length && currentUser && (
+        <div className="rating bundle__rating">
+          <p className="rating-number">Оценить подборку</p>
+          <Rate onChange={handleRatingChange} />
+        </div>
+      )}
+
       <div className="bundle__cards">
         {ourPlaces?.map((place) => (
           <PlaceCard key={place.id} place={place} />

@@ -32,7 +32,12 @@ export const routeAddFetch = async ({
   cityId: number;
   routePlaces: number[];
 }): Promise<Route> => {
-  const res = await fetch('/api/bundles', {
+
+
+
+  
+  const res = await fetch('/api/routes', {
+
     method: 'POST',
     headers: {'Content-type': 'application/json'},
     body: JSON.stringify({

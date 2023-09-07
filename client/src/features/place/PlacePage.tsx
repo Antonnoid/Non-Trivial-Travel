@@ -26,23 +26,21 @@ function PlacePage(): JSX.Element {
   const {placeId} = useParams();
   const places = useSelector((store: RootState) => store.places.places);
   const images = useSelector((store: RootState) => store.images.images);
-  const currentUser = useSelector((store: RootState) => store.auth.user);
   const ratings = useSelector((store: RootState) => store.ratings.ratings);
+  const currentUser = useSelector((store: RootState) => store.auth.user);
   let ourPlace: Place | undefined;
   let ourImages;
   let ourRating;
-  // let averageRating;
   if (placeId) {
     ourPlace = places.find((place: Place) => place.id === +placeId);
     ourImages = images.filter((image: Image) => image.placeId === +placeId)!!;
     ourRating = ratings.filter(
       (el) => el.itemId === +placeId && el.type === 'place'
     );
-    // averageRating =
-    //   ourRating.reduce((acc, el) => el.rate + acc, 0) / ourRating.length;
   }
   const usersId = ourRating?.map((el) => el.userId);
   const checkId = usersId?.filter((el) => el === currentUser?.id);
+  console.log(currentUser);
 
   const handleRatingChange = (value: number): void => {
     setRating(value);
@@ -54,36 +52,34 @@ function PlacePage(): JSX.Element {
   return (
     <div className="placePage__container">
       {ourPlace ? (
-        <div>
-          <div className="placePage__contents">
-            <div className="placePage__contents-header">
-              <h1 className="placePage__contents-header-text">
-                {ourPlace.title}
-              </h1>
+        <div className="placePage__contents">
+          <div className="placePage__contents-header">
+            <h1 className="placePage__contents-header-text">
+              {ourPlace.title}
+            </h1>
+          </div>
+          {!checkId?.length && currentUser && (
+            <div className="rating">
+              <p className="rating-number">Оценить место</p>
+              <Rate onChange={handleRatingChange} />
             </div>
-            {!checkId?.length && (
-              <div className="rating">
-                <p className="rating-number">Оценить место</p>
-                <Rate onChange={handleRatingChange} />
-              </div>
-            )}
+          )}
 
-            <Swiper
-              spaceBetween={30}
-              effect="fade"
-              navigation
-              modules={[EffectFade, Navigation]}
-              className="mySwiper"
-            >
-              {ourImages?.map((image: Image) => (
-                <SwiperSlide key={image.id}>
-                  <ImageItem image={image} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <div className="placePage__contents-desc">
-              <h3>{ourPlace.description}</h3>
-            </div>
+          <Swiper
+            spaceBetween={30}
+            effect="fade"
+            navigation
+            modules={[EffectFade, Navigation]}
+            className="mySwiper"
+          >
+            {ourImages?.map((image: Image) => (
+              <SwiperSlide key={image.id}>
+                <ImageItem image={image} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div className="placePage__contents-desc">
+            <h3>{ourPlace.description}</h3>
           </div>
           <div className="placePage__contents-comments">
             <CommentsListPage />
