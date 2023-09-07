@@ -45,7 +45,7 @@ const BundlePage = (): JSX.Element => {
       <div className="bundle__text">
         <h1 className="bundle__title">{ourBundle?.title}</h1>
       </div>
-      {!checkId?.length && (
+      {!checkId?.length && currentUser && (
         <div className="rating bundle__rating">
           <p className="rating-number">Оценить подборку</p>
           <Rate onChange={handleRatingChange} />
