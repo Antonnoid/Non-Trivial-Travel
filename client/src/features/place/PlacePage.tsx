@@ -41,7 +41,7 @@ function PlacePage(): JSX.Element {
   return (
     <div className="placePage__container">
       {ourPlace ? (
-        <>
+        <div>
           <div className="placePage__contents">
             <div className="placePage__contents-header">
               <h1 className="placePage__contents-header-text">
@@ -60,13 +60,12 @@ function PlacePage(): JSX.Element {
               className="mySwiper"
             >
               {ourImages?.map((image: Image) => (
-                <SwiperSlide>
-                  <ImageItem image={image} key={image.id} />
+                <SwiperSlide key={image.id}>
+                  <ImageItem image={image} />
                 </SwiperSlide>
               ))}
-            </div>
-            <h3>{ourPlace.description}</h3>
             </Swiper>
+            <h3>{ourPlace.description}</h3>
             <div className="rating">
               <Rate onChange={handleRatingChange} />
               <p>{rating}</p>
@@ -78,7 +77,7 @@ function PlacePage(): JSX.Element {
           <div className="placePage__contents-comments">
             <CommentsListPage />
           </div>
-        </>
+        </div>
       ) : (
         <div>
           <p>Ты ошибся переулком</p>
