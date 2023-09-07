@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {Place} from '../place/type';
 import {City} from '../city/types/types';
-import { addRoute } from './routesSlice';
-
+import {addRoute} from './routesSlice';
 
 const RouteAddPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -22,16 +21,24 @@ const RouteAddPage = (): JSX.Element => {
   const [timeValue, setTimeValue] = useState('');
   const [timeUnits, setTimeUnits] = useState('');
   const [routeCity, setCity] = useState<City>({id: 0, name: 'Не выбрано'});
+  const [trackPlaces, setTrackPlaces] = useState<Place[]>([]);
 
   const filtredCities = allCities.filter((city) =>
     city.name.trim().toLowerCase().includes(findCity.trim().toLowerCase())
   );
-  const filtredPlaces = allPlaces.filter((place) =>
-    place.title.trim().toLowerCase().includes(findPlace.trim().toLowerCase())
-    && (place.cityId === routeCity.id));
+  const filtredPlaces = allPlaces.filter(
+    (place) =>
+      place.title
+        .trim()
+        .toLowerCase()
+        .includes(findPlace.trim().toLowerCase()) &&
+      place.cityId === routeCity.id
+  );
 
   const handleAddToRoute = (place: Place): void => {
-    setRoutePlaces((prev) => [...prev, place.id]);
+    if (!routePlaces.find((el) => el === place.id)) {
+      setRoutePlaces((prev) => [...prev, place.id]);
+    }
   };
 
   const handleDeleteFromRoute = (place: Place): void => {
@@ -50,7 +57,6 @@ const RouteAddPage = (): JSX.Element => {
   ): Promise<void> => {
     e.preventDefault();
     if (userId) {
-
       dispatch(
         addRoute({
           title,
@@ -85,23 +91,74 @@ const RouteAddPage = (): JSX.Element => {
     );
   });
 
-  const placesInBundle = allPlaces.filter((place) =>
+  const placesInRoute = allPlaces.filter((place) =>
     routePlaces.find((el) => el === place.id)
   );
 
-  const addedPlaces = placesInBundle
-    .sort((a, b) => a.id - b.id)
-    .map((placeInBundle) => (
+  // useEffect(() => {
+  //   setTrackPlaces((prev) => !prev)
+  //   console.log('Эффект работает');
+    
+  // }, [placesInRoute])
+
+  console.log(trackPlaces);
+  
+
+  const addedPlaces = placesInRoute
+    .map((placeInRoute) => (
       <div>
-        <p>{placeInBundle.title}</p>
+        <p>{placeInRoute.title}</p>
         <button
-          onClick={() => handleDeleteFromRoute(placeInBundle)}
+          onClick={() => {
+            handleMoveUp(routePlaces, placeInRoute);
+          }}
+          type="button"
+        >
+          Переместить выше
+        </button>
+        <button
+          // onClick={() => handleMoveUp(routePlaces, placeInRoute )}
+          type="button"
+        >
+          Переместить ниже
+        </button>
+        <button
+          onClick={() => handleDeleteFromRoute(placeInRoute)}
           type="button"
         >
           Удалить
         </button>
       </div>
     ));
+
+
+
+  const handleMoveUp = (arr: number[], place: Place): void => {
+    const position = arr.indexOf(place.id);
+
+    if (position + 1 < arr.length) {
+      const newArr: number[] = [];
+      [...arr].map((el, i) => {
+        if (i === position) {
+          newArr.push(arr[i + 1]);
+          return;
+        }
+        if (i === position + 1) {
+          newArr.push(arr[i - 1]);
+          return;
+        }
+        newArr.push(el);
+      });
+      setRoutePlaces([...newArr]);
+      setTrackPlaces(placesInRoute)
+    }
+  };
+
+  useEffect(() => {
+
+  })
+
+  console.log(routePlaces);
 
   return (
     <div>
@@ -157,7 +214,7 @@ const RouteAddPage = (): JSX.Element => {
           <input onChange={() => setIsPublic(!isPublic)} type="checkbox" />
         </label>
         <div>
-          <button type="submit">Создать подборку</button>
+          <button type="submit">Создать маршрут</button>
         </div>
       </form>
       <div>
