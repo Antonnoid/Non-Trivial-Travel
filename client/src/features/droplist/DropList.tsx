@@ -18,7 +18,7 @@ export default function DropList({
 }): JSX.Element {
   return (
     <ul className="drop-down" ref={dropDownRef}>
-      {cities.length === 0 && (
+      {cities && cities.length === 0 && (
         <li className="drop-down__item">Такого города нет</li>
       )}
       {allCity && (
@@ -34,9 +34,11 @@ export default function DropList({
           </Link>
         </li>
       )}
-      {cities.map((city) => (
-        <CityItem onClick={onClickCity} key={city.id} city={city} />
-      ))}
+      {cities &&
+        cities.length > 0 &&
+        cities.map((city) => (
+          <CityItem onClick={onClickCity} key={city.id} city={city} />
+        ))}
     </ul>
   );
 }

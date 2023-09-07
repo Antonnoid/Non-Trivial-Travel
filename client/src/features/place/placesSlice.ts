@@ -3,7 +3,11 @@ import {Place, PlaceForAdd, PlacesState, PlaceId} from './type';
 import * as api from './api';
 import {City} from '../city/types/types';
 
-export const initialState: PlacesState = {places: [], allPlaces: [], error: ''};
+export const initialState: PlacesState = {
+  places: [],
+  allPlaces: [],
+  error: '',
+};
 
 export const placesInit = createAsyncThunk('places/init', () =>
   api.placesInitFetch()

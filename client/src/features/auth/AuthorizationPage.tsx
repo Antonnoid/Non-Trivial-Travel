@@ -47,7 +47,7 @@ function AuthorizationPage(): JSX.Element {
           value={email}
           onChange={ChengeEmail}
           className="registr-auth_input"
-          placeholder="  ntt@mail.ru"
+          placeholder="ntt@mail.ru"
           type="text"
         />
         <label className="registr-auth_label">Пароль</label>
@@ -55,8 +55,8 @@ function AuthorizationPage(): JSX.Element {
           value={password}
           onChange={ChengePassword}
           className="registr-auth_input"
-          placeholder="  от 3 символов"
-          type="text"
+          placeholder="от 3 символов"
+          type="password"
         />
         <div className="reg-auth-dutton">
           <button className="registr-auth_button" type="submit">

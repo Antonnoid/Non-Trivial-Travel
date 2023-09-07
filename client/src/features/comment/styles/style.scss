@@ -1,0 +1,28 @@
+$blue: #008ab7;
+$date_com_color: #9a9a9a;
+.comments {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  .comment {
+    border: 1px solid $blue;
+    padding: 20px 20px;
+    border-radius: 9px;
+    margin-bottom: 20px;
+    &__date {
+      color: $date_com_color;
+    }
+    &__delete {
+      outline: none;
+      border: none;
+      background: inherit;
+      color: $blue;
+      font-size: 18px;
+      padding: 0;
+      margin: 0;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

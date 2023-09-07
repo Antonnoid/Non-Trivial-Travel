@@ -6,6 +6,7 @@ export type CommentOfPlace = {
   userId?: number;
   placeId?: number;
   User?: User;
+  createdAt?: string;
 };
 export type CommentOfRoute = {
   id?: number;
@@ -13,6 +14,7 @@ export type CommentOfRoute = {
   userId?: number;
   routeId?: number;
   User?: User;
+  createdAt?: string;
 };
 export type CommentOfBundle = {
   id?: number;
@@ -20,4 +22,5 @@ export type CommentOfBundle = {
   userId?: number;
   bundleId?: number;
   User?: User;
+  createdAt?: string;
 };

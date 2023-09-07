@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store';
 import {Rate} from 'antd';
+import {RootState} from '../../redux/store';
 import {Bundle} from './type';
 import PlaceCard from '../place/PlaceCard';
 import CommentsListPage from '../comment/CommentsListPage';
@@ -18,7 +18,7 @@ const BundlePage = (): JSX.Element => {
   let ourPlaces;
   if (bundleId) {
     ourBundle = bundles.find((bundle: Bundle) => bundle.id === +bundleId);
-    ourPlaces = ourBundle?.Bundle_places.map(
+    ourPlaces = ourBundle?.Bundle_places?.map(
       (bundlePlace) => bundlePlace.Place
     ).flat();
   }
@@ -37,11 +37,11 @@ const BundlePage = (): JSX.Element => {
           <PlaceCard key={place.id} place={place} />
         ))}
       </div>
-      <div className="bundle__comments">
-        <CommentsListPage />
-      </div>
       <div className="bundle__text">
         <h2 className="bundle__desc">{ourBundle?.description}</h2>
+      </div>
+      <div className="bundle__comments">
+        <CommentsListPage />
       </div>
       <div className="rating">
         <Rate onChange={handleRatingChange} />

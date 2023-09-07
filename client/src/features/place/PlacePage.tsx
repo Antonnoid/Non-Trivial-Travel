@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Swiper, SwiperSlide} from 'swiper/react';
 import {Rate} from 'antd';
 import './styles/stylesPage.scss';
 import {useSelector} from 'react-redux';
@@ -10,6 +11,13 @@ import CommentsListPage from '../comment/CommentsListPage';
 import starImg from './img/5-Star.png';
 import * as api from './api';
 import {addRating} from '../rating/ratingsSlice';
+
+import 'swiper/css';
+
+import 'swiper/css/navigation';
+import 'swiper/css/effect-creative';
+import '../swiper/styles/style.scss';
+import {EffectFade, Navigation} from 'swiper/modules';
 
 function PlacePage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -42,14 +50,23 @@ function PlacePage(): JSX.Element {
             </div>
             <div className="placePage__contents-rating">
               <img className="img-rating" src={starImg} alt="star" />
-              <p className="points-rating"></p>
+              <p className="points-rating" />
             </div>
-            <div className="placePage__contents-img">
+            <Swiper
+              spaceBetween={30}
+              effect={'fade'}
+              navigation={true}
+              modules={[EffectFade, Navigation]}
+              className="mySwiper"
+            >
               {ourImages?.map((image: Image) => (
-                <ImageItem image={image} key={image.id} />
+                <SwiperSlide>
+                  <ImageItem image={image} key={image.id} />
+                </SwiperSlide>
               ))}
             </div>
             <h3>{ourPlace.description}</h3>
+            </Swiper>
             <div className="rating">
               <Rate onChange={handleRatingChange} />
               <p>{rating}</p>
