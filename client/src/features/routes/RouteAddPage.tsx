@@ -13,7 +13,7 @@ const RouteAddPage = (): JSX.Element => {
 
   const [findPlace, setFindPlace] = useState('');
 
-  const [routePlaces, setRoutePlaces] = useState<number[]>([]);
+  const [routePlaces, setRoutePlaces] = useState<Place[]>([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [findCity, setFindCity] = useState('');
@@ -21,7 +21,6 @@ const RouteAddPage = (): JSX.Element => {
   const [timeValue, setTimeValue] = useState('');
   const [timeUnits, setTimeUnits] = useState('');
   const [routeCity, setCity] = useState<City>({id: 0, name: 'Не выбрано'});
-  const [trackPlaces, setTrackPlaces] = useState<Place[]>([]);
 
   const filtredCities = allCities.filter((city) =>
     city.name.trim().toLowerCase().includes(findCity.trim().toLowerCase())
@@ -36,14 +35,14 @@ const RouteAddPage = (): JSX.Element => {
   );
 
   const handleAddToRoute = (place: Place): void => {
-    if (!routePlaces.find((el) => el === place.id)) {
-      setRoutePlaces((prev) => [...prev, place.id]);
+    if (!routePlaces.find((el) => el.id === place.id)) {
+      setRoutePlaces((prev) => [...prev, place]);
     }
   };
 
   const handleDeleteFromRoute = (place: Place): void => {
     setRoutePlaces((prev) =>
-      prev.filter((prevPlace) => prevPlace !== place.id)
+      prev.filter((prevPlace) => prevPlace.id !== place.id)
     );
   };
 
@@ -65,7 +64,7 @@ const RouteAddPage = (): JSX.Element => {
           time: `${timeValue} ${timeUnits}`,
           cityId: routeCity.id,
           userId,
-          routePlaces,
+          routePlaces: routePlaces.map((place) => place.id),
         })
       );
     }
@@ -91,21 +90,8 @@ const RouteAddPage = (): JSX.Element => {
     );
   });
 
-  const placesInRoute = allPlaces.filter((place) =>
-    routePlaces.find((el) => el === place.id)
-  );
-
-  // useEffect(() => {
-  //   setTrackPlaces((prev) => !prev)
-  //   console.log('Эффект работает');
-    
-  // }, [placesInRoute])
-
-  console.log(trackPlaces);
-  
-
-  const addedPlaces = placesInRoute
-    .map((placeInRoute) => (
+  const addedPlaces = routePlaces.map((placeInRoute) => (
+    <li>
       <div>
         <p>{placeInRoute.title}</p>
         <button
@@ -117,7 +103,7 @@ const RouteAddPage = (): JSX.Element => {
           Переместить выше
         </button>
         <button
-          // onClick={() => handleMoveUp(routePlaces, placeInRoute )}
+          onClick={() => handleMoveDown(routePlaces, placeInRoute )}
           type="button"
         >
           Переместить ниже
@@ -129,15 +115,34 @@ const RouteAddPage = (): JSX.Element => {
           Удалить
         </button>
       </div>
-    ));
+    </li>
+  ));
 
+  const handleMoveUp = (arr: Place[], place: Place): void => {
+    const position = arr.indexOf(place);
 
+    if (position > 0) {
+      const newArr: Place[] = [];
+      [...arr].map((el, i) => {
+        if (i === position) {
+          newArr.push(arr[i - 1]);
+          return;
+        }
+        if (i === position - 1) {
+          newArr.push(arr[i + 1]);
+          return;
+        }
+        newArr.push(el);
+      });
+      setRoutePlaces([...newArr]);
+    }
+  };
 
-  const handleMoveUp = (arr: number[], place: Place): void => {
-    const position = arr.indexOf(place.id);
+  const handleMoveDown = (arr: Place[], place: Place): void => {
+    const position = arr.indexOf(place);
 
     if (position + 1 < arr.length) {
-      const newArr: number[] = [];
+      const newArr: Place[] = [];
       [...arr].map((el, i) => {
         if (i === position) {
           newArr.push(arr[i + 1]);
@@ -150,13 +155,8 @@ const RouteAddPage = (): JSX.Element => {
         newArr.push(el);
       });
       setRoutePlaces([...newArr]);
-      setTrackPlaces(placesInRoute)
     }
   };
-
-  useEffect(() => {
-
-  })
 
   console.log(routePlaces);
 
@@ -219,7 +219,7 @@ const RouteAddPage = (): JSX.Element => {
       </form>
       <div>
         <h1>Места в подборке</h1>
-        {addedPlaces}
+        <ol>{addedPlaces}</ol>
       </div>
     </div>
   );
