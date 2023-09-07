@@ -15,11 +15,13 @@ export const routesInit = createAsyncThunk('routes/init', () =>
 
 export const allRoutesInit = createAsyncThunk('routes/all/init', () =>
   api.routeInitFetch()
+);
 
 export const routerRemove = createAsyncThunk(
   'routes/remove',
   (id: Route['id']) => api.fetchRemoveRoute(id)
 );
+
 export const cityRoutesInit = createAsyncThunk(
   'routes/init/city',
   (id: City['id']) => api.routesInitFromCity(id)
