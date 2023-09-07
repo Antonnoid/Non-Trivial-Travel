@@ -20,17 +20,17 @@ import {imagesInit} from '../features/image/ImagesSlice';
 import BundleAddPage from '../features/bundle/BundleAddPage';
 import RoutePage from '../features/routes/RoutePage';
 import {allCitiesInit} from '../features/city/citiesSlice';
-import { ratingsInit } from '../features/rating/ratingsSlice';
+import {ratingsInit} from '../features/rating/ratingsSlice';
 import RouteAddPage from '../features/routes/RouteAddPage';
 import CityPage from '../features/city/CityPage';
-import SwiperItem from '../features/swiper/SwiperItem';
+
 import imgPrealoader from './prealoder.gif';
 import logo from './logo.png';
+import {routesInit} from '../features/routes/routesSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const pending = useSelector((store: RootState) => store.auth.pending);
-  console.log(pending);
 
   useEffect(() => {
     dispatch(authChecUser());
@@ -39,7 +39,8 @@ function App(): JSX.Element {
     dispatch(allCitiesInit());
     dispatch(bundlesInit());
     dispatch(imagesInit());
-    dispatch(ratingsInit())
+    dispatch(ratingsInit());
+    dispatch(routesInit());
   }, []);
 
   useEffect(() => {
@@ -50,7 +51,6 @@ function App(): JSX.Element {
 
   return (
     <BrowserRouter>
-
       {pending ? (
         <div className="prealoader__container">
           <img className="prealoader__logo" src={logo} alt="logo" />
