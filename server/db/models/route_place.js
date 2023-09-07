@@ -27,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         onDelete: 'CASCADE',
       },
+      order: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
     },
     {
       sequelize,
