@@ -11,7 +11,7 @@ import {
 const initialState: AuthState = {
   user: undefined,
   error: undefined,
-  pending: false,
+  pending: true,
 };
 export const registration = createAsyncThunk(
   'auth/registration',
