@@ -8,8 +8,6 @@ import {RootState, useAppDispatch} from '../../redux/store';
 import {placeRemove} from './placesSlice';
 
 function PlaceCard({place}: {place: Place}): JSX.Element {
-  console.log(place);
-
   const images = useSelector((store: RootState) => store.images.images);
   const user = useSelector((store: RootState) => store.auth.user);
   const rating = useSelector((store: RootState) => store.ratings.ratings);

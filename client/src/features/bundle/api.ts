@@ -1,5 +1,5 @@
 import {City} from '../city/types/types';
-import { Rating } from '../rating/type'; 
+import {Rating} from '../rating/type';
 import {Bundle} from './type';
 
 /* eslint-disable import/prefer-default-export */
@@ -32,7 +32,6 @@ export const bundleAddFetch = async ({
   cityId: number;
   bundlePlaces: number[];
 }): Promise<Bundle> => {
-
   const res = await fetch('/api/bundles', {
     method: 'POST',
     headers: {'Content-type': 'application/json'},
@@ -62,4 +61,12 @@ export const bundleRatingAddFetch = async (
   });
   const data = res.json();
   return data;
+};
+
+export const fetchRemoveBundle = async (
+  id: Bundle['id']
+): Promise<Bundle['id'] | {message: string}> => {
+  const res = await fetch(`/api/bundles/${id}`, {method: 'DELETE'});
+
+  return res.json();
 };
