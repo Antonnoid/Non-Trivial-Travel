@@ -3,10 +3,13 @@ import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {Rate} from 'antd';
 import {Route} from './type';
-import {RootState} from '../../redux/store';
+import {RootState, useAppDispatch} from '../../redux/store';
+import {routerRemove} from './routesSlice';
 
 const RouteCard = ({route}: {route: Route}): JSX.Element => {
+  const dispatch = useAppDispatch();
   const routePlacesId = route.Route_places?.map((el) => el.placeId);
+  const user = useSelector((store: RootState) => store.auth.user);
   const images = useSelector((store: RootState) => store.images.images);
   const rating = useSelector((store: RootState) => store.ratings.ratings);
   const ourImages = images.filter((image) =>
@@ -19,18 +22,17 @@ const RouteCard = ({route}: {route: Route}): JSX.Element => {
   );
   const averageRating =
     ourRating.reduce((acc, el) => el.rate + acc, 0) / ourRating.length;
+
+  const removeRoute = async (): Promise<void> => {
+    dispatch(routerRemove(route.id));
+  };
   return (
     <div className="routeCard">
       <img className="route__img" src={randomImage?.url} alt="img" />
       <div className="route">
         <div className="route__body">
           <h1 className="route__title">{route.title}</h1>
-          {/* <Rate
-            className="route__rating"
-            disabled
-            defaultValue={averageRating}
-          /> */}
-          {/* <p className="route__description">{route.description}</p> */}
+
           <div className="route__links">
             <Rate
               className="route__rating"
@@ -43,6 +45,15 @@ const RouteCard = ({route}: {route: Route}): JSX.Element => {
             >
               Подробнее
             </Link>
+            {(user?.isAdmin || user?.id === route.userId) && (
+              <button
+                type="button"
+                className="route__link route__link_more"
+                onClick={removeRoute}
+              >
+                Удалить
+              </button>
+            )}
           </div>
         </div>
       </div>

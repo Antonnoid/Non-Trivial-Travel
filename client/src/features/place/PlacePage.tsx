@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, {useState} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Rate} from 'antd';
@@ -39,7 +40,7 @@ function PlacePage(): JSX.Element {
   }
   const usersId = ourRating?.map((el) => el.userId);
   const checkId = usersId?.filter((el) => el === currentUser?.id);
-console.log(currentUser);
+  console.log(currentUser);
 
   const handleRatingChange = (value: number): void => {
     setRating(value);
@@ -51,36 +52,34 @@ console.log(currentUser);
   return (
     <div className="placePage__container">
       {ourPlace ? (
-        <div>
-          <div className="placePage__contents">
-            <div className="placePage__contents-header">
-              <h1 className="placePage__contents-header-text">
-                {ourPlace.title}
-              </h1>
+        <div className="placePage__contents">
+          <div className="placePage__contents-header">
+            <h1 className="placePage__contents-header-text">
+              {ourPlace.title}
+            </h1>
+          </div>
+          {!checkId?.length && currentUser && (
+            <div className="rating">
+              <p className="rating-number">Оценить место</p>
+              <Rate onChange={handleRatingChange} />
             </div>
-            {!checkId?.length && currentUser && (
-              <div className="rating">
-                <p className="rating-number">Оценить место</p>
-                <Rate onChange={handleRatingChange} />
-              </div>
-            )}
+          )}
 
-            <Swiper
-              spaceBetween={30}
-              effect="fade"
-              navigation
-              modules={[EffectFade, Navigation]}
-              className="mySwiper"
-            >
-              {ourImages?.map((image: Image) => (
-                <SwiperSlide key={image.id}>
-                  <ImageItem image={image} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <div className="placePage__contents-desc">
-              <h3>{ourPlace.description}</h3>
-            </div>
+          <Swiper
+            spaceBetween={30}
+            effect="fade"
+            navigation
+            modules={[EffectFade, Navigation]}
+            className="mySwiper"
+          >
+            {ourImages?.map((image: Image) => (
+              <SwiperSlide key={image.id}>
+                <ImageItem image={image} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div className="placePage__contents-desc">
+            <h3>{ourPlace.description}</h3>
           </div>
           <div className="placePage__contents-comments">
             <CommentsListPage />
