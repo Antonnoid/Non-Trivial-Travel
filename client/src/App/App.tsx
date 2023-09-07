@@ -1,16 +1,15 @@
 import React, {useEffect} from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-
 import './App.scss';
 // import Map from '../features/map/Map';
+import {useSelector} from 'react-redux';
 import Navbar from '../features/navbar/Navbar';
 import MainPage from '../features/main/MainPage';
 import AuthorizationPage from '../features/auth/AuthorizationPage';
 import RegisterPage from '../features/auth/RegisterPage';
-import {useAppDispatch} from '../redux/store';
-import {authChecUser} from '../features/auth/authSlice';
+import {RootState, useAppDispatch} from '../redux/store';
+import {authChecUser, stopPending} from '../features/auth/authSlice';
 import Map from '../features/map/Map';
-import PlacesList from '../features/place/PlacesList';
 import UserPage from '../features/user/UserPage';
 import PlacePage from '../features/place/PlacePage';
 import BundlePage from '../features/bundle/BundlePage';
@@ -22,11 +21,14 @@ import BundleAddPage from '../features/bundle/BundleAddPage';
 import RoutePage from '../features/routes/RoutePage';
 import {allCitiesInit} from '../features/city/citiesSlice';
 import RouteAddPage from '../features/routes/RouteAddPage';
-import RoutesList from '../features/routes/RoutesList';
 import CityPage from '../features/city/CityPage';
+import imgPrealoader from './prealoder.gif';
+import logo from './logo.png';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
+  const pending = useSelector((store: RootState) => store.auth.pending);
+  console.log(pending);
 
   useEffect(() => {
     dispatch(authChecUser());
@@ -37,24 +39,42 @@ function App(): JSX.Element {
     dispatch(imagesInit());
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(stopPending());
+    }, 2000);
+  }, [pending]);
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navbar />}>
-          <Route index element={<MainPage />} />
-          <Route path="/authorization" element={<AuthorizationPage />} />
-          <Route path="/registration" element={<RegisterPage />} />
-          <Route path="/map" element={<Map />} />
-          <Route path="/cities/:cityId" element={<CityPage />} />
-          <Route path="/user/:userId" element={<UserPage />} />
-          <Route path="/places/:placeId" element={<PlacePage />} />
-          <Route path="/bundles/:bundleId" element={<BundlePage />} />
-          <Route path="/bundles/add" element={<BundleAddPage />} />
-          <Route path="/routes/add" element={<RouteAddPage />} />
-          <Route path="/routes/:routeId" element={<RoutePage />} />
-        </Route>
-        <Route path="*" element={<Error />} />
-      </Routes>
+      {pending ? (
+        <div className="prealoader__container">
+          <img className="prealoader__logo" src={logo} alt="logo" />
+          <img
+            className="prealoader__prealoader"
+            src={imgPrealoader}
+            alt="prealoader"
+          />
+          <img className="prealoader__logo" src={logo} alt="logo" />
+        </div>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Navbar />}>
+            <Route index element={<MainPage />} />
+            <Route path="/authorization" element={<AuthorizationPage />} />
+            <Route path="/registration" element={<RegisterPage />} />
+            <Route path="/map" element={<Map />} />
+            <Route path="/cities/:cityId" element={<CityPage />} />
+            <Route path="/user/:userId" element={<UserPage />} />
+            <Route path="/places/:placeId" element={<PlacePage />} />
+            <Route path="/bundles/:bundleId" element={<BundlePage />} />
+            <Route path="/bundles/add" element={<BundleAddPage />} />
+            <Route path="/routes/add" element={<RouteAddPage />} />
+            <Route path="/routes/:routeId" element={<RoutePage />} />
+          </Route>
+          <Route path="*" element={<Error />} />
+        </Routes>
+      )}
     </BrowserRouter>
   );
 }

@@ -3,7 +3,10 @@ import {RoutesState} from './type';
 import * as api from './api';
 import {City} from '../city/types/types';
 
-export const initialState: RoutesState = {routes: [], error: ''};
+export const initialState: RoutesState = {
+  routes: [],
+  error: '',
+};
 
 export const routesInit = createAsyncThunk('routes/init', () =>
   api.routeInitFetch()
