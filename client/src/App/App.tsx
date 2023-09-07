@@ -20,14 +20,12 @@ import {imagesInit} from '../features/image/ImagesSlice';
 import BundleAddPage from '../features/bundle/BundleAddPage';
 import RoutePage from '../features/routes/RoutePage';
 import {allCitiesInit} from '../features/city/citiesSlice';
+import { ratingsInit } from '../features/rating/ratingsSlice';
 import RouteAddPage from '../features/routes/RouteAddPage';
 import CityPage from '../features/city/CityPage';
-
 import SwiperItem from '../features/swiper/SwiperItem';
-
 import imgPrealoader from './prealoder.gif';
 import logo from './logo.png';
-
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -41,6 +39,7 @@ function App(): JSX.Element {
     dispatch(allCitiesInit());
     dispatch(bundlesInit());
     dispatch(imagesInit());
+    dispatch(ratingsInit())
   }, []);
 
   useEffect(() => {

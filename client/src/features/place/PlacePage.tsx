@@ -1,17 +1,16 @@
 import React, {useState} from 'react';
-
 import {Swiper, SwiperSlide} from 'swiper/react';
-
-
 import {Rate} from 'antd';
 import './styles/stylesPage.scss';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import {Image, Place} from './type';
-import {RootState} from '../../redux/store';
+import {RootState, useAppDispatch} from '../../redux/store';
 import ImageItem from '../image/ImageItem';
 import CommentsListPage from '../comment/CommentsListPage';
 import starImg from './img/5-Star.png';
+import * as api from './api';
+import {addRating} from '../rating/ratingsSlice';
 
 import 'swiper/css';
 
@@ -21,19 +20,22 @@ import '../swiper/styles/style.scss';
 import {EffectFade, Navigation} from 'swiper/modules';
 
 function PlacePage(): JSX.Element {
+  const dispatch = useAppDispatch();
   const [rating, setRating] = useState(0);
   const {placeId} = useParams();
   const places = useSelector((store: RootState) => store.places.places);
   const images = useSelector((store: RootState) => store.images.images);
-  let ourPlace;
+  let ourPlace: Place | undefined;
   let ourImages;
   if (placeId) {
-    ourPlace = places.find((place: Place) => place.id === +placeId)!!;
+    ourPlace = places.find((place: Place) => place.id === +placeId);
     ourImages = images.filter((image: Image) => image.placeId === +placeId)!!;
   }
-
   const handleRatingChange = (value: number): void => {
     setRating(value);
+    if (ourPlace) {
+      dispatch(addRating({rate: value, place: ourPlace}));
+    }
   };
 
   return (
@@ -62,8 +64,9 @@ function PlacePage(): JSX.Element {
                   <ImageItem image={image} key={image.id} />
                 </SwiperSlide>
               ))}
+            </div>
+            <h3>{ourPlace.description}</h3>
             </Swiper>
-
             <div className="rating">
               <Rate onChange={handleRatingChange} />
               <p>{rating}</p>

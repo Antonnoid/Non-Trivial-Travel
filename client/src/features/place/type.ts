@@ -29,10 +29,3 @@ export type PlacesState = {
 };
 
 export type PlaceId = number;
-
-export type Rating = {
-  id: number;
-  rate: number;
-  type: string;
-  userId: number;
-};
