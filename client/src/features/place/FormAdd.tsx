@@ -87,48 +87,50 @@ export default function FormAdd(): JSX.Element {
   };
 
   return (
-    <form className="addPlaceForm" onSubmit={addPlace}>
-      <input
-        value={title}
-        onChange={(e): void => setTitle(e.target.value)}
-        name="title"
-        type="text"
-        placeholder="Название"
-      />
-      <input
-        value={description}
-        onChange={(e) => setDesc(e.target.value)}
-        name="description"
-        type="text"
-        placeholder="Описание"
-      />
-      <div className="city">
+    <div className="addPlaceForm_container">
+      <form className="addPlaceForm" onSubmit={addPlace}>
         <input
-          onFocus={() => showDropList(true)}
-          value={city}
-          onChange={(e) => {
-            setCity(e.target.value);
-            setDisabled(true);
-          }}
-          name="city"
+          value={title}
+          onChange={(e): void => setTitle(e.target.value)}
+          name="title"
           type="text"
-          placeholder="Город"
-          autoComplete="off"
+          placeholder="Название"
         />
-        {dropList && (
-          <DropList
-            allCity={allCity}
-            dropDownRef={dropDownRef}
-            cities={cities}
-            setPlaceholder={setPlaceholder}
-            onClickCity={onClickCity}
+        <input
+          value={description}
+          onChange={(e) => setDesc(e.target.value)}
+          name="description"
+          type="text"
+          placeholder="Описание"
+        />
+        <div className="city">
+          <input
+            onFocus={() => showDropList(true)}
+            value={city}
+            onChange={(e) => {
+              setCity(e.target.value);
+              setDisabled(true);
+            }}
+            name="city"
+            type="text"
+            placeholder="Город"
+            autoComplete="off"
           />
-        )}
-      </div>
-      <div className="message">{message}</div>
-      <button disabled={disable} type="submit">
-        Добавить место
-      </button>
-    </form>
+          {dropList && (
+            <DropList
+              allCity={allCity}
+              dropDownRef={dropDownRef}
+              cities={cities}
+              setPlaceholder={setPlaceholder}
+              onClickCity={onClickCity}
+            />
+          )}
+        </div>
+        <div className="message">{message}</div>
+        <button disabled={disable} type="submit">
+          Добавить место
+        </button>
+      </form>
+    </div>
   );
 }
