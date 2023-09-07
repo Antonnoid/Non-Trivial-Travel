@@ -10,6 +10,7 @@ const RoutesList = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const {cityId} = useParams();
   const routes = useSelector((store: RootState) => store.routes.routes);
+  console.log(cityId, routes);
 
   useEffect(() => {
     if (!cityId) {
