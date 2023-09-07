@@ -15,11 +15,11 @@ const RoutePage = (): JSX.Element => {
   const {routeId} = useParams();
   const routes = useSelector((store: RootState) => store.routes.routes);
   const ratings = useSelector((store: RootState) => store.ratings.ratings);
+  const currentUser = useSelector((store: RootState) => store.auth.user);
 
   let ourRoute: Route | undefined;
   let ourPlaces;
   let ourRating;
-  let averageRating;
   if (routeId) {
     ourRoute = routes.find((route: Route) => route.id === +routeId);
     ourPlaces = ourRoute?.Route_places?.map(
@@ -28,9 +28,9 @@ const RoutePage = (): JSX.Element => {
     ourRating = ratings.filter(
       (el) => el.itemId === +routeId && el.type === 'route'
     );
-    averageRating =
-      ourRating.reduce((acc, el) => el.rate + acc, 0) / ourRating.length;
   }
+  const usersId = ourRating?.map((el) => el.userId);
+  const checkId = usersId?.filter((el) => el === currentUser?.id);
 
   const handleRatingChange = (value: number): void => {
     setRating(value);
@@ -44,10 +44,11 @@ const RoutePage = (): JSX.Element => {
       <div className="bundle__text">
         <h1 className="bundle__title">{ourRoute?.title}</h1>
       </div>
-      <div className="rating">
+      {!checkId?.length && (<div className="rating">
         <p className="rating-number">Оценить маршрут</p>
         <Rate onChange={handleRatingChange} />
-      </div>
+      </div>)}
+      
       <div className="bundle__cards">
         {ourPlaces?.map((place) => (
           <PlaceCard place={place} />

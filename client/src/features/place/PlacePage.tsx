@@ -25,20 +25,17 @@ function PlacePage(): JSX.Element {
   const {placeId} = useParams();
   const places = useSelector((store: RootState) => store.places.places);
   const images = useSelector((store: RootState) => store.images.images);
-  const currentUser = useSelector((store: RootState) => store.auth.user);
   const ratings = useSelector((store: RootState) => store.ratings.ratings);
+  const currentUser = useSelector((store: RootState) => store.auth.user);
   let ourPlace: Place | undefined;
   let ourImages;
   let ourRating;
-  // let averageRating;
   if (placeId) {
     ourPlace = places.find((place: Place) => place.id === +placeId);
     ourImages = images.filter((image: Image) => image.placeId === +placeId)!!;
     ourRating = ratings.filter(
       (el) => el.itemId === +placeId && el.type === 'place'
     );
-    // averageRating =
-    //   ourRating.reduce((acc, el) => el.rate + acc, 0) / ourRating.length;
   }
   const usersId = ourRating?.map((el) => el.userId);
   const checkId = usersId?.filter((el) => el === currentUser?.id);
