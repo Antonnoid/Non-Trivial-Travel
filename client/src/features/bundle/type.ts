@@ -12,6 +12,7 @@ export type Bundle = {
 
 export type BundlesState = {
   bundles: Bundle[];
+  allBundles: Bundle[];
   error: string | undefined;
 };
 

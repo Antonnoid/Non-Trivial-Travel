@@ -5,10 +5,14 @@ import {City} from '../city/types/types';
 
 export const initialState: RoutesState = {
   routes: [],
+  allRoutes: [],
   error: '',
 };
 
 export const routesInit = createAsyncThunk('routes/init', () =>
+  api.routeInitFetch()
+);
+export const allRoutesInit = createAsyncThunk('routes/all/init', () =>
   api.routeInitFetch()
 );
 export const cityRoutesInit = createAsyncThunk(
@@ -56,6 +60,12 @@ const routesSlice = createSlice({
         state.routes = action.payload;
       })
       .addCase(routesInit.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(allRoutesInit.fulfilled, (state, action) => {
+        state.allRoutes = action.payload;
+      })
+      .addCase(allRoutesInit.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(cityRoutesInit.fulfilled, (state, action) => {

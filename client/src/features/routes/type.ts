@@ -13,6 +13,7 @@ export type Route = {
 
 export type RoutesState = {
   routes: Route[];
+  allRoutes: Route[];
   error: string | undefined;
 };
 
