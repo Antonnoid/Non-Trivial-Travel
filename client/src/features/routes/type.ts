@@ -19,6 +19,7 @@ export type RoutesState = {
 export type RoutePlace = {
   id: number;
   routeId: number;
+  order: number;
   placeId: number;
   Place: Place[];
 };

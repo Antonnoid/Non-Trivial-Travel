@@ -37,4 +37,28 @@ router.post('/:routeId/rating', async (req, res) => {
   }
 });
 
+router.post('/', async (req, res) => {
+  try {
+    const {title, description, isPublic, time, userId, cityId, routePlaces} =
+      req.body;
+      console.log(title, description, isPublic, userId, time, cityId, routePlaces);
+    const newRoute = await Route.create({
+      title,
+      description,
+      isPublic,
+      time,
+      userId: +userId,
+      cityId: +cityId,
+    });
+   routePlaces.map(async (placeId, i) => {
+       await Route_place.create({routeId: newRoute.id, placeId, order: i + 1})
+    });
+  console.log(newRoute);
+    res.json(newRoute);
+  } catch ({message}) {
+    console.log({message})
+    res.json({message})
+  }
+});
+
 module.exports = router;

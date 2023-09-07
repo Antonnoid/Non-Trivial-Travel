@@ -38,6 +38,7 @@ const RoutePage = (): JSX.Element => {
       dispatch(ratingRouteAdd({rate: value, route: ourRoute}));
     }
   };
+  
 
   return (
     <div className="router__container">

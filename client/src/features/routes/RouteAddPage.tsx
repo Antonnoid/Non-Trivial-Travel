@@ -61,7 +61,7 @@ const RouteAddPage = (): JSX.Element => {
           title,
           description,
           isPublic,
-          time: `${timeValue} ${timeUnits}`,
+          time: ` `,
           cityId: routeCity.id,
           userId,
           routePlaces: routePlaces.map((place) => place.id),
