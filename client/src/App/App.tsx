@@ -22,8 +22,12 @@ import RoutePage from '../features/routes/RoutePage';
 import {allCitiesInit} from '../features/city/citiesSlice';
 import RouteAddPage from '../features/routes/RouteAddPage';
 import CityPage from '../features/city/CityPage';
+
+import SwiperItem from '../features/swiper/SwiperItem';
+
 import imgPrealoader from './prealoder.gif';
 import logo from './logo.png';
+
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -47,6 +51,7 @@ function App(): JSX.Element {
 
   return (
     <BrowserRouter>
+
       {pending ? (
         <div className="prealoader__container">
           <img className="prealoader__logo" src={logo} alt="logo" />
