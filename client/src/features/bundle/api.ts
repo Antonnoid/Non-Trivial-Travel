@@ -1,5 +1,5 @@
 import {City} from '../city/types/types';
-import {Rating} from '../place/type';
+import { Rating } from '../rating/type'; 
 import {Bundle} from './type';
 
 /* eslint-disable import/prefer-default-export */
@@ -49,15 +49,15 @@ export const bundleAddFetch = async ({
   return data;
 };
 export const bundleRatingAddFetch = async (
-  rating: Rating,
+  rate: number,
   bundle: Bundle
 ): Promise<Rating> => {
   const res = await fetch(`/api/bundles/${bundle.id}/rating`, {
     method: 'POST',
     headers: {'content-type': 'application/json'},
     body: JSON.stringify({
-      rate: rating.rate,
-      type: 'place',
+      rate,
+      type: 'bundle',
     }),
   });
   const data = res.json();

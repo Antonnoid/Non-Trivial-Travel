@@ -5,6 +5,7 @@ const {Place_comment} = require('../../db/models');
 const {City} = require('../../db/models');
 const {User} = require('../../db/models');
 const {Op} = require('sequelize');
+const {Rating} = require('../../db/models')
 
 router.get('/', async (req, res) => {
   try {
@@ -127,8 +128,8 @@ router.post('/:placeId/rating', async (req, res) => {
   try {
     const {placeId} = req.params;
     const rating = await Rating.create({
-      rate,
-      type,
+      rate: req.body.rate,
+      type: req.body.type,
       userId: req.session.userId,
       itemId: +placeId,
     });
