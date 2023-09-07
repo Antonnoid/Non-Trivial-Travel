@@ -51,7 +51,7 @@ const RoutePage = (): JSX.Element => {
       
       <div className="bundle__cards">
         {ourPlaces?.map((place) => (
-          <PlaceCard place={place} key={place.id} />
+          <PlaceCard place={place} />
         ))}
       </div>
       <div className="bundle__text">

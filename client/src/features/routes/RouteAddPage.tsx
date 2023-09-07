@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {Place} from '../place/type';
 import {City} from '../city/types/types';
-import { addRoute } from './routesSlice';
-
+import {addRoute} from './routesSlice';
 
 const RouteAddPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -14,7 +13,7 @@ const RouteAddPage = (): JSX.Element => {
 
   const [findPlace, setFindPlace] = useState('');
 
-  const [routePlaces, setRoutePlaces] = useState<number[]>([]);
+  const [routePlaces, setRoutePlaces] = useState<Place[]>([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [findCity, setFindCity] = useState('');
@@ -26,17 +25,24 @@ const RouteAddPage = (): JSX.Element => {
   const filtredCities = allCities.filter((city) =>
     city.name.trim().toLowerCase().includes(findCity.trim().toLowerCase())
   );
-  const filtredPlaces = allPlaces.filter((place) =>
-    place.title.trim().toLowerCase().includes(findPlace.trim().toLowerCase())
-    && (place.cityId === routeCity.id));
+  const filtredPlaces = allPlaces.filter(
+    (place) =>
+      place.title
+        .trim()
+        .toLowerCase()
+        .includes(findPlace.trim().toLowerCase()) &&
+      place.cityId === routeCity.id
+  );
 
   const handleAddToRoute = (place: Place): void => {
-    setRoutePlaces((prev) => [...prev, place.id]);
+    if (!routePlaces.find((el) => el.id === place.id)) {
+      setRoutePlaces((prev) => [...prev, place]);
+    }
   };
 
   const handleDeleteFromRoute = (place: Place): void => {
     setRoutePlaces((prev) =>
-      prev.filter((prevPlace) => prevPlace !== place.id)
+      prev.filter((prevPlace) => prevPlace.id !== place.id)
     );
   };
 
@@ -50,7 +56,6 @@ const RouteAddPage = (): JSX.Element => {
   ): Promise<void> => {
     e.preventDefault();
     if (userId) {
-
       dispatch(
         addRoute({
           title,
@@ -59,7 +64,7 @@ const RouteAddPage = (): JSX.Element => {
           time: `${timeValue} ${timeUnits}`,
           cityId: routeCity.id,
           userId,
-          routePlaces,
+          routePlaces: routePlaces.map((place) => place.id),
         })
       );
     }
@@ -85,23 +90,75 @@ const RouteAddPage = (): JSX.Element => {
     );
   });
 
-  const placesInBundle = allPlaces.filter((place) =>
-    routePlaces.find((el) => el === place.id)
-  );
-
-  const addedPlaces = placesInBundle
-    .sort((a, b) => a.id - b.id)
-    .map((placeInBundle) => (
+  const addedPlaces = routePlaces.map((placeInRoute) => (
+    <li>
       <div>
-        <p>{placeInBundle.title}</p>
+        <p>{placeInRoute.title}</p>
         <button
-          onClick={() => handleDeleteFromRoute(placeInBundle)}
+          onClick={() => {
+            handleMoveUp(routePlaces, placeInRoute);
+          }}
+          type="button"
+        >
+          Переместить выше
+        </button>
+        <button
+          onClick={() => handleMoveDown(routePlaces, placeInRoute )}
+          type="button"
+        >
+          Переместить ниже
+        </button>
+        <button
+          onClick={() => handleDeleteFromRoute(placeInRoute)}
           type="button"
         >
           Удалить
         </button>
       </div>
-    ));
+    </li>
+  ));
+
+  const handleMoveUp = (arr: Place[], place: Place): void => {
+    const position = arr.indexOf(place);
+
+    if (position > 0) {
+      const newArr: Place[] = [];
+      [...arr].map((el, i) => {
+        if (i === position) {
+          newArr.push(arr[i - 1]);
+          return;
+        }
+        if (i === position - 1) {
+          newArr.push(arr[i + 1]);
+          return;
+        }
+        newArr.push(el);
+      });
+      setRoutePlaces([...newArr]);
+    }
+  };
+
+  const handleMoveDown = (arr: Place[], place: Place): void => {
+    const position = arr.indexOf(place);
+
+    if (position + 1 < arr.length) {
+      const newArr: Place[] = [];
+      [...arr].map((el, i) => {
+        if (i === position) {
+          newArr.push(arr[i + 1]);
+          return;
+        }
+        if (i === position + 1) {
+          newArr.push(arr[i - 1]);
+          return;
+        }
+        newArr.push(el);
+      });
+      setRoutePlaces([...newArr]);
+    }
+  };
+
+  console.log(routePlaces);
 
   return (
     <div>
@@ -157,12 +214,12 @@ const RouteAddPage = (): JSX.Element => {
           <input onChange={() => setIsPublic(!isPublic)} type="checkbox" />
         </label>
         <div>
-          <button type="submit">Создать подборку</button>
+          <button type="submit">Создать маршрут</button>
         </div>
       </form>
       <div>
         <h1>Места в подборке</h1>
-        {addedPlaces}
+        <ol>{addedPlaces}</ol>
       </div>
     </div>
   );

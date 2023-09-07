@@ -26,20 +26,20 @@ export const fetchRegisterUser = async (user: UserAuthReg): Promise<User> => {
     const data = await res.json();
     throw new Error(data.message);
   }
-  console.log(res, '---летит феч в базу на регу-----');
+
   return res.json();
 };
 
 // фетч на проверку наличия юзера !!!
 export const fetchAuthCheckUser = async (): Promise<User> => {
   const res = await fetch('/api/auth/check');
-  console.log(res, '---летит феч в базу на проверку наличия юзера-----');
+
   return res.json();
 };
 
 // фетч на выход юзера !!!
 export const fetchLogOut = async (): Promise<{message: string}> => {
   const res = await fetch('/api/auth/logout');
-  console.log(res, '---летит феч в базу на выход юзера-----');
+
   return res.json();
 };

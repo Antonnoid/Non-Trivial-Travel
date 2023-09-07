@@ -12,6 +12,7 @@ import FormAddComment from './FormAddComment';
 export default function CommentsListPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const {placeId} = useParams();
+  const {user} = useSelector((store: RootState) => store.auth);
   const forRoute = useSelector(
     (store: RootState) => store.commentsOfRoute.commentsRoute
   );
@@ -68,7 +69,7 @@ export default function CommentsListPage(): JSX.Element {
             <CommentItem key={comment.id} comment={comment} />
           ))
         : pathname.includes(routesName) && <p>Комментариев нет...</p>}
-      <FormAddComment />
+      {user && <FormAddComment />}
     </div>
   );
 }
