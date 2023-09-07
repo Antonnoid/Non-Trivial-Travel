@@ -1,4 +1,4 @@
-import { Place } from "../place/type";
+import {Place} from '../place/type';
 
 export type Bundle = {
   id: number;
@@ -20,4 +20,4 @@ export type BundlePlace = {
   bundleId: number;
   placeId: number;
   Place: Place[];
-}
+};

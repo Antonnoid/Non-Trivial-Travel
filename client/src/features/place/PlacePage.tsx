@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
+
 import {Swiper, SwiperSlide} from 'swiper/react';
+
 
 import {Rate} from 'antd';
 import './styles/stylesPage.scss';
@@ -46,7 +48,7 @@ function PlacePage(): JSX.Element {
             </div>
             <div className="placePage__contents-rating">
               <img className="img-rating" src={starImg} alt="star" />
-              <p className="points-rating"></p>
+              <p className="points-rating" />
             </div>
             <Swiper
               spaceBetween={30}
@@ -61,7 +63,7 @@ function PlacePage(): JSX.Element {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <h3>{ourPlace.description}</h3>
+
             <div className="rating">
               <Rate onChange={handleRatingChange} />
               <p>{rating}</p>

@@ -4,3 +4,15 @@
 @import '../features/place/styles/style';
 @import '../features/droplist/styles/style';
 @import '../features/comment/styles/style';
+
+.prealoader__container {
+  display: flex;
+  justify-content: center;
+  margin-top: 300px;
+  align-items: center;
+}
+
+.prealoader__logo {
+  width: 100px;
+  height: 110px;
+}
