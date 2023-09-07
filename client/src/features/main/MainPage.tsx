@@ -1,6 +1,5 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import CardsList from './CardsList';
 import PlacesList from '../place/PlacesList';
 import FormAdd from '../place/FormAdd';
 import BundlesList from '../bundle/BundlesList';
