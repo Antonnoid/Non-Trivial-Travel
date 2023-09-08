@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {Place} from '../place/type';
-import { City } from '../city/types/types'; 
+import {City} from '../city/types/types';
 import {addBundle} from './bundlesSlice';
-
 
 const BundleAddPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -13,7 +12,6 @@ const BundleAddPage = (): JSX.Element => {
   const userId = useSelector((store: RootState) => store.auth.user)?.id;
 
   const [findPlace, setFindPlace] = useState('');
-  console.log('-', findPlace.trim().toLowerCase(), '-');
 
   const [bundlePlaces, setBundlePlaces] = useState<number[]>([]);
   const [title, setTitle] = useState('');
@@ -25,9 +23,14 @@ const BundleAddPage = (): JSX.Element => {
   const filtredCities = allCities.filter((city) =>
     city.name.trim().toLowerCase().includes(findCity.trim().toLowerCase())
   );
-  const filtredPlaces = allPlaces.filter((place) =>
-    place.title.trim().toLowerCase().includes(findPlace.trim().toLowerCase())
-    && (place.cityId === bundleCity.id));
+  const filtredPlaces = allPlaces.filter(
+    (place) =>
+      place.title
+        .trim()
+        .toLowerCase()
+        .includes(findPlace.trim().toLowerCase()) &&
+      place.cityId === bundleCity.id
+  );
 
   const handleAddToBundle = (place: Place): void => {
     setBundlePlaces((prev) => [...prev, place.id]);
@@ -49,8 +52,6 @@ const BundleAddPage = (): JSX.Element => {
   ): Promise<void> => {
     e.preventDefault();
     if (userId) {
-      console.log('Саночка');
-
       dispatch(
         addBundle({
           title,

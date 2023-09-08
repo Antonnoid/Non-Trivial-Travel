@@ -9,7 +9,6 @@ router.post('/registration', async (req, res) => {
     const {name, email, password, cityName} = req.body;
     if (name && email && password) {
       const city = await City.findOne({where: {name: cityName}});
-      console.log(city);
 
       user = await User.findOne({where: {email}});
       if (user) {

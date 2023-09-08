@@ -41,7 +41,6 @@ function PlacePage(): JSX.Element {
   }
   const usersId = ourRating?.map((el) => el.userId);
   const checkId = usersId?.filter((el) => el === currentUser?.id);
-  console.log(currentUser);
 
   const handleRatingChange = (value: number): void => {
     setRating(value);

@@ -168,8 +168,6 @@ const RouteAddPage = (): JSX.Element => {
     }
   };
 
-  console.log(routePlaces);
-
   return (
     <div className="routeAddForm_page-container">
       <div className="routeAddForm_text-title">
@@ -238,9 +236,9 @@ const RouteAddPage = (): JSX.Element => {
           <input onChange={() => setIsPublic(!isPublic)} type="checkbox" />
         </label>
         <div>
-            <button className="account_button" type="submit">
-              Создать маршрут
-            </button>
+          <button className="account_button" type="submit">
+            Создать маршрут
+          </button>
         </div>
       </form>
       <div className="routeAddForm_places-list-container">

@@ -67,15 +67,7 @@ router.post('/', async (req, res) => {
   try {
     const {title, description, isPublic, time, userId, cityId, routePlaces} =
       req.body;
-    console.log(
-      title,
-      description,
-      isPublic,
-      userId,
-      time,
-      cityId,
-      routePlaces
-    );
+
     const newRoute = await Route.create({
       title,
       description,

@@ -10,7 +10,7 @@ router.post('/place', async (req, res) => {
   // места
   try {
     const {text, placeId} = req.body;
-    console.log(req.body);
+
     if (req.session.userId && text.trim()) {
       const newComment = await Place_comment.create({
         text,
@@ -82,7 +82,7 @@ router.delete('/place/:commentId', async (req, res) => {
   // места
   try {
     const {commentId} = req.params;
-    console.log(commentId);
+
     const comment = await Place_comment.findOne({
       where: {id: +commentId},
       include: [{model: User}],
@@ -93,7 +93,7 @@ router.delete('/place/:commentId', async (req, res) => {
       (comment.User.isAdmin || comment.userId === +req.session.userId)
     ) {
       const data = await Place_comment.destroy({where: {id: commentId}});
-      console.log(data);
+
       res.json(commentId);
       return;
     }
@@ -106,7 +106,7 @@ router.delete('/bundle/:commentId', async (req, res) => {
   // подборки
   try {
     const {commentId} = req.params;
-    console.log(commentId);
+
     const comment = await Bundle_comment.findOne({
       where: {id: +commentId},
       include: [{model: User}],
@@ -117,7 +117,7 @@ router.delete('/bundle/:commentId', async (req, res) => {
       (comment.User.isAdmin || comment.userId === +req.session.userId)
     ) {
       const data = await Bundle_comment.destroy({where: {id: commentId}});
-      console.log(data);
+
       res.json(commentId);
       return;
     }
@@ -131,7 +131,7 @@ router.delete('/route/:commentId', async (req, res) => {
   //маршруты
   try {
     const {commentId} = req.params;
-    console.log(commentId);
+
     const comment = await Route_comment.findOne({
       where: {id: +commentId},
       include: [{model: User}],
@@ -142,7 +142,7 @@ router.delete('/route/:commentId', async (req, res) => {
       (comment.User.isAdmin || comment.userId === +req.session.userId)
     ) {
       const data = await Route_comment.destroy({where: {id: commentId}});
-      console.log(data);
+
       res.json(commentId);
       return;
     }

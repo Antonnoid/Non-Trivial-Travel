@@ -56,7 +56,7 @@ router.get('/search/id/:id', async (req, res) => {
         },
       ],
     });
-    console.log(city);
+
     res.json(city);
   } catch ({message}) {
     res.json(message);
@@ -67,7 +67,7 @@ router.get('/search/id/:id', async (req, res) => {
 router.post('/search/name', async (req, res) => {
   try {
     const {name} = req.body;
-    console.log(req.body);
+
     const city = await City.findAll({
       where: Sequelize.where(
         Sequelize.fn('LOWER', Sequelize.col('name')), // нечувствителен к регистру

@@ -4,8 +4,6 @@ const router = require('express').Router();
 router.post('/', async (req, res) => {
   try {
     const {key} = req.query; // api-ключ
-    console.log(key);
-    console.log(req.body);
 
     const response = await fetch(
       `https://api.2gis.ru/routing/1.0.0/global?key=${key}`,
