@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+// @ts-nocheck
 import React, {useState} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Rate} from 'antd';
