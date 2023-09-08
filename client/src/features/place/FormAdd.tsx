@@ -5,6 +5,7 @@ import {RootState, useAppDispatch} from '../../redux/store';
 import {placeAddfromForm} from './placesSlice';
 import DropList from '../droplist/DropList';
 import {loadCitiesByLetter, loadCitiesPopular} from '../city/citiesSlice';
+import './styles/styleAddPage.scss';
 
 export default function FormAdd(): JSX.Element {
   const [message, setMessage] = useState('');
@@ -72,7 +73,7 @@ export default function FormAdd(): JSX.Element {
 
       const formData = new FormData();
       // console.log(titleInput.current?.value);
-      for (let key in file) {
+      for (const key in file) {
         formData.append(`img${key}`, file[key]);
       }
 
@@ -125,8 +126,11 @@ export default function FormAdd(): JSX.Element {
   };
 
   return (
-    <div className="addPlaceForm_container">
-      <form className="addPlaceForm" onSubmit={handleSubmit}>
+    <div className="routeAddForm_page-container">
+      <div className="routeAddForm_text-title">
+        <h1>Добавление места</h1>
+      </div>
+      <form className="routeAddForm_form" onSubmit={handleSubmit}>
         <input
           value={title}
           onChange={(e): void => setTitle(e.target.value)}
@@ -169,7 +173,12 @@ export default function FormAdd(): JSX.Element {
           )}
         </div>
         <div className="message">{message}</div>
-        <button type="submit" >Добавить место</button>
+        <button
+          className="routeAddForm_droplist-button placeAddForm-button"
+          type="submit"
+        >
+          Добавить место
+        </button>
       </form>
     </div>
   );

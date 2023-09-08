@@ -32,27 +32,45 @@ const RouteCard = ({route}: {route: Route}): JSX.Element => {
       <div className="route">
         <div className="route__body">
           <h1 className="route__title">{route.title}</h1>
-
+          <Rate
+            className="route__rating"
+            disabled
+            defaultValue={averageRating}
+          />
           <div className="route__links">
-            <Rate
-              className="route__rating"
-              disabled
-              defaultValue={averageRating}
-            />
-            <Link
-              className="route__link route__link_more"
-              to={`/routes/${route.id}`}
-            >
-              Подробнее
-            </Link>
             {(user?.isAdmin || user?.id === route.userId) && (
-              <button
-                type="button"
-                className="route__link route__link_more"
-                onClick={removeRoute}
+              <>
+                <button
+                  type="button"
+                  className="route__link route__front-link_more-delet"
+                  onClick={removeRoute}
+                >
+                  Удалить
+                </button>
+                <Link
+                  className="route__link route__link_more"
+                  to={`/routes/${route.id}`}
+                >
+                  Подробнее
+                </Link>
+              </>
+            )}
+            {user?.isAdmin || user?.id === route.userId ? (
+              <Link
+                style={{visibility: 'hidden'}}
+                className="route__link route__link_more route__nonUser"
+                to={`/routes/${route.id}`}
               >
-                Удалить
-              </button>
+                Подробнее
+              </Link>
+            ) : (
+              <Link
+                // style={{visibility: 'hidden'}}
+                className="bundle__front-link bundle__front-link_more route__User"
+                to={`/bundles/${route.id}`}
+              >
+                Подробнее
+              </Link>
             )}
           </div>
         </div>

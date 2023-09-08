@@ -4,6 +4,8 @@ import {RootState, useAppDispatch} from '../../redux/store';
 import {Place} from '../place/type';
 import {City} from '../city/types/types';
 import {addRoute} from './routesSlice';
+import './styles/stylesAddPage.scss';
+import {NavLink} from 'react-router-dom';
 
 const RouteAddPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -72,8 +74,12 @@ const RouteAddPage = (): JSX.Element => {
 
   const liPlaces = filtredPlaces.map((place) => {
     return (
-      <li>
-        <button onClick={() => handleAddToRoute(place)} type="button">
+      <li className="routeAddForm_drop-down__item">
+        <button
+          className="routeAddForm_droplist-button"
+          onClick={() => handleAddToRoute(place)}
+          type="button"
+        >
           {place.title}
         </button>
       </li>
@@ -82,8 +88,12 @@ const RouteAddPage = (): JSX.Element => {
 
   const liCities = filtredCities.map((city) => {
     return (
-      <li>
-        <button onClick={() => handleSetCity(city)} type="button">
+      <li className="routeAddForm_drop-down__item">
+        <button
+          className="routeAddForm_droplist-button"
+          onClick={() => handleSetCity(city)}
+          type="button"
+        >
           {city.name}
         </button>
       </li>
@@ -91,30 +101,31 @@ const RouteAddPage = (): JSX.Element => {
   });
 
   const addedPlaces = routePlaces.map((placeInRoute) => (
-    <li>
-      <div>
-        <p>{placeInRoute.title}</p>
-        <button
-          onClick={() => {
-            handleMoveUp(routePlaces, placeInRoute);
-          }}
-          type="button"
-        >
-          Переместить выше
-        </button>
-        <button
-          onClick={() => handleMoveDown(routePlaces, placeInRoute )}
-          type="button"
-        >
-          Переместить ниже
-        </button>
-        <button
-          onClick={() => handleDeleteFromRoute(placeInRoute)}
-          type="button"
-        >
-          Удалить
-        </button>
-      </div>
+    <li className="routeAddForm_placeListLi">
+      <div className="routeAddForm_placeTitle">{placeInRoute.title}</div>
+      <button
+        className="place_button"
+        onClick={() => {
+          handleMoveUp(routePlaces, placeInRoute);
+        }}
+        type="button"
+      >
+        Выше
+      </button>
+      <button
+        className="place_button"
+        onClick={() => handleMoveDown(routePlaces, placeInRoute)}
+        type="button"
+      >
+        Ниже
+      </button>
+      <button
+        className="place_button"
+        onClick={() => handleDeleteFromRoute(placeInRoute)}
+        type="button"
+      >
+        Удалить
+      </button>
     </li>
   ));
 
@@ -161,11 +172,14 @@ const RouteAddPage = (): JSX.Element => {
   console.log(routePlaces);
 
   return (
-    <div>
-      <form onSubmit={handleAddRoute}>
+    <div className="routeAddForm_page-container">
+      <div className="routeAddForm_text-title">
+        <h1>Добавление маршрута</h1>
+      </div>
+      <form className="routeAddForm_form" onSubmit={handleAddRoute}>
         <div>
           <label>
-            Выберите город
+            <h1>Выберите город</h1>
             <br />
             <input
               value={findCity}
@@ -173,7 +187,10 @@ const RouteAddPage = (): JSX.Element => {
             />
           </label>
           {findCity && findCity.trim().toLowerCase() !== ' ' && (
-            <ul style={{visibility: `${findCity ? 'visible' : 'collapse'}`}}>
+            <ul
+              className="routeAddForm_drop-down"
+              style={{visibility: `${findCity ? 'visible' : 'collapse'}`}}
+            >
               {liCities}
             </ul>
           )}
@@ -183,7 +200,8 @@ const RouteAddPage = (): JSX.Element => {
         </div>
         <div>
           <label>
-            Выберите места
+            <h1>Выберите места</h1>
+
             <br />
             <input
               value={findPlace}
@@ -191,9 +209,16 @@ const RouteAddPage = (): JSX.Element => {
             />
           </label>
           {findPlace && findPlace.trim().toLowerCase() !== ' ' && (
-            <ul style={{visibility: `${findPlace ? 'visible' : 'collapse'}`}}>
+            <ul
+              className="routeAddForm_drop-down"
+              style={{visibility: `${findPlace ? 'visible' : 'collapse'}`}}
+            >
               <li>
-                <button onClick={() => setFindPlace('')} type="button">
+                <button
+                  className="routeAddForm_droplist-button"
+                  onClick={() => setFindPlace('')}
+                  type="button"
+                >
                   Очистить поиск
                 </button>
               </li>
@@ -209,17 +234,19 @@ const RouteAddPage = (): JSX.Element => {
           <h1>Введите описание</h1>
           <input onChange={(e) => setDescription(e.target.value)} />
         </label>
-        <label>
+        <label style={{display: 'none'}}>
           <h1>Опубликовать</h1>
           <input onChange={() => setIsPublic(!isPublic)} type="checkbox" />
         </label>
         <div>
-          <button type="submit">Создать маршрут</button>
+            <button className="account_button" type="submit">
+              Создать маршрут
+            </button>
         </div>
       </form>
-      <div>
-        <h1>Места в подборке</h1>
-        <ol>{addedPlaces}</ol>
+      <div className="routeAddForm_places-list-container">
+        <h1 className="routeAddForm_text-title">Вы добавили в маршрут:</h1>
+        <ul className="routeAddForm_places-list">{addedPlaces}</ul>
       </div>
     </div>
   );

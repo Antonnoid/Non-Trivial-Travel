@@ -1,4 +1,4 @@
-$input_width: 150px;
+$input_width: 250px;
 $hover_color: #3eae7f;
 .navbar {
   font-family: Inter;
@@ -12,12 +12,14 @@ $hover_color: #3eae7f;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 20px 0;
   }
 
   &__form {
     position: relative;
     input {
       max-width: $input_width;
+
       margin-right: 20px;
       padding: 8px 0;
       text-align: center;

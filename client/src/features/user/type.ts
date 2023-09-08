@@ -14,7 +14,8 @@ export type UserAuthReg = {
   name: string;
   email: string;
   password: string;
-  cityId: number;
+  cityId?: number;
+  cityName?: string;
 };
 
 export type UserAuthLog = {
