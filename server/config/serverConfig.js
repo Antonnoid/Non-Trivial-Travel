@@ -20,6 +20,7 @@ const sessionConfig = {
 function serverConfig(app) {
   app.use(cookieParser());
   app.use(session(sessionConfig));
+  app.use(express.static(path.join(__dirname, '../public')));
   app.use(express.static(path.join(__dirname, '../../client/build')));
 
   app.use(express.urlencoded({extended: true}));

@@ -5,7 +5,8 @@ const {Place_comment} = require('../../db/models');
 const {City} = require('../../db/models');
 const {User} = require('../../db/models');
 const {Op} = require('sequelize');
-const {Rating} = require('../../db/models')
+const {Rating} = require('../../db/models');
+// const upLoader = reuire('../../midleware/uploader');
 
 router.get('/', async (req, res) => {
   try {
@@ -61,6 +62,10 @@ router.get('/:placeId', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const {title, description, city} = req.body;
+    const {images} = req.files;
+    // const url = await upLoader(images);
+    // console.log(req.files, '----------------');
+
     if (req.session.userId) {
       const cityByName = await City.findOne({
         where: {
@@ -78,6 +83,20 @@ router.post('/', async (req, res) => {
           latitude: 45.4535,
           longitude: 35.32435,
         });
+
+        for (let key in req.files) {
+          await Image.create({
+            url: `/images/${req.files[key].name}`,
+            placeId: newPlace.id,
+          });
+          req.files[key].mv(
+            `${__dirname}/../../public/images/${req.files[key].name}`,
+            (err) => {
+              if (err) return res.status(500).send(err);
+            }
+          );
+        }
+
         res.json(newPlace);
         return;
       }
