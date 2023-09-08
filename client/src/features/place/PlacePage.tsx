@@ -15,6 +15,7 @@ import CommentsListPage from '../comment/CommentsListPage';
 // import starImg from './img/5-Star.png';
 // import * as api from './api';
 import {addRating} from '../rating/ratingsSlice';
+import cart from './img/cart.png';
 
 import 'swiper/css';
 
@@ -81,6 +82,13 @@ function PlacePage(): JSX.Element {
           </Swiper>
           <div className="placePage__contents-desc">
             <h3>{ourPlace.description}</h3>
+          </div>
+          <div className="placePage__contents-cart">
+            <img
+              className="placePage__contents-cart-img"
+              src={cart}
+              alt="cart"
+            />
           </div>
           <div className="placePage__contents-comments">
             <CommentsListPage />

@@ -6,6 +6,7 @@ import {Place} from '../place/type';
 import {City} from '../city/types/types';
 import {addRoute} from './routesSlice';
 import './styles/stylesAddPage.scss';
+import {useNavigate} from 'react-router-dom';
 
 const RouteAddPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -22,6 +23,8 @@ const RouteAddPage = (): JSX.Element => {
   const [isPublic, setIsPublic] = useState(false);
 
   const [routeCity, setCity] = useState<City>({id: 0, name: 'Не выбрано'});
+
+  const novigayte = useNavigate();
 
   const filtredCities = allCities.filter((city) =>
     city.name.trim().toLowerCase().includes(findCity.trim().toLowerCase())
@@ -236,7 +239,11 @@ const RouteAddPage = (): JSX.Element => {
           <input onChange={() => setIsPublic(!isPublic)} type="checkbox" />
         </label>
         <div>
-          <button className="account_button" type="submit">
+          <button
+            className="account_button"
+            type="submit"
+            onClick={() => novigayte(-1)}
+          >
             Создать маршрут
           </button>
         </div>

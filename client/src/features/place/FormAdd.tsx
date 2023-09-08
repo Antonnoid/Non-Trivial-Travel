@@ -129,7 +129,7 @@ export default function FormAdd(): JSX.Element {
   };
 
   return (
-    <div className="routeAddForm_page-container">
+    <div className="placeAddForm_page-container">
       <div className="routeAddForm_text-title">
         <h1>Добавление места</h1>
       </div>
