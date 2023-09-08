@@ -1,4 +1,4 @@
-$input_width: 150px;
+$input_width: 200px;
 $hover_color: #3eae7f;
 .navbar {
   font-family: Inter;
@@ -18,6 +18,7 @@ $hover_color: #3eae7f;
     position: relative;
     input {
       max-width: $input_width;
+
       margin-right: 20px;
       padding: 8px 0;
       text-align: center;
