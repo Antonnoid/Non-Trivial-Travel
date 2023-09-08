@@ -8,7 +8,7 @@ export type Place = {
   isPublic: boolean;
   atitude: number;
   longitude: number;
-  images: Image[];
+  Images: Image[];
 };
 export type PlaceForAdd = {
   title: string;

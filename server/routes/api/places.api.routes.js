@@ -97,7 +97,12 @@ router.post('/', async (req, res) => {
           );
         }
 
-        res.json(newPlace);
+        const place = await Place.findOne({
+          where: {id: newPlace.id},
+          include: [{model: Image}],
+        });
+
+        res.json(place);
         return;
       }
     }

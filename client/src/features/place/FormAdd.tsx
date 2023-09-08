@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {useSelector} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {placeAddfromForm} from './placesSlice';
 import DropList from '../droplist/DropList';
@@ -16,6 +17,7 @@ export default function FormAdd(): JSX.Element {
   const titleInput = useRef<HTMLInputElement>(null);
   const descriptionInput = useRef<HTMLInputElement>(null);
   const cityInput = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate()
 
   const dispatch = useAppDispatch();
   // const addPlace = async (
@@ -83,6 +85,7 @@ export default function FormAdd(): JSX.Element {
       // dispatch(addPresentation(formData));
       dispatch(placeAddfromForm(formData));
     }
+    navigate(-1)
   };
 
   const initCities = async (): Promise<void> => {
@@ -166,7 +169,7 @@ export default function FormAdd(): JSX.Element {
           )}
         </div>
         <div className="message">{message}</div>
-        <button type="submit">Добавить место</button>
+        <button type="submit" >Добавить место</button>
       </form>
     </div>
   );

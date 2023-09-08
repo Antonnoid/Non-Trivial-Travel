@@ -8,10 +8,11 @@ import {RootState, useAppDispatch} from '../../redux/store';
 import {placeRemove} from './placesSlice';
 
 function PlaceCard({place}: {place: Place}): JSX.Element {
-  const images = useSelector((store: RootState) => store.images.images);
+  // const images = useSelector((store: RootState) => store.images.images);
   const user = useSelector((store: RootState) => store.auth.user);
   const rating = useSelector((store: RootState) => store.ratings.ratings);
-  const placeImages = images.filter((image) => image.placeId === place.id);
+  // const placeImages = images.filter((image) => image.placeId === place.id);
+  const placeImages = place.Images
   const ourRating = rating.filter(
     (el) => el.itemId === place.id && el.type === 'place'
   );

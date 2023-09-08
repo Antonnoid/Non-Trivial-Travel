@@ -19,7 +19,9 @@ export const placeAdd = async (place: FormData): Promise<Place> => {
     method: 'POST',
     body: place,
   });
-  return res.json();
+  
+  const data =  res.json();
+  return data
 };
 
 export const placeRemoveOnClick = async (id: Place['id']): Promise<PlaceId> => {
