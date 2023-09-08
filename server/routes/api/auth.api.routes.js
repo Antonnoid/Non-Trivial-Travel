@@ -1,13 +1,16 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const {User} = require('../../db/models');
+const {User, City} = require('../../db/models');
 
 //регистрация
 router.post('/registration', async (req, res) => {
   try {
     let user;
-    const {name, email, password, cityId} = req.body;
-    if (name && email && password && cityId) {
+    const {name, email, password, cityName} = req.body;
+    if (name && email && password) {
+      const city = await City.findOne({where: {name: cityName}});
+      console.log(city);
+
       user = await User.findOne({where: {email}});
       if (user) {
         res.status(400).json({message: 'Данная почта уже существует'});
@@ -18,7 +21,7 @@ router.post('/registration', async (req, res) => {
           name,
           email,
           password: hash,
-          cityId,
+          cityId: city.id,
           isAdmin: false,
         });
         req.session.userId = user.id;
