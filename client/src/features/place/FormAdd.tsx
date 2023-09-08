@@ -12,43 +12,78 @@ export default function FormAdd(): JSX.Element {
   const [city, setCity] = useState('');
   const [title, setTitle] = useState('');
   const [allCity, setAllCity] = useState(false);
+  const fileInput = useRef<HTMLInputElement>(null);
+  const titleInput = useRef<HTMLInputElement>(null);
+  const descriptionInput = useRef<HTMLInputElement>(null);
+  const cityInput = useRef<HTMLInputElement>(null);
 
   const dispatch = useAppDispatch();
-  const addPlace = async (
-    e: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
-    e.preventDefault();
-    if (
-      title.trim() !== '' &&
-      description.trim() !== '' &&
-      city.trim() !== ''
-    ) {
-      const result = await dispatch(
-        placeAddfromForm({title, description, city})
-      );
-      if (placeAddfromForm.fulfilled.match(result)) {
-        setMessage('Добавлено');
-        setTimeout(() => {
-          setMessage('');
-        }, 2000);
-      } else {
-        setMessage('Ошибка добавления');
-        setTimeout(() => {
-          setMessage('');
-        }, 2000);
-      }
-    } else {
-      setMessage('Заполните все поля');
-      setTimeout(() => {
-        setMessage('');
-      }, 2000);
-    }
-  };
+  // const addPlace = async (
+  //   e: React.FormEvent<HTMLFormElement>
+  // ): Promise<void> => {
+  //   e.preventDefault();
+  //   if (
+  //     title.trim() !== '' &&
+  //     description.trim() !== '' &&
+  //     city.trim() !== ''
+  //   ) {
+  //     const result = await dispatch(
+  //       placeAddfromForm({title, description, city})
+  //     );
+  //     if (placeAddfromForm.fulfilled.match(result)) {
+  //       setMessage('Добавлено');
+  //       setTimeout(() => {
+  //         setMessage('');
+  //       }, 2000);
+  //     } else {
+  //       setMessage('Ошибка добавления');
+  //       setTimeout(() => {
+  //         setMessage('');
+  //       }, 2000);
+  //     }
+  //   } else {
+  //     setMessage('Заполните все поля');
+  //     setTimeout(() => {
+  //       setMessage('');
+  //     }, 2000);
+  //   }
+  // };
   const dropDownRef = useRef<HTMLUListElement | null>(null);
   const cities = useSelector((store: RootState) => store.cities.cities);
   const [placeholder, setPlaceholder] = useState('Все города');
   const [dropList, showDropList] = useState(false);
   const [disable, setDisabled] = useState(true);
+
+  const handleSubmit = async (event: React.FormEvent): Promise<void> => {
+    event.preventDefault();
+
+    if (
+      fileInput.current?.files?.length &&
+      titleInput.current?.value &&
+      descriptionInput.current?.value &&
+      cityInput.current?.value
+    ) {
+      const file = fileInput.current.files;
+      const title = titleInput.current.value;
+      const description = descriptionInput.current.value;
+      const city = cityInput.current.value;
+
+      const formData = new FormData();
+      // console.log(titleInput.current?.value);
+      for (let key in file) {
+        formData.append(`img${key}`, file[key]);
+      }
+
+      // formData.append('file', file);
+      formData.append('title', title);
+      formData.append('description', description);
+      formData.append('city', city);
+
+      console.log(formData);
+      // dispatch(addPresentation(formData));
+      dispatch(placeAddfromForm(formData));
+    }
+  };
 
   const initCities = async (): Promise<void> => {
     if (city) {
@@ -88,13 +123,14 @@ export default function FormAdd(): JSX.Element {
 
   return (
     <div className="addPlaceForm_container">
-      <form className="addPlaceForm" onSubmit={addPlace}>
+      <form className="addPlaceForm" onSubmit={handleSubmit}>
         <input
           value={title}
           onChange={(e): void => setTitle(e.target.value)}
           name="title"
           type="text"
           placeholder="Название"
+          ref={titleInput}
         />
         <input
           value={description}
@@ -102,6 +138,7 @@ export default function FormAdd(): JSX.Element {
           name="description"
           type="text"
           placeholder="Описание"
+          ref={descriptionInput}
         />
         <div className="city">
           <input
@@ -115,8 +152,9 @@ export default function FormAdd(): JSX.Element {
             type="text"
             placeholder="Город"
             autoComplete="off"
+            ref={cityInput}
           />
-          <input type="file" />
+          <input type="file" ref={fileInput} multiple />
           {dropList && (
             <DropList
               allCity={allCity}
@@ -128,9 +166,7 @@ export default function FormAdd(): JSX.Element {
           )}
         </div>
         <div className="message">{message}</div>
-        <button disabled={disable} type="submit">
-          Добавить место
-        </button>
+        <button type="submit">Добавить место</button>
       </form>
     </div>
   );

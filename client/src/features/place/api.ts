@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import {Place, PlaceId, PlaceForAdd} from './type';
 import {City} from '../city/types/types';
-import { Rating } from '../rating/type';
+import {Rating} from '../rating/type';
 
 export const placesInitFetch = async (): Promise<Place[]> => {
   const res = await fetch('/api/places');
@@ -14,11 +14,10 @@ export const placesInitFromCity = async (id: City['id']): Promise<Place[]> => {
   const data = await res.json(); // город
   return data.Places; // ключ Places, в котором лежат места этого города
 };
-export const placeAdd = async (place: PlaceForAdd): Promise<Place> => {
+export const placeAdd = async (place: FormData): Promise<Place> => {
   const res = await fetch(`/api/places`, {
     method: 'POST',
-    headers: {'Content-type': 'application/json'},
-    body: JSON.stringify(place),
+    body: place,
   });
   return res.json();
 };
@@ -58,7 +57,7 @@ export const placeRatingAddFetch = async (
     }),
   });
   const data = await res.json();
-  return data
+  return data;
 };
 
 export const allPlacesInitFetch = async (): Promise<Place[]> => {
