@@ -54,6 +54,9 @@ input {
   font-weight: 500;
   color: #00af83;
   background-color: #ffffff;
+  &:disabled {
+    display: none;
+  }
 }
 .reg-auth-dutton {
   font-family: Inter;
