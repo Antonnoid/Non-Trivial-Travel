@@ -4,6 +4,13 @@
   flex-direction: column;
   width: 100%;
   align-items: center;
+  input {
+    font-size: xx-large;
+    height: 60px;
+    width: 1340px;
+    border-radius: 6px;
+    margin-bottom: 70px;
+  }
 }
 
 .routeAddForm_text-title {
@@ -21,14 +28,6 @@
   align-items: center;
   width: 1340px;
   margin-bottom: 30px;
-}
-
-input {
-  font-size: xx-large;
-  height: 60px;
-  width: 1340px;
-  border-radius: 6px;
-  margin-bottom: 70px;
 }
 
 .routeAddForm_form {
