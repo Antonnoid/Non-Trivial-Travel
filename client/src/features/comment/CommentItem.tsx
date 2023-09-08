@@ -3,6 +3,9 @@ import {useSelector} from 'react-redux';
 import {CommentOfPlace, CommentOfBundle, CommentOfRoute} from './types/types';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {removeCommentPlace} from './commentsPlaceSlice';
+import {useLocation} from 'react-router-dom';
+import {removeCommentBundle} from './commentsBundleSlice';
+import {removeCommentRoute} from './commentsRouteSlice';
 
 export default function CommentItem({
   comment,
@@ -11,8 +14,19 @@ export default function CommentItem({
 }): JSX.Element {
   const dispatch = useAppDispatch();
   const user = useSelector((store: RootState) => store.auth.user);
+  const {pathname} = useLocation();
   const removeComment = async (): Promise<void> => {
-    dispatch(removeCommentPlace(comment.id));
+    if (pathname.includes('places')) {
+      dispatch(removeCommentPlace(comment.id));
+      return;
+    }
+    if (pathname.includes('bundles')) {
+      dispatch(removeCommentBundle(comment.id));
+      return;
+    }
+    if (pathname.includes('routes')) {
+      dispatch(removeCommentRoute(comment.id));
+    }
   };
 
   return (
