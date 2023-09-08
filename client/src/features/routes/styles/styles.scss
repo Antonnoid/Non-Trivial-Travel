@@ -74,7 +74,7 @@ $more_color: #ffffff;
 .route__body {
   display: flex;
   flex-direction: column;
-  gap: 42px;
+  gap: 10px;
   align-items: center;
   width: 100%;
 }
@@ -95,8 +95,8 @@ $more_color: #ffffff;
   height: 50px;
   font-size: x-large;
   font-weight: 555;
-  // margin-left: 0px;
-  gap: 90px;
+  margin-left: 485px;
+  gap: 100px;
 }
 
 .route__link {
@@ -113,6 +113,26 @@ $more_color: #ffffff;
   border-top-left-radius: 25px;
   display: flex;
   align-items: center;
+}
+
+.route__front-link_more-delet {
+  border-bottom-left-radius: 25px;
+  border-top-right-radius: 25px;
+  background-color: #00af83;
+  color: #ffffff;
+  font-size: large;
+}
+
+.route__nonUser {
+  margin-left: 220px;
+}
+
+.route__User {
+  margin-left: -215px;
+}
+
+.route__rating-nonUser {
+  margin-top: 100px;
 }
 
 .route__rating {
