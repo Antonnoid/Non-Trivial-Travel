@@ -9,6 +9,7 @@ import {bundleRemove} from './bundlesSlice';
 const BundleCard = ({bundle}: {bundle: Bundle}): JSX.Element => {
   const bundlePlacesId = bundle?.Bundle_places?.map((el) => el.placeId);
   const dispatch = useAppDispatch();
+  const user = useSelector((store: RootState) => store.auth.user);
   const images = useSelector((store: RootState) => store.images.images);
   const rating = useSelector((store: RootState) => store.ratings.ratings);
   const ourImages = images.filter((image) =>
@@ -37,19 +38,40 @@ const BundleCard = ({bundle}: {bundle: Bundle}): JSX.Element => {
             <Rate disabled defaultValue={averageRating} />
             {/* <p className="bundle__description">{bundle.description}</p> */}
             <div className="bundle__front-links">
-              <Link
-                className="bundle__front-link bundle__front-link_more"
-                to={`/bundles/${bundle.id}`}
-              >
-                Подробнее
-              </Link>
-              <button
-                onClick={removeBundle}
-                type="button"
-                className="bundle__front-link bundle__front-link_more"
-              >
-                Удалить
-              </button>
+              {(user?.isAdmin || user?.id === bundle.userId) && (
+                <>
+                  <button
+                    onClick={removeBundle}
+                    type="button"
+                    className="bundle__front-link bundle__front-link_more-delet"
+                  >
+                    Удалить
+                  </button>
+                  <Link
+                    className="bundle__front-link bundle__front-link_more"
+                    to={`/bundles/${bundle.id}`}
+                  >
+                    Подробнее
+                  </Link>
+                </>
+              )}
+              {user?.isAdmin || user?.id === bundle.userId ? (
+                <Link
+                  style={{visibility: 'hidden'}}
+                  className="bundle__front-link bundle__front-link_more bundle__nonUser"
+                  to={`/bundles/${bundle.id}`}
+                >
+                  Подробнее
+                </Link>
+              ) : (
+                <Link
+                  // style={{visibility: 'hidden'}}
+                  className="bundle__front-link bundle__front-link_more bundle__User"
+                  to={`/bundles/${bundle.id}`}
+                >
+                  Подробнее
+                </Link>
+              )}
             </div>
           </div>
         </div>

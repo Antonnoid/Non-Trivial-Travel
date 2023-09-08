@@ -85,8 +85,8 @@ $more_color: #008ab7;
   position: absolute;
   display: flex;
   border-radius: 25px;
-  width: 398px;
-  height: 298px;
+  width: 399px;
+  height: 299px;
 }
 
 .bundle__front-links {
@@ -94,7 +94,8 @@ $more_color: #008ab7;
   height: 50px;
   font-size: xx-large;
   font-weight: 555;
-  margin-left: 182px;
+  margin-left: 447px;
+  gap: 61px;
 }
 .bundle__front-link {
   z-index: 5;
@@ -109,6 +110,21 @@ $more_color: #008ab7;
   border-top-left-radius: 25px;
   display: flex;
   align-items: center;
+}
+
+.bundle__front-link_more-delet {
+  border-bottom-left-radius: 25px;
+  border-top-right-radius: 25px;
+  color: #00af83;
+  font-size: large;
+}
+
+.bundle__nonUser {
+  margin-left: 182px;
+}
+
+.bundle__User {
+  margin-left: -232px;
 }
 
 .bundle__front-title {
