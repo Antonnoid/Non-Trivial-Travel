@@ -83,12 +83,16 @@ const routesSlice = createSlice({
       })
       .addCase(addRoute.fulfilled, (state, action) => {
         state.routes.push(action.payload);
+        state.allRoutes.push(action.payload);
       })
       .addCase(addRoute.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(routerRemove.fulfilled, (state, action) => {
         state.routes = state.routes.filter(
+          (route) => route.id !== +action.payload
+        );
+        state.allRoutes = state.allRoutes.filter(
           (route) => route.id !== +action.payload
         );
       })

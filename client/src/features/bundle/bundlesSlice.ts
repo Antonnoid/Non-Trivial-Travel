@@ -76,12 +76,16 @@ const bundlesSlice = createSlice({
       })
       .addCase(addBundle.fulfilled, (state, action) => {
         state.bundles.push(action.payload);
+        state.allBundles.push(action.payload);
       })
       .addCase(addBundle.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(bundleRemove.fulfilled, (state, action) => {
         state.bundles = state.bundles.filter(
+          (bundle) => bundle.id !== +action.payload
+        );
+        state.allBundles = state.allBundles.filter(
           (bundle) => bundle.id !== +action.payload
         );
       })

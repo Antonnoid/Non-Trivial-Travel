@@ -64,6 +64,7 @@ const placesSlice = createSlice({
       })
       .addCase(placeAddfromForm.fulfilled, (state, action) => {
         state.places.push(action.payload);
+        state.allPlaces.push(action.payload);
       })
       .addCase(placeAddfromForm.rejected, (state, action) => {
         state.error = action.error.message;
@@ -78,6 +79,9 @@ const placesSlice = createSlice({
       })
       .addCase(placeRemove.fulfilled, (state, action) => {
         state.places = state.places.filter(
+          (place) => place.id !== +action.payload
+        );
+        state.allPlaces = state.allPlaces.filter(
           (place) => place.id !== +action.payload
         );
       })
