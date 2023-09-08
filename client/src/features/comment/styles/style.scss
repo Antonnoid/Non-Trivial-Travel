@@ -26,3 +26,22 @@ $date_com_color: #9a9a9a;
     }
   }
 }
+
+.comment__form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  * {
+    border-radius: 9px;
+  }
+}
+.comment__input {
+  margin-right: 20px;
+}
+.comment__submit {
+  font-size: 20px;
+  &:hover {
+    background: #d9cdcd;
+  }
+}

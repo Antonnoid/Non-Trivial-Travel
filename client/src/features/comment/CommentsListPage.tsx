@@ -54,6 +54,7 @@ export default function CommentsListPage(): JSX.Element {
   return (
     <div className="comments">
       <h2 className="comments__header">Комментарии</h2>
+      {user && <FormAddComment />}
       {pathname.includes(placesName) && forPlace
         ? forPlace.map((comment) => (
             <CommentItem key={comment.id} comment={comment} />
@@ -69,7 +70,6 @@ export default function CommentsListPage(): JSX.Element {
             <CommentItem key={comment.id} comment={comment} />
           ))
         : pathname.includes(routesName) && <p>Комментариев нет...</p>}
-      {user && <FormAddComment />}
     </div>
   );
 }

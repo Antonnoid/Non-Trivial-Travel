@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {useSelector} from 'react-redux';
@@ -8,6 +9,7 @@ import PlaceCard from '../place/PlaceCard';
 
 import './styles/stylesPage.scss';
 import {ratingRouteAdd} from '../rating/ratingsSlice';
+import CommentsListPage from '../comment/CommentsListPage';
 
 const RoutePage = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -38,18 +40,19 @@ const RoutePage = (): JSX.Element => {
       dispatch(ratingRouteAdd({rate: value, route: ourRoute}));
     }
   };
-  
 
   return (
     <div className="router__container">
       <div className="bundle__text">
         <h1 className="bundle__title">{ourRoute?.title}</h1>
       </div>
-      {!checkId?.length && currentUser && (<div className="rating">
-        <p className="rating-number">Оценить маршрут</p>
-        <Rate onChange={handleRatingChange} />
-      </div>)}
-      
+      {!checkId?.length && currentUser && (
+        <div className="rating">
+          <p className="rating-number">Оценить маршрут</p>
+          <Rate onChange={handleRatingChange} />
+        </div>
+      )}
+
       <div className="bundle__cards">
         {ourPlaces?.map((place) => (
           <PlaceCard place={place} />
@@ -57,6 +60,9 @@ const RoutePage = (): JSX.Element => {
       </div>
       <div className="bundle__text">
         <h2 className="bundle__desc">{ourRoute?.description}</h2>
+      </div>
+      <div className="bundle__comments">
+        <CommentsListPage />
       </div>
     </div>
   );

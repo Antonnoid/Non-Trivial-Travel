@@ -140,3 +140,14 @@ $more_color: #008ab7;
 //   justify-content: center;
 //   padding: 100px;
 // }
+
+.form__add_comment {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+  background: #000;
+  .comment__input {
+  }
+  .comment__submit {
+  }
+}
