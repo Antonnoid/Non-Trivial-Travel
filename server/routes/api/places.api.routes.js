@@ -64,7 +64,6 @@ router.post('/', async (req, res) => {
     const {title, description, city} = req.body;
     const {images} = req.files;
     // const url = await upLoader(images);
-    // console.log(req.files, '----------------');
 
     if (req.session.userId) {
       const cityByName = await City.findOne({

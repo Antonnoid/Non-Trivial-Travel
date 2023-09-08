@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+/* eslint-disable array-callback-return */
+import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {Place} from '../place/type';
@@ -20,8 +21,7 @@ const RouteAddPage = (): JSX.Element => {
   const [description, setDescription] = useState('');
   const [findCity, setFindCity] = useState('');
   const [isPublic, setIsPublic] = useState(false);
-  const [timeValue, setTimeValue] = useState('');
-  const [timeUnits, setTimeUnits] = useState('');
+
   const [routeCity, setCity] = useState<City>({id: 0, name: 'Не выбрано'});
 
   const novigayte = useNavigate();
@@ -170,8 +170,6 @@ const RouteAddPage = (): JSX.Element => {
       setRoutePlaces([...newArr]);
     }
   };
-
-  console.log(routePlaces);
 
   return (
     <div className="routeAddForm_page-container">

@@ -7,7 +7,7 @@ import logoSlogon from './img/logoSlogon.png';
 
 function AuthorizationPage(): JSX.Element {
   const {error, user} = useSelector((store: RootState) => store.auth);
-  console.log(error, '--error-----');
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
