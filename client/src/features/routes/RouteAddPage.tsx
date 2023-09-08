@@ -5,7 +5,6 @@ import {Place} from '../place/type';
 import {City} from '../city/types/types';
 import {addRoute} from './routesSlice';
 import './styles/stylesAddPage.scss';
-import {NavLink} from 'react-router-dom';
 
 const RouteAddPage = (): JSX.Element => {
   const dispatch = useAppDispatch();

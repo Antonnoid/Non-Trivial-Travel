@@ -34,7 +34,7 @@ function PlacePage(): JSX.Element {
   let ourRating;
   if (placeId) {
     ourPlace = places.find((place: Place) => place.id === +placeId);
-    ourImages = images.filter((image: Image) => image.placeId === +placeId)!!;
+    ourImages = ourPlace?.Images;
     ourRating = ratings.filter(
       (el) => el.itemId === +placeId && el.type === 'place'
     );
