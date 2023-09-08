@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {useSelector} from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {placeAddfromForm} from './placesSlice';
 import DropList from '../droplist/DropList';
@@ -18,7 +18,7 @@ export default function FormAdd(): JSX.Element {
   const titleInput = useRef<HTMLInputElement>(null);
   const descriptionInput = useRef<HTMLInputElement>(null);
   const cityInput = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   // const addPlace = async (
@@ -86,7 +86,7 @@ export default function FormAdd(): JSX.Element {
       // dispatch(addPresentation(formData));
       dispatch(placeAddfromForm(formData));
     }
-    navigate(-1)
+    navigate(-1);
   };
 
   const initCities = async (): Promise<void> => {
@@ -126,7 +126,7 @@ export default function FormAdd(): JSX.Element {
   };
 
   return (
-    <div className="routeAddForm_page-container">
+    <div className="placeAddForm_page-container">
       <div className="routeAddForm_text-title">
         <h1>Добавление места</h1>
       </div>
