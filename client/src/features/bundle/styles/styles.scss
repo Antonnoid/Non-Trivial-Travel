@@ -110,6 +110,7 @@ $more_color: #008ab7;
   border-top-left-radius: 25px;
   display: flex;
   align-items: center;
+  font-family: Inter;
 }
 
 .bundle__front-link_more-delet {
@@ -120,11 +121,13 @@ $more_color: #008ab7;
 }
 
 .bundle__nonUser {
+  font-family: Inter;
   margin-left: 182px;
 }
 
 .bundle__User {
-  margin-left: -232px;
+  font-family: Inter;
+  margin-left: -202px;
 }
 
 .bundle__front-title {
