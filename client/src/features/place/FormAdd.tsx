@@ -82,7 +82,6 @@ export default function FormAdd(): JSX.Element {
       formData.append('description', description);
       formData.append('city', city);
 
-      console.log(formData);
       // dispatch(addPresentation(formData));
       dispatch(placeAddfromForm(formData));
     }

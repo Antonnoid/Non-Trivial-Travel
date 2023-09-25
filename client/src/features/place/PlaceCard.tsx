@@ -8,11 +8,14 @@ import {RootState, useAppDispatch} from '../../redux/store';
 import {placeRemove} from './placesSlice';
 
 function PlaceCard({place}: {place: Place}): JSX.Element {
+  const places = useSelector((store: RootState) => store.places.allPlaces);
   // const images = useSelector((store: RootState) => store.images.images);
   const user = useSelector((store: RootState) => store.auth.user);
   const rating = useSelector((store: RootState) => store.ratings.ratings);
   // const placeImages = images.filter((image) => image.placeId === place.id);
-  const placeImages = place.Images
+
+  const ourPlace = places.find((place1) => place1.id === place.id )
+  const placeImages = ourPlace?.Images;
   const ourRating = rating.filter(
     (el) => el.itemId === place.id && el.type === 'place'
   );
@@ -23,8 +26,17 @@ function PlaceCard({place}: {place: Place}): JSX.Element {
   const removePlace = async (): Promise<void> => {
     dispatch(placeRemove(place.id));
   };
-  const randomImage =
-    placeImages[Math.floor(Math.random() * (placeImages.length - 1))];
+ 
+  let randomImage
+
+  if (placeImages) {
+    randomImage =
+    placeImages[
+      Math.floor(Math.random() * (placeImages ? placeImages.length - 1 : 1))
+    ];
+  }
+  
+
 
   return (
     <div className="place__card">

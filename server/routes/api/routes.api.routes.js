@@ -23,6 +23,7 @@ router.get('/', async (req, res) => {
         },
       ],
     });
+    console.log(routes);
     res.json(routes);
   } catch ({message}) {
     res.json({message});

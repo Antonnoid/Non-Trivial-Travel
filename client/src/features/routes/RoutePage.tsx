@@ -15,7 +15,7 @@ const RoutePage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const [rating, setRating] = useState(0);
   const {routeId} = useParams();
-  const routes = useSelector((store: RootState) => store.routes.routes);
+  const routes = useSelector((store: RootState) => store.routes.allRoutes);
   const ratings = useSelector((store: RootState) => store.ratings.ratings);
   const currentUser = useSelector((store: RootState) => store.auth.user);
 
@@ -40,6 +40,9 @@ const RoutePage = (): JSX.Element => {
       dispatch(ratingRouteAdd({rate: value, route: ourRoute}));
     }
   };
+
+  console.log(routes);
+  
 
   return (
     <div className="router__container">

@@ -54,6 +54,10 @@ function App(): JSX.Element {
     }, 2000);
   }, [pending]);
 
+  const routes = useSelector((store: RootState) => store.routes.allRoutes)
+  console.log(routes);
+  
+
   return (
     <BrowserRouter>
       {pending ? (

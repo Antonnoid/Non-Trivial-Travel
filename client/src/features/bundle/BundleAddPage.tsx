@@ -13,7 +13,6 @@ const BundleAddPage = (): JSX.Element => {
   const userId = useSelector((store: RootState) => store.auth.user)?.id;
 
   const [findPlace, setFindPlace] = useState('');
-  console.log('-', findPlace.trim().toLowerCase(), '-');
 
   const [bundlePlaces, setBundlePlaces] = useState<number[]>([]);
   const [title, setTitle] = useState('');
@@ -49,7 +48,6 @@ const BundleAddPage = (): JSX.Element => {
   ): Promise<void> => {
     e.preventDefault();
     if (userId) {
-      console.log('Саночка');
 
       dispatch(
         addBundle({
